@@ -45,5 +45,6 @@ dependencies {
 
     /** UTILS **/
     compile "org.projectlombok:lombok:1.16.10"
+    compile "org.jsoup:jsoup:1.10.2"
     runtime('mysql:mysql-connector-java')
 }
