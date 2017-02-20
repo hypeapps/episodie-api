@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="acceptance-tests_main" target="1.8" />
+      <module name="acceptance-tests_test" target="1.8" />
+      <module name="configuration_main" target="1.8" />
+      <module name="configuration_test" target="1.8" />
+      <module name="core_main" target="1.8" />
+      <module name="core_test" target="1.8" />
+      <module name="dataproviders_main" target="1.8" />
+      <module name="dataproviders_test" target="1.8" />
+      <module name="entrypoints_main" target="1.8" />
+      <module name="entrypoints_test" target="1.8" />
+      <module name="episodie-api_main" target="1.8" />
+      <module name="episodie-api_test" target="1.8" />
+      <module name="integration-tests_main" target="1.8" />
+      <module name="integration-tests_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

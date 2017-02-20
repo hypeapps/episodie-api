@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'episodie-api-application'
+    destinationDir = project(":application").getBuildDir()
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile libs.spring_boot
+    compile libs.database_initialisation
+    compile project(":application:core")
+    compile project(":application:dataproviders")
+    compile project(":application:entrypoints")
+    runtime('mysql:mysql-connector-java')
+
+//    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

@@ -1,0 +1,9 @@
+rootProject.name = 'episodie-api'
+
+include "application:core"
+include "application:dataproviders"
+include "application:entrypoints"
+include "application:configuration"
+
+include "acceptance-tests"
+include "integration-tests"

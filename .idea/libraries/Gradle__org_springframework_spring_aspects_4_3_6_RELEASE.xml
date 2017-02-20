@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework:spring-aspects:4.3.6.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aspects/4.3.6.RELEASE/f89e7d952f8981ee616ac5e680d020ae7c52c068/spring-aspects-4.3.6.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aspects/4.3.6.RELEASE/8ce130d8190a6460a8056f92a5557441b7f33619/spring-aspects-4.3.6.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

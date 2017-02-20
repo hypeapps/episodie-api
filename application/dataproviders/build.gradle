@@ -1,0 +1,6 @@
+dependencies {
+    compile project(":application:core")
+    compile libs.database
+
+    testCompile libs.unit_tests
+}
