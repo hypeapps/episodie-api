@@ -9,62 +9,62 @@ subprojects {
     }
 
     ext {
-        spring_version = "4.2.5.RELEASE"
+        springVersion = "4.2.5.RELEASE"
         springBootVersion = "1.4.4.RELEASE"
     }
 
-ext.libs = [
-        unit_tests             : [
+    ext.libs = [
+            unit_tests             : [
 //                "junit:junit:4.+",
 //                "org.mockito:mockito-core:1.10.19",
 //                "org.assertj:assertj-core:3.3.0"
-        ],
+            ],
 
-        acceptance_tests       : [
+            acceptance_tests       : [
 //                "com.googlecode.yatspec:yatspec:1.20"
-        ],
+            ],
 
-        integration_test       : [
+            integration_test       : [
 //                "org.springframework:spring-test:${spring_version}",
 //                "org.skyscreamer:jsonassert:1.3.0",
 //                "com.cedarsoftware:json-io:4.4.0"
-        ],
+            ],
 
-        end_to_end_test        : [
+            end_to_end_test        : [
 //                "org.springframework:spring-test:${spring_version}",
 //                "com.mashape.unirest:unirest-java:1.4.8",
 //                "org.skyscreamer:jsonassert:1.3.0",
 //                "com.cedarsoftware:json-io:4.4.0"
-        ],
+            ],
 
-        spring_boot            : [
-                "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
-                "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",
-                "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}",
-        ],
+            spring_boot            : [
+                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                    "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",
+                    "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}",
+            ],
 
-        rest                   : [
-//                "org.springframework:spring-web:${spring_version}"
-        ],
+            rest                   : [
+                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            ],
 
-        database_initialisation: [
-                "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+            database_initialisation: [
+                    "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 //                "org.springframework:spring-jdbc:${spring_version}",
 //                "com.h2database:h2:1.4.191"
-        ],
+            ],
 
-        database               : [
+            database               : [
 //                "org.springframework:spring-jdbc:${spring_version}"
-        ],
+            ],
 
-        string_utils           : [
+            string_utils           : [
 //                "org.apache.commons:commons-lang3:3.4"
-        ],
+            ],
 
-        log                    : [
+            log                    : [
 //                "org.slf4j:slf4j-api:1.7.19"
-        ]
-]
+            ]
+    ]
 }
 
 configure(allprojects - project(":application")) {
