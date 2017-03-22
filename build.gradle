@@ -3,21 +3,29 @@ subprojects {
     repositories {
 //        mavenLocal()
         mavenCentral()
-//        maven {
-//            url "http://repo.bodar.com"
-//        }
+        maven {
+            url "http://repo.bodar.com"
+        }
     }
 
     ext {
         springVersion = "4.2.5.RELEASE"
         springBootVersion = "1.4.4.RELEASE"
+        spockFrameworkVersion = '1.1-groovy-2.4-rc-3'
     }
 
     ext.libs = [
             unit_tests             : [
-//                "junit:junit:4.+",
-//                "org.mockito:mockito-core:1.10.19",
-//                "org.assertj:assertj-core:3.3.0"
+                    "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+                    "org.codehaus.groovy:groovy-all:2.4.8",
+                    "junit:junit:4.+",
+                    "org.mockito:mockito-core:1.10.19",
+                    "org.assertj:assertj-core:3.3.0"
+            ],
+
+            spock                  : [
+                    group: 'org.spockframework', name: 'spock-core', version: "${spockFrameworkVersion}",
+                    group: 'org.spockframework', name: 'spock-spring', version: "${spockFrameworkVersion}"
             ],
 
             acceptance_tests       : [
@@ -41,10 +49,12 @@ subprojects {
                     "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
                     "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",
                     "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}",
+                    "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
             ],
 
             rest                   : [
-                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                    "org.springframework:spring-web:${springVersion}"
+//                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             ],
 
             database_initialisation: [
