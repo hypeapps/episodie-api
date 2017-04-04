@@ -3,6 +3,8 @@ package pl.hypeapp.episodie.dataproviders.crawler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.hypeapp.core.usecase.episode.extractimdbtoptvshows.GetImdbTopTvShows;
 
 import java.io.IOException;
@@ -11,15 +13,17 @@ import java.util.List;
 
 public class ImdbTopTvShowsCrawlerDataProvider implements GetImdbTopTvShows {
     private static final int PATH_SECOND_SEGMENT = 2;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImdbTopTvShowsCrawlerDataProvider.class);
 
     @Override
-    public List<String> getIds(String url) {
+    public List<String> getImdbIds(String url) {
         System.out.println("CRAWLING");
         try {
             Document document = getDocument(url);
             return initCrawler(document);
         } catch (IOException ex) {
-            throw new CrawlerFailException();
+            LOGGER.info("Unable to get document");
+            return null;
         }
     }
 
