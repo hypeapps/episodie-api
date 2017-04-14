@@ -12,8 +12,26 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
 
     private TvShowRemote tvShowRemote;
 
-    public TvShowDatabaseAdapter(TvShowEntity tvShowRemote) {
-        this.tvShowRemote = (TvShowRemote) tvShowRemote;
+    public TvShowDatabaseAdapter(TvShowRemote tvShowRemote) {
+        this.tvShowRemote = tvShowRemote;
+    }
+
+    public TvShowLocal apply() {
+        return TvShowLocal.builder()
+                .tvShowApiId(getTvShowApiId())
+                .imdbId(getImdbId())
+                .name(getName())
+                .status(getStatus())
+                .runtime(getRuntime())
+                .fullRuntime(getFullRuntime())
+                .premiered(getPremiered())
+                .summary(getSummary())
+                .imageMedium(getImageMedium())
+                .imageOriginal(getImageOriginal())
+                .updated(getUpdated())
+                .seasons(getSeasons())
+                .episodes(getEpisodes())
+                .build();
     }
 
     @Override
@@ -28,7 +46,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
 
     @Override
     public String getName() {
-        return tvShowRemote.getName();
+        return this.tvShowRemote.getName();
     }
 
     @Override
@@ -39,6 +57,11 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
     @Override
     public Integer getRuntime() {
         return this.tvShowRemote.getRuntime();
+    }
+
+    @Override
+    public Integer getFullRuntime() {
+        return this.tvShowRemote.getFullRuntime();
     }
 
     @Override
