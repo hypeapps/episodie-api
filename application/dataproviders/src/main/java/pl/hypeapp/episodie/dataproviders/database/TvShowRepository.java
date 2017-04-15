@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 
-public interface TvShowRepository extends JpaRepository<TvShowLocal, Integer> {
+public interface TvShowRepository extends JpaRepository<TvShowLocal, String> {
 
-    @Query("SELECT CASE  WHEN count(tv)> 0 THEN true ELSE false END FROM TvShowLocal tv WHERE tv.tvShowApiId = :id")
+    @Query("SELECT CASE WHEN count(tv)> 0 THEN true ELSE false END FROM TvShowLocal tv WHERE tv.tvShowApiId = :id")
     boolean existsByTvShowApiId(@Param("id") String tvShowApiId);
 
 }
