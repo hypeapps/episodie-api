@@ -1,13 +1,14 @@
-package pl.hypeapp.core.entity.tvmaze;
+package pl.hypeapp.core.entity.api.tvmaze;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TvMazeId {
     @JsonProperty("id")
     public String id;
-
 }

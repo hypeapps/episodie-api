@@ -5,42 +5,69 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import pl.hypeapp.core.entity.EpisodeEntity;
+import pl.hypeapp.core.entity.TvShowEntity;
 
 import java.util.List;
 
 @Data
 @Setter(AccessLevel.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TvShowRemote {
-    @JsonProperty("id")
-    public Integer id;
-    @JsonProperty("url")
-    public String url;
-    @JsonProperty("name")
-    public String name;
-    @JsonProperty("status")
-    public String status;
-    @JsonProperty("runtime")
-    public Integer runtime;
-    @JsonProperty("premiered")
-    public String premiered;
-    @JsonProperty("externals")
-    public Externals externals;
-    @JsonProperty("image")
-    public Image image;
-    @JsonProperty("summary")
-    public String summary;
-    @JsonProperty("updated")
-    public Integer updated;
-    @JsonProperty("_embedded")
-    public Embedded embedded;
+public class TvShowRemote implements TvShowEntity<SeasonRemote, EpisodeRemote> {
 
-    public List getSeasons() {
+    @JsonProperty("id")
+    private String tvShowApiId;
+
+    private String url;
+
+    private String name;
+
+    private String status;
+
+    private Integer runtime;
+
+    private String premiered;
+
+    private Externals externals;
+
+    private Image image;
+
+    private String summary;
+
+    private Integer updated;
+    @JsonProperty("_embedded")
+    private Embedded embedded;
+
+    @Override
+    public String getImdbId() {
+        return externals.getImdbId();
+    }
+
+    @Override
+    public String getImageMedium() {
+        return image.getMedium();
+    }
+
+    @Override
+    public String getImageOriginal() {
+        return image.getOriginal();
+    }
+
+    @Override
+    public List<SeasonRemote> getSeasons() {
         return embedded.getSeasons();
     }
 
-    public List<EpisodeEntity> getEpisodes() {
+    @Override
+    public List<EpisodeRemote> getEpisodes() {
         return embedded.getEpisodes();
     }
+
+    @Override
+    public Integer getFullRuntime() {
+        return getEpisodes()
+                .stream()
+                .mapToInt(EpisodeRemote::getRuntime)
+                .sum();
+    }
+
 }
