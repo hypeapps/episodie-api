@@ -1,8 +1,7 @@
 package pl.hypeapp.core.entity.database;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Tolerate;
 import pl.hypeapp.core.entity.TvShowEntity;
 
 import javax.persistence.*;
@@ -10,49 +9,50 @@ import java.util.List;
 
 @Data
 @Setter(AccessLevel.NONE)
+@Builder
 @Entity
-@Table(name = "TvShows")
-public class TvShowLocal implements TvShowEntity {
+@AllArgsConstructor
+@Table(name = "tv_shows")
+public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     @Id
-    @GeneratedValue
-    public Integer id;
+    @Column(name = "tv_show_api_id")
+    private String tvShowApiId;
 
-    public Integer tvShowId;
+    private String imdbId;
 
-    public String name;
+    private String name;
 
     public String status;
 
-    public Integer runtime;
+    private Integer runtime;
 
-    public String premiered;
+    private Integer fullRuntime;
 
-    public String summary;
+    private String premiered;
 
-    public String coverOriginal;
+    @Lob
+    @Column(length = 100000)
+    private String summary;
 
-    public String coverMedium;
+    private String imageMedium;
 
-    public Integer updated;
+    private String imageOriginal;
 
-    @Column(name = "seasons")
-    @OneToMany
+    private Integer updated;
+
+    @OneToMany(cascade = CascadeType.ALL)
     @ElementCollection(targetClass = SeasonLocal.class)
-    public List<SeasonLocal> seasons;
+    @JoinColumn(name = "tv_show_api_id")
+    private List<SeasonLocal> seasons;
 
-    @Column(name = "episodes")
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @ElementCollection(targetClass = EpisodeLocal.class)
-    public List<EpisodeLocal> episodes;
+    @JoinColumn(name = "tv_show_api_id")
+    private List<EpisodeLocal> episodes;
 
-//    @Override
-//    public List getSeasons() {
-//        return seasons;
-//    }
-//
-//    @Override
-//    public List getEpisodes() {
-//        return episodes;
-//    }
+    @Tolerate
+    public TvShowLocal() {
+    }
+
 }
