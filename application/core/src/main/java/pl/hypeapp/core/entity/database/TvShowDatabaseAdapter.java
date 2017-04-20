@@ -108,6 +108,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
     private SeasonLocal convertToSeasonLocal(SeasonRemote seasonRemote) {
         return SeasonLocal.builder()
                 .seasonApiId(seasonRemote.getSeasonApiId())
+                .runtime(calculateSeasonRuntime(seasonRemote.getSeasonNumber()))
                 .url(seasonRemote.getUrl())
                 .seasonNumber(seasonRemote.getSeasonNumber())
                 .episodeOrder(seasonRemote.getEpisodeOrder())
@@ -115,6 +116,13 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .endDate(seasonRemote.getEndDate())
                 .summary(seasonRemote.getSummary())
                 .build();
+    }
+
+    private Integer calculateSeasonRuntime(Integer seasonNumber) {
+        return tvShowRemote.getEpisodes().stream()
+                .filter(episodeRemote -> episodeRemote.getSeasonNumber().equals(seasonNumber))
+                .mapToInt(EpisodeRemote::getRuntime)
+                .sum();
     }
 
     private EpisodeLocal convertToEpisodeLocal(EpisodeRemote episodeRemote) {
@@ -131,4 +139,5 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .summary(episodeRemote.getSummary())
                 .build();
     }
+
 }
