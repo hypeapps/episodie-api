@@ -21,8 +21,8 @@ public class ImdbTopTvShowsCrawlerDataProvider implements GetImdbTopTvShows {
         Document document;
         try {
             document = getDocument(url);
-        } catch (IOException ex) {
-            LOGGER.info("Unable to get document");
+        } catch (IOException e) {
+            LOGGER.info("Unable to get document: " + e.getMessage());
             throw new CrawlerFailException();
         }
         return initCrawler(document);
