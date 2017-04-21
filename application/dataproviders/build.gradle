@@ -1,6 +1,11 @@
 dependencies {
     compile project(":application:core")
     compile libs.database
+    compile libs.rest
+    compile libs.jpa
+    compile libs.utils
+    compile libs.log
 
     testCompile libs.unit_tests
+    testCompile libs.spock
 }
