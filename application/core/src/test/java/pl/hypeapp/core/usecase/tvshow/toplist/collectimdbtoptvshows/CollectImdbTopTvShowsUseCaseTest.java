@@ -30,21 +30,22 @@ public class CollectImdbTopTvShowsUseCaseTest {
     public void shouldGetTopTvShowsAndInsertToDataProvider() throws Exception {
         List<String> imdbIds = new LinkedList<>();
         imdbIds.add("1");
+        imdbIds.add("1");
         Optional<TvMazeId> tvMazeId = Optional.of(new TvMazeId("1"));
         Optional<TvShowRemote> tvShowEntity = Optional.of(new TvShowRemote());
         Optional<TvShowLocal> tvShowLocal = Optional.of(new TvShowLocal());
 
-        when(getImdbTopTvShows.getImdbIds(URL)).thenReturn(imdbIds);
+        when(getImdbTopTvShows.crawl(URL)).thenReturn(imdbIds);
         when(getTvShowIdFromApi.getTvShowIdByImdbId("1")).thenReturn(tvMazeId);
         when(getTvShowFromApi.getTvShowByMazeId(tvMazeId.get())).thenReturn(tvShowEntity);
         when(insertTvShowToDatabase.insertTvShow(tvShowEntity.get())).thenReturn(tvShowLocal);
 
         collectImdbTopTvShowsUseCase.collect(URL);
 
-        verify(getImdbTopTvShows, times(1)).getImdbIds(URL);
-        verify(getTvShowIdFromApi, times(1)).getTvShowIdByImdbId(imdbIds.get(0));
-        verify(getTvShowFromApi, times(1)).getTvShowByMazeId(tvMazeId.get());
-        verify(insertTvShowToDatabase, times(1)).insertTvShow(tvShowEntity.get());
+        verify(getImdbTopTvShows, times(1)).crawl(URL);
+        verify(getTvShowIdFromApi, times(imdbIds.size())).getTvShowIdByImdbId(imdbIds.get(0));
+        verify(getTvShowFromApi, times(imdbIds.size())).getTvShowByMazeId(tvMazeId.get());
+        verify(insertTvShowToDatabase, times(imdbIds.size())).insertTvShow(tvShowEntity.get());
         verify(insertTvShowToTopList, times(1)).insert(new TvShowTopListLocal(1, null));
     }
 
