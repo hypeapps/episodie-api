@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface GetImdbTopTvShows {
 
-    List<String> getImdbIds(String url);
+    List<String> crawl(String url);
 
 }

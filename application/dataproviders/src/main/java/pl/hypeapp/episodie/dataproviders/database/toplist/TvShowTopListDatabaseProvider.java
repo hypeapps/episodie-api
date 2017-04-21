@@ -24,4 +24,5 @@ public class TvShowTopListDatabaseProvider implements InsertTvShowToTopList, Get
         tvShowTopListRepository.save(tvShowTopListLocal);
         LOGGER.info("Inserted to toplist: " + tvShowTopListLocal.getPosition() + " : " + tvShowTopListLocal.getTvShowApiId());
     }
+
 }

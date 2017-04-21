@@ -5,35 +5,37 @@ import com.github.rholder.retry.Retryer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
-import pl.hypeapp.core.entity.tvmazeid.TvMazeId;
-import pl.hypeapp.core.usecase.episode.extractimdbtoptvshows.EpisodeIdNotFoundException;
-import pl.hypeapp.core.usecase.episode.extractimdbtoptvshows.GetEpisodeIdFromApi;
+import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
+import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetTvShowIdFromApi;
 
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
-public class EpisodeIdTvMazeApiDataProvider implements GetEpisodeIdFromApi {
-    private static final Logger LOOGER = LoggerFactory.getLogger(EpisodeIdTvMazeApiDataProvider.class);
+public class TvShowIdTvMazeApiDataProvider implements GetTvShowIdFromApi {
+    private static final Logger LOOGER = LoggerFactory.getLogger(TvShowIdTvMazeApiDataProvider.class);
     private static final String API_ENDPOINT = "http://api.tvmaze.com/lookup/shows?imdb=";
     private final RestTemplate restTemplate;
     private final Retryer<TvMazeId> retryer;
 
-    public EpisodeIdTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvMazeId> retryer) {
+    public TvShowIdTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvMazeId> retryer) {
         this.restTemplate = restTemplate;
         this.retryer = retryer;
     }
 
     @Override
-    public TvMazeId getEpisodeIdByImdbId(String imdbId) {
+    public Optional<TvMazeId> getTvShowIdByImdbId(String imdbId) {
         try {
-            return retryer.call(callForId(imdbId));
+            TvMazeId tvMazeId = retryer.call(callForId(imdbId));
+            return Optional.of(tvMazeId);
         } catch (RetryException | ExecutionException e) {
             LOOGER.info(e.getMessage());
-            throw new EpisodeIdNotFoundException();
         }
+        return Optional.empty();
     }
 
     private Callable<TvMazeId> callForId(String imdbId) {
         return () -> restTemplate.getForObject(API_ENDPOINT + imdbId, TvMazeId.class);
     }
+
 }

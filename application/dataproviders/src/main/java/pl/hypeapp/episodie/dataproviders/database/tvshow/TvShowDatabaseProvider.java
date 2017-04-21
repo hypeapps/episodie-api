@@ -39,7 +39,7 @@ public class TvShowDatabaseProvider implements GetTvShowFromDatabase, InsertTvSh
             LOGGER.info("Saved tv show for id: " + tvShowLocal.getTvShowApiId());
             return Optional.of(tvShowLocal);
         } catch (Exception e) {
-            LOGGER.info(tvShowRemote.getTvShowApiId() + " " + e.getMessage());
+            LOGGER.info(e.getMessage());
         }
         return Optional.empty();
     }

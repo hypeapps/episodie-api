@@ -1,7 +1,7 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.top;
 
+import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsException;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.ExtractImdbTopTvShowsException;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 
 import java.util.concurrent.TimeUnit;
@@ -42,8 +42,9 @@ public class CollectImdbTopTvShowsJob implements ScheduledJob {
         try {
             collectImdbTopTvShowsUseCase.collect(IMDB_TOP_TV_SHOWS_URL);
             collectImdbTopTvShowsJobResult.recordJobSuccessfulResult();
-        } catch (ExtractImdbTopTvShowsException e) {
+        } catch (CollectImdbTopTvShowsException e) {
             collectImdbTopTvShowsJobResult.recordJobUnsuccessfulResult(e.getMessage());
         }
     }
+
 }
