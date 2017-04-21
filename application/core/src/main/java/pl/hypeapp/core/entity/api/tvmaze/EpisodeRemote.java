@@ -34,13 +34,17 @@ public class EpisodeRemote implements EpisodeEntity {
 
     @Override
     public String getImageMedium() {
-        if (image != null) return image.getMedium();
+        if (image != null) {
+            return image.getMedium();
+        }
         return null;
     }
 
     @Override
     public String getImageOriginal() {
-        if (image != null) return image.getOriginal();
+        if (image != null) {
+            return image.getOriginal();
+        }
         return null;
     }
 

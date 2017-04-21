@@ -23,6 +23,7 @@ public class TvShowTopListLocal {
 
     @Tolerate
     public TvShowTopListLocal() {
+        //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
 }

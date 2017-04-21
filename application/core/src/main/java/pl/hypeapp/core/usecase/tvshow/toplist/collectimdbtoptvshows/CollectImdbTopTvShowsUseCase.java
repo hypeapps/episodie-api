@@ -51,7 +51,7 @@ public class CollectImdbTopTvShowsUseCase {
         try {
             return getImdbTopTvShows.crawl(url);
         } catch (CrawlerFailException e) {
-            LOGGER.info("Crawler Failed");
+            LOGGER.info("Crawler Failed" + e.getMessage());
             throw new CollectImdbTopTvShowsException();
         }
     }
@@ -69,10 +69,6 @@ public class CollectImdbTopTvShowsUseCase {
                 .map(getTvShowFromApi::getTvShowByMazeId)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .filter((tvShowEntity) -> {
-                    LOGGER.info(tvShowEntity.getName());
-                    return true;
-                })
                 .collect(Collectors.toList());
     }
 

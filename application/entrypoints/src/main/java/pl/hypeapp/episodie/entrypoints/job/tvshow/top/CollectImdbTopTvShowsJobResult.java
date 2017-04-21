@@ -14,7 +14,7 @@ public class CollectImdbTopTvShowsJobResult {
     }
 
     public void recordJobUnsuccessfulResult(String message) {
-        System.out.println(date.toString() + " JOB FAILED BECAUSE: " + message);
+        LOGGER.info(date.toString() + " JOB FAILED BECAUSE: " + message);
     }
 
 }
