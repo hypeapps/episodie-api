@@ -1,4 +1,4 @@
-package pl.hypeapp.episodie.dataproviders.database;
+package pl.hypeapp.episodie.dataproviders.database.tvshow;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

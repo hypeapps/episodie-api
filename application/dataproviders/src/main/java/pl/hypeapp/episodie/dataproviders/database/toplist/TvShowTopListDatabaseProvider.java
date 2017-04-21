@@ -1,4 +1,4 @@
-package pl.hypeapp.episodie.dataproviders.database;
+package pl.hypeapp.episodie.dataproviders.database.toplist;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
 import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
+import pl.hypeapp.episodie.dataproviders.database.tvshow.TvShowRepository;
 
 @Transactional
 public class TvShowTopListDatabaseProvider implements InsertTvShowToTopList, GetTvShowTopList {

@@ -1,4 +1,4 @@
-package pl.hypeapp.episodie.dataproviders.database;
+package pl.hypeapp.episodie.dataproviders.database.tvshow;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
