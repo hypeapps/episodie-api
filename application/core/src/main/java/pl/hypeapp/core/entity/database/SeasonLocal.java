@@ -38,6 +38,7 @@ public class SeasonLocal implements SeasonEntity {
 
     @Tolerate
     public SeasonLocal() {
+        //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
 }

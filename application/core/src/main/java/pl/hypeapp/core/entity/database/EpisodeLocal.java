@@ -42,6 +42,7 @@ public class EpisodeLocal implements EpisodeEntity {
 
     @Tolerate
     public EpisodeLocal() {
+        //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
 }

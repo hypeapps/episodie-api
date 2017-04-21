@@ -23,7 +23,7 @@ public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     private String name;
 
-    public String status;
+    private String status;
 
     private Integer runtime;
 
@@ -53,6 +53,7 @@ public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     @Tolerate
     public TvShowLocal() {
+        //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
 }
