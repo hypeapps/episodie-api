@@ -21,6 +21,7 @@ repositories { mavenCentral() }
 dependencies {
     compile libs.spring_boot
     compile libs.database_initialisation
+    compile libs.log
     compile project(":application:core")
     compile project(":application:dataproviders")
     compile project(":application:entrypoints")
