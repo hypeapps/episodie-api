@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 public class TvShowTvMazeApiDataProvider implements GetTvShowFromApi {
-    private static final Logger LOOGER = LoggerFactory.getLogger(TvShowTvMazeApiDataProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TvShowTvMazeApiDataProvider.class);
     private final RestTemplate restTemplate;
     private final Retryer<TvShowRemote> retryer;
 
@@ -29,7 +29,7 @@ public class TvShowTvMazeApiDataProvider implements GetTvShowFromApi {
             TvShowRemote tvShowRemote = retryer.call(callForTvShow(tvMazeId.getId()));
             return Optional.of(tvShowRemote);
         } catch (RetryException | ExecutionException e) {
-            LOOGER.info(e.getMessage());
+            LOGGER.info(e.getMessage());
         }
         return Optional.empty();
     }
