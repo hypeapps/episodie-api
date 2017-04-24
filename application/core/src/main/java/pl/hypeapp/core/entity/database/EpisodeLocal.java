@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import pl.hypeapp.core.entity.EpisodeEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Builder
@@ -35,6 +38,14 @@ public class EpisodeLocal implements EpisodeEntity {
     private String imageMedium;
 
     private String imageOriginal;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdEntity;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedEntity;
 
     @Lob
     @Column(length = 100000)

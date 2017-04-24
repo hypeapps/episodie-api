@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Setter(AccessLevel.NONE)
@@ -20,6 +22,10 @@ public class TvShowTopListLocal {
     private Integer position;
 
     private String tvShowApiId;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedEntity;
 
     @Tolerate
     public TvShowTopListLocal() {

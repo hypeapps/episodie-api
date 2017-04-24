@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import pl.hypeapp.core.entity.SeasonEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Setter(AccessLevel.NONE)
@@ -31,6 +34,14 @@ public class SeasonLocal implements SeasonEntity {
     private String premiereDate;
 
     private String endDate;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdEntity;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedEntity;
 
     @Lob
     @Column(length = 100000)
