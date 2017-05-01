@@ -78,17 +78,14 @@ subprojects {
 
             ],
 
-            string_utils           : [
-//                "org.apache.commons:commons-lang3:3.4"
-            ],
-
             log                    : [
                     "org.slf4j:slf4j-api:1.7.19"
             ],
 
             utils                  : [
                     "org.jsoup:jsoup:1.10.2",
-                    "org.projectlombok:lombok:1.16.10"
+                    "org.projectlombok:lombok:1.16.10",
+                    'com.google.guava:guava:21.0'
             ],
 
             jackson                : [
