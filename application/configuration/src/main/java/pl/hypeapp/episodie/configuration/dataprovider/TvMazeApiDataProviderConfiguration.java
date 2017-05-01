@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
 import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
+import pl.hypeapp.core.entity.api.tvmaze.TvShowsUpdatesRemote;
 import pl.hypeapp.episodie.dataproviders.api.tvmaze.id.TvShowIdTvMazeApiDataProvider;
 import pl.hypeapp.episodie.dataproviders.api.tvmaze.tvshow.TvShowTvMazeApiDataProvider;
+import pl.hypeapp.episodie.dataproviders.api.tvmaze.update.TvShowsUpdatesApiDataProvider;
 
 import javax.xml.ws.http.HTTPException;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +43,11 @@ public class TvMazeApiDataProviderConfiguration {
     @Bean
     public TvShowIdTvMazeApiDataProvider tvShowIdTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvMazeId> retryer) {
         return new TvShowIdTvMazeApiDataProvider(restTemplate, retryer);
+    }
+
+    @Bean
+    public TvShowsUpdatesApiDataProvider tvShowsUpdatesApiDataProvider(RestTemplate restTemplate, Retryer<TvShowsUpdatesRemote> retryer) {
+        return new TvShowsUpdatesApiDataProvider(restTemplate, retryer);
     }
 
 }
