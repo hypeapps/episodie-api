@@ -2,9 +2,12 @@ package pl.hypeapp.core.entity.database;
 
 import lombok.*;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import pl.hypeapp.core.entity.TvShowEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -40,6 +43,14 @@ public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
     private String imageOriginal;
 
     private Integer updated;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdEntity;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedEntity;
 
     @OneToMany(cascade = CascadeType.ALL)
     @ElementCollection(targetClass = SeasonLocal.class)
