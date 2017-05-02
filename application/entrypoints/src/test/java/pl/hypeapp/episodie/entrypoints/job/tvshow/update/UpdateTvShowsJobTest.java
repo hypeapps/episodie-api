@@ -1,7 +1,6 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.update;
 
 import org.junit.Test;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsException;
 import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsException;
 import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 
@@ -31,7 +30,7 @@ public class UpdateTvShowsJobTest {
 
         updateTvShowsJob.run();
 
-        assertThatExceptionOfType(CollectImdbTopTvShowsException.class).isThrownBy(() -> updateTvShowsUseCase.update());
+        assertThatExceptionOfType(UpdateTvShowsException.class).isThrownBy(() -> updateTvShowsUseCase.update());
         verify(updateTvShowsJobResult, times(1)).recordJobUnsuccessfulResult(updateTvShowsException.getMessage());
     }
 
