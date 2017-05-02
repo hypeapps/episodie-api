@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CollectImdbTopTvShowsJob implements ScheduledJob {
     private static final String IMDB_TOP_TV_SHOWS_URL = "http://www.imdb.com/chart/toptv";
+    private static final String JOB_NAME = "CollectImdbTopTvShowsJob";
     private final CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase;
     private final CollectImdbTopTvShowsJobResult collectImdbTopTvShowsJobResult;
 
@@ -19,7 +20,7 @@ public class CollectImdbTopTvShowsJob implements ScheduledJob {
 
     @Override
     public String getName() {
-        return "CollectImdbTopTvShowsJob";
+        return JOB_NAME;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CollectImdbTopTvShowsJob implements ScheduledJob {
 
     @Override
     public long getPeriod() {
-        return 1;
+        return 2;
     }
 
     @Override

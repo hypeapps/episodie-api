@@ -33,7 +33,7 @@ public class UpdateTvShowsJob implements ScheduledJob {
 
     @Override
     public TimeUnit getTimeUnit() {
-        return TimeUnit.MINUTES;
+        return TimeUnit.DAYS;
     }
 
     @Override
