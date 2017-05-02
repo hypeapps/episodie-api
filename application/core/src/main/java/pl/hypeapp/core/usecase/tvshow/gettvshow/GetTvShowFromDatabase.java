@@ -1,8 +1,14 @@
 package pl.hypeapp.core.usecase.tvshow.gettvshow;
 
+import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.core.entity.database.TvShowsUpdatesLocal;
+
 public interface GetTvShowFromDatabase {
 
-    String getTvShow(String tvMazeId);
+    TvShowLocal getTvShow(String tvMazeId);
 
     boolean doesTvShowExist(String tvMazeId);
+
+    TvShowsUpdatesLocal getUpdates();
+
 }
