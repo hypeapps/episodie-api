@@ -32,4 +32,10 @@ public class TvShowTopListLocal {
         //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
+    @Tolerate
+    public TvShowTopListLocal(Integer position, String tvShowApiId) {
+        this.position = position;
+        this.tvShowApiId = tvShowApiId;
+    }
+
 }
