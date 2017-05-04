@@ -9,7 +9,6 @@ import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
 import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
-import pl.hypeapp.episodie.dataproviders.database.tvshow.TvShowRepository;
 
 import java.util.List;
 
@@ -18,12 +17,9 @@ public class TvShowTopListDatabaseProvider implements InsertTvShowToTopList, Get
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TvShowTopListDatabaseProvider.class);
 
-    private final TvShowRepository tvShowRepository;
-
     private final TvShowTopListRepository tvShowTopListRepository;
 
-    public TvShowTopListDatabaseProvider(TvShowRepository tvShowRepository, TvShowTopListRepository tvShowTopListRepository) {
-        this.tvShowRepository = tvShowRepository;
+    public TvShowTopListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
         this.tvShowTopListRepository = tvShowTopListRepository;
     }
 
