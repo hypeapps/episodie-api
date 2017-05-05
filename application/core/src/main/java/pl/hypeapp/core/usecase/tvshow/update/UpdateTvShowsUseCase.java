@@ -9,8 +9,8 @@ import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
 import pl.hypeapp.core.entity.api.tvmaze.TvShowsUpdatesRemote;
 import pl.hypeapp.core.entity.database.TvShowsUpdatesLocal;
 import pl.hypeapp.core.usecase.tvshow.GetTvShowFromApi;
+import pl.hypeapp.core.usecase.tvshow.GetTvShowFromDatabase;
 import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
-import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowFromDatabase;
 
 import java.util.*;
 

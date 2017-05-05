@@ -9,7 +9,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.*;
 
 public class UpdateTvShowsJobTest {
+
     private UpdateTvShowsUseCase updateTvShowsUseCase = mock(UpdateTvShowsUseCase.class);
+
     private UpdateTvShowsJobResult updateTvShowsJobResult = mock(UpdateTvShowsJobResult.class);
 
     private UpdateTvShowsJob updateTvShowsJob = new UpdateTvShowsJob(updateTvShowsUseCase,

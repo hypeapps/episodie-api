@@ -7,8 +7,11 @@ import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 import java.util.concurrent.TimeUnit;
 
 public class UpdateTvShowsJob implements ScheduledJob {
+
     private static final String JOB_NAME = "UpdateTvShowsJob";
+
     private final UpdateTvShowsJobResult updateTvShowsJobResult;
+
     private final UpdateTvShowsUseCase updateTvShowsUseCase;
 
     public UpdateTvShowsJob(UpdateTvShowsUseCase updateTvShowsJobUseCase, UpdateTvShowsJobResult updateTvShowsJobResult) {

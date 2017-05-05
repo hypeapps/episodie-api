@@ -13,7 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ImdbTopTvShowsCrawlerDataProvider implements GetImdbTopTvShows {
+
     private static final int PATH_SECOND_SEGMENT = 2;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ImdbTopTvShowsCrawlerDataProvider.class);
 
     @Override

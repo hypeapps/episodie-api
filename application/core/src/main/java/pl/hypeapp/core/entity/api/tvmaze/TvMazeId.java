@@ -9,6 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TvMazeId {
+
     @JsonProperty("id")
     public String id;
+
 }
