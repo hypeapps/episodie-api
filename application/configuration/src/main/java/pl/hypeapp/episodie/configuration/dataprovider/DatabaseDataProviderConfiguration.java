@@ -16,8 +16,8 @@ public class DatabaseDataProviderConfiguration {
     }
 
     @Bean
-    public TvShowTopListDatabaseProvider tvShowTopListDatabaseProvider(TvShowRepository tvShowRepository, TvShowTopListRepository tvShowTopListRepository) {
-        return new TvShowTopListDatabaseProvider(tvShowRepository, tvShowTopListRepository);
+    public TvShowTopListDatabaseProvider tvShowTopListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
+        return new TvShowTopListDatabaseProvider(tvShowTopListRepository);
     }
 
 }

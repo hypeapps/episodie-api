@@ -10,6 +10,8 @@ import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbT
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetTvShowIdFromApi;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
+import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
+import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
 import pl.hypeapp.core.usecase.tvshow.update.GetTvShowsUpdates;
 import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 
@@ -38,6 +40,11 @@ public class UseCaseConfiguration {
     public UpdateTvShowsUseCase updateTvShowsUseCase(GetTvShowFromApi getTvShowFromApi, GetTvShowFromDatabase getTvShowFromDatabase,
                                                      GetTvShowsUpdates getTvShowsUpdates, InsertTvShowToDatabase insertTvShowToDatabase) {
         return new UpdateTvShowsUseCase(getTvShowFromApi, getTvShowFromDatabase, getTvShowsUpdates, insertTvShowToDatabase);
+    }
+
+    @Bean
+    public GetTvShowTopListUseCase getTvShowTopListUseCase(GetTvShowTopList getTvShowTopList) {
+        return new GetTvShowTopListUseCase(getTvShowTopList);
     }
 
 }
