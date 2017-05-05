@@ -10,6 +10,7 @@ import pl.hypeapp.core.entity.database.TvShowLocal;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -43,6 +44,17 @@ public class TvShowDatabaseProviderTest {
         tvShowDatabaseProvider.getUpdates();
 
         verify(tvShowRepository, times(1)).getUpdates();
+    }
+
+    @Test
+    public void shouldCheckDoesEntityExist() throws Exception {
+        String tvMazeId = "82";
+
+        when(tvShowRepository.doesTvShowExist(tvMazeId)).thenReturn(true);
+
+        boolean doesExist = tvShowDatabaseProvider.doesTvShowExist(tvMazeId);
+
+        assertTrue(doesExist);
     }
 
 }
