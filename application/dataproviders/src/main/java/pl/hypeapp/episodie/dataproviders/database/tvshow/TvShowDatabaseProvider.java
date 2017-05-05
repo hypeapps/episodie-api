@@ -8,8 +8,8 @@ import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
 import pl.hypeapp.core.entity.database.TvShowDatabaseAdapter;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowsUpdatesLocal;
+import pl.hypeapp.core.usecase.tvshow.GetTvShowFromDatabase;
 import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
-import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowFromDatabase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +18,13 @@ import java.util.Optional;
 
 @Transactional
 public class TvShowDatabaseProvider implements GetTvShowFromDatabase, InsertTvShowToDatabase {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TvShowDatabaseProvider.class);
+
     private static final int COLUMN_TV_SHOW_API_ID = 0;
+
     private static final int COLUMN_UPDATED = 1;
+
     private final TvShowRepository tvShowRepository;
 
     public TvShowDatabaseProvider(TvShowRepository tvShowRepository) {
@@ -29,7 +33,7 @@ public class TvShowDatabaseProvider implements GetTvShowFromDatabase, InsertTvSh
 
     @Override
     public boolean doesTvShowExist(String tvMazeId) {
-        return true;
+        return tvShowRepository.doesTvShowExist(tvMazeId);
     }
 
     @Override
