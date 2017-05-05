@@ -15,11 +15,17 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 public class CollectImdbTopTvShowsUseCaseTest {
+
     private static final String URL = "http://www.example.com";
+
     private GetImdbTopTvShows getImdbTopTvShows = mock(GetImdbTopTvShows.class);
+
     private GetTvShowFromApi getTvShowFromApi = mock(GetTvShowFromApi.class);
+
     private GetTvShowIdFromApi getTvShowIdFromApi = mock(GetTvShowIdFromApi.class);
+
     private InsertTvShowToDatabase insertTvShowToDatabase = mock(InsertTvShowToDatabase.class);
+
     private InsertTvShowToTopList insertTvShowToTopList = mock(InsertTvShowToTopList.class);
 
     private CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase =

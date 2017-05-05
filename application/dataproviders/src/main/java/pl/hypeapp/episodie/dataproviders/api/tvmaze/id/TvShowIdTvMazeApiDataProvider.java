@@ -13,9 +13,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 public class TvShowIdTvMazeApiDataProvider implements GetTvShowIdFromApi {
+
     private static final Logger LOOGER = LoggerFactory.getLogger(TvShowIdTvMazeApiDataProvider.class);
+
     private static final String API_ENDPOINT = "http://api.tvmaze.com/lookup/shows?imdb=";
+
     private final RestTemplate restTemplate;
+
     private final Retryer<TvMazeId> retryer;
 
     public TvShowIdTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvMazeId> retryer) {

@@ -15,6 +15,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class TvShowDatabaseProviderTest {
+
     private TvShowRepository tvShowRepository = mock(TvShowRepository.class);
 
     private TvShowDatabaseProvider tvShowDatabaseProvider = new TvShowDatabaseProvider(tvShowRepository);

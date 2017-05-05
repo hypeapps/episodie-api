@@ -9,8 +9,11 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.*;
 
 public class CollectImdbTopTvShowsJobTest {
+
     private static final String IMDB_TOP_TV_SHOWS_URL = "http://www.imdb.com/chart/toptv";
+
     private CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase = mock(CollectImdbTopTvShowsUseCase.class);
+
     private CollectImdbTopTvShowsJobResult collectImdbTopTvShowsJobResult = mock(CollectImdbTopTvShowsJobResult.class);
 
     private CollectImdbTopTvShowsJob collectImdbTopTvShowsJob = new CollectImdbTopTvShowsJob(collectImdbTopTvShowsUseCase,

@@ -14,8 +14,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 public class TvShowsUpdatesApiDataProvider implements GetTvShowsUpdates {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TvShowsUpdatesApiDataProvider.class);
+
     private final RestTemplate restTemplate;
+
     private final Retryer<TvShowsUpdatesRemote> retryer;
 
     public TvShowsUpdatesApiDataProvider(RestTemplate restTemplate, Retryer<TvShowsUpdatesRemote> retryer) {
