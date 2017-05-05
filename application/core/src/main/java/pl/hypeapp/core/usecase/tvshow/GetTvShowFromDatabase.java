@@ -1,4 +1,4 @@
-package pl.hypeapp.core.usecase.tvshow.gettvshow;
+package pl.hypeapp.core.usecase.tvshow;
 
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowsUpdatesLocal;
