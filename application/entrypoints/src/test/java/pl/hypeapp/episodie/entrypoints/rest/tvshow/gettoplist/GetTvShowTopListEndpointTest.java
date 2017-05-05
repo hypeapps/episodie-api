@@ -38,12 +38,14 @@ public class GetTvShowTopListEndpointTest {
         verify(getTvShowTopListUseCase, times(1)).getTopList(pageable);
     }
 
-    @Test
+    @Test(expected = ResourceNotFoundException.class)
     public void shouldThrowsException() throws Exception {
         Pageable pageable = new PageRequest(0, 3);
         ResourceNotFoundException exception = new ResourceNotFoundException();
 
         when(getTvShowTopListUseCase.getTopList(pageable)).thenThrow(exception);
+
+        getTvShowTopListUseCase.getTopList(pageable);
 
         assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getTvShowTopListUseCase.getTopList(pageable));
         assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getTvShowTopListEndpoint.getTopList(pageable));
