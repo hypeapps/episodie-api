@@ -11,7 +11,7 @@ import pl.hypeapp.episodie.entrypoints.rest.tvshow.gettvshow.GetTvShowEndpoint;
 public class EndpointConfiguration {
 
     @Bean
-    public GetTvShowEndpoint episodeEndpoint(GetTvShowUseCase getTvShowUseCase) {
+    public GetTvShowEndpoint getTvShowEndpoint(GetTvShowUseCase getTvShowUseCase) {
         return new GetTvShowEndpoint(getTvShowUseCase);
     }
 

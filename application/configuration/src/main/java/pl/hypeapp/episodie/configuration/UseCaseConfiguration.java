@@ -3,8 +3,8 @@ package pl.hypeapp.episodie.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.hypeapp.core.usecase.tvshow.GetTvShowFromApi;
+import pl.hypeapp.core.usecase.tvshow.GetTvShowFromDatabase;
 import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
-import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowFromDatabase;
 import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
@@ -18,15 +18,9 @@ import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 @Configuration
 public class UseCaseConfiguration {
 
-    //    @Bean
-//    public GetTvShowUseCase getTvShowUseCase(DoesTvShowExist doesTvShowExist, GetTvShowFromApi getTvShowFromApi,
-//                                             GetTvShowFromDatabase getTvShowFromDatabase, InsertTvShowToDatabase insertTvShowToDatabase){
-//        return new GetTvShowUseCase(doesTvShowExist, getTvShowFromApi, getTvShowFromDatabase, insertTvShowToDatabase);
-//    }
-//
     @Bean
-    public GetTvShowUseCase getTvShowUseCase(GetTvShowFromApi getTvShowFromApi) {
-        return new GetTvShowUseCase(getTvShowFromApi);
+    public GetTvShowUseCase getTvShowUseCase(GetTvShowFromDatabase getTvShowFromDatabase) {
+        return new GetTvShowUseCase(getTvShowFromDatabase);
     }
 
     @Bean
