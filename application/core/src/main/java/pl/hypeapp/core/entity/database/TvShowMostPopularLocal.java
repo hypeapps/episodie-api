@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 @Setter(AccessLevel.NONE)
 @AllArgsConstructor
 @Entity
-@Table(name = "tv_show_top_list")
-public class TvShowTopListLocal {
+@Table(name = "tv_show_most_popular")
+public class TvShowMostPopularLocal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +33,12 @@ public class TvShowTopListLocal {
     private Timestamp updatedEntity;
 
     @Tolerate
-    public TvShowTopListLocal() {
+    public TvShowMostPopularLocal() {
         //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
     @Tolerate
-    public TvShowTopListLocal(Integer position, String tvShowApiId) {
+    public TvShowMostPopularLocal(Integer position, String tvShowApiId) {
         this.position = position;
         this.tvShowApiId = tvShowApiId;
     }
