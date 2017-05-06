@@ -5,8 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
-import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.ResourceNotFoundException;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
