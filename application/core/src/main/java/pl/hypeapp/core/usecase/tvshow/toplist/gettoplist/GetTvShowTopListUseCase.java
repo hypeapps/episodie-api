@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,9 +36,9 @@ public class GetTvShowTopListUseCase {
                 .collect(Collectors.toList());
     }
 
-    private void orderTvShowsById(List<String> topListIds, List<TvShowLocal> tvShowToList) {
+    private void orderTvShowsById(List<String> topListIds, List<TvShowLocal> tvShowTopList) {
         Ordering<String> idOrdering = Ordering.explicit(topListIds);
-        tvShowToList.sort((o1, o2) -> idOrdering.compare(o1.getTvShowApiId(), o2.getTvShowApiId()));
+        tvShowTopList.sort((o1, o2) -> idOrdering.compare(o1.getTvShowApiId(), o2.getTvShowApiId()));
     }
 
 }

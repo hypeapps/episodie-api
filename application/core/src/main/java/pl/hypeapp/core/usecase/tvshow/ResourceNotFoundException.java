@@ -1,4 +1,4 @@
-package pl.hypeapp.core.usecase.tvshow.toplist.gettoplist;
+package pl.hypeapp.core.usecase.tvshow;
 
 public class ResourceNotFoundException extends RuntimeException {
 }

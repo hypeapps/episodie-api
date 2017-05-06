@@ -1,6 +1,5 @@
 package pl.hypeapp.episodie.dataproviders.database.mostpopular;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,18 +29,15 @@ public class TvShowMostPopularDatabaseProviderTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnsTopList() throws Exception {
         Pageable pageable = new PageRequest(0, 3);
 
-        //TODO: End test
-//        tvShowMostPopularDatabaseProvider.getTopList(pageable);
+        tvShowMostPopularDatabaseProvider.getMostPopular(pageable);
 
         verify(tvShowMostPopularRepository, times(1)).findAll(pageable);
     }
 
     @Test
-    @Ignore
     public void shouldReturnsTvShowsTopList() throws Exception {
         List<String> topListIds = new ArrayList<>();
         topListIds.add("12");
@@ -52,8 +48,8 @@ public class TvShowMostPopularDatabaseProviderTest {
         tvShows.add(new TvShowLocal());
 
         when(tvShowMostPopularRepository.getTopListTvShows(topListIds)).thenReturn(tvShows);
-        //TODO: End test
-//        tvShowMostPopularDatabaseProvider.getTopListTvShows(topListIds);
+
+        tvShowMostPopularDatabaseProvider.getMostPopularTvShows(topListIds);
 
         verify(tvShowMostPopularRepository, times(1)).getTopListTvShows(topListIds);
     }

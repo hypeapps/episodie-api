@@ -1,4 +1,4 @@
-package pl.hypeapp.episodie.entrypoints.rest.tvshow.gettoplist;
+package pl.hypeapp.episodie.entrypoints.rest.tvshow.getmostpopular;
 
 import org.junit.Test;
 import org.springframework.data.domain.Page;
@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
+import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.*;
 
-public class GetTvShowTopListEndpointTest {
+public class GetMostPopularTvShowsEndpointTest {
 
-    private GetTvShowTopListUseCase getTvShowTopListUseCase = mock(GetTvShowTopListUseCase.class);
+    private GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase = mock(GetMostPopularTvShowsUseCase.class);
 
-    private GetTvShowTopListEndpoint getTvShowTopListEndpoint = new GetTvShowTopListEndpoint(getTvShowTopListUseCase);
+    private GetMostPopularTvShowsEndpoint getMostPopularTvShowsEndpoint = new GetMostPopularTvShowsEndpoint(getMostPopularTvShowsUseCase);
 
     @Test
     public void shouldGetTvShowTopList() throws Exception {
@@ -31,11 +31,11 @@ public class GetTvShowTopListEndpointTest {
         tvShows.add(new TvShowLocal());
         Page<TvShowLocal> tvShowLocalPage = new PageImpl<>(tvShows, pageable, pageable.getPageSize());
 
-        when(getTvShowTopListUseCase.getTopList(pageable)).thenReturn(tvShowLocalPage);
+        when(getMostPopularTvShowsUseCase.getMostPopular(pageable)).thenReturn(tvShowLocalPage);
 
-        getTvShowTopListEndpoint.getTopList(pageable);
+        getMostPopularTvShowsEndpoint.getMostPopular(pageable);
 
-        verify(getTvShowTopListUseCase, times(1)).getTopList(pageable);
+        verify(getMostPopularTvShowsUseCase, times(1)).getMostPopular(pageable);
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -43,12 +43,12 @@ public class GetTvShowTopListEndpointTest {
         Pageable pageable = new PageRequest(0, 3);
         ResourceNotFoundException exception = new ResourceNotFoundException();
 
-        when(getTvShowTopListUseCase.getTopList(pageable)).thenThrow(exception);
+        when(getMostPopularTvShowsUseCase.getMostPopular(pageable)).thenThrow(exception);
 
-        getTvShowTopListUseCase.getTopList(pageable);
+        getMostPopularTvShowsUseCase.getMostPopular(pageable);
 
-        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getTvShowTopListUseCase.getTopList(pageable));
-        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getTvShowTopListEndpoint.getTopList(pageable));
+        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getMostPopularTvShowsUseCase.getMostPopular(pageable));
+        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getMostPopularTvShowsEndpoint.getMostPopular(pageable));
     }
 
 }

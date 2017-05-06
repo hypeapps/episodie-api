@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

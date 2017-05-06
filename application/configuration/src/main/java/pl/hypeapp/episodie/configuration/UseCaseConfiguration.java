@@ -10,6 +10,8 @@ import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
 import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
 import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.GetImdbMostPopularTvShows;
 import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
+import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
+import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
 import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
@@ -49,6 +51,11 @@ public class UseCaseConfiguration {
     @Bean
     public GetTvShowTopListUseCase getTvShowTopListUseCase(GetTvShowTopList getTvShowTopList) {
         return new GetTvShowTopListUseCase(getTvShowTopList);
+    }
+
+    @Bean
+    public GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase(GetMostPopularTvShows getMostPopularTvShows) {
+        return new GetMostPopularTvShowsUseCase(getMostPopularTvShows);
     }
 
 }
