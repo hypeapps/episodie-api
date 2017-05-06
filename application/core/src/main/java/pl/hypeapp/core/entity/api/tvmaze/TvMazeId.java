@@ -11,6 +11,6 @@ import lombok.Data;
 public class TvMazeId {
 
     @JsonProperty("id")
-    public String id;
+    private String id;
 
 }
