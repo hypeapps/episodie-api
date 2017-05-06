@@ -34,7 +34,7 @@ public class CollectImdbTopTvShowsJob implements ScheduledJob {
 
     @Override
     public long getPeriod() {
-        return 2;
+        return 3;
     }
 
     @Override
