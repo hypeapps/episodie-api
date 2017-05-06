@@ -36,7 +36,7 @@ public class UpdateTvShowsUseCase {
             LOGGER.info("TV SHOWS TO UPDATE " + getTvShowsToUpdate(tvShowsUpdatesRemote, tvShowsUpdatesLocal).size());
             Map<String, Integer> tvShowsToUpdate = getTvShowsToUpdate(tvShowsUpdatesRemote, tvShowsUpdatesLocal);
             List<TvShowRemote> updatedTvShows = getUpdatedTvShows(tvShowsToUpdate);
-            insertUpdatedTvShowsToDatabase(updatedTvShows);
+            insertUpdatedTvShowsToDataProvider(updatedTvShows);
         } catch (Exception e) {
             throw new UpdateTvShowsException();
         }
@@ -58,7 +58,7 @@ public class UpdateTvShowsUseCase {
         return updatedTvShows;
     }
 
-    private void insertUpdatedTvShowsToDatabase(List<TvShowRemote> updatedTvShows) {
+    private void insertUpdatedTvShowsToDataProvider(List<TvShowRemote> updatedTvShows) {
         updatedTvShows.forEach(insertTvShowToDatabase::insertTvShow);
     }
 

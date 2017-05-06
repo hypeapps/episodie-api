@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 
 public class CollectImdbTopTvShowsJobResult {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectImdbTopTvShowsJobResult.class);
+
     private final Date date = new Date();
 
     public void recordJobSuccessfulResult() {

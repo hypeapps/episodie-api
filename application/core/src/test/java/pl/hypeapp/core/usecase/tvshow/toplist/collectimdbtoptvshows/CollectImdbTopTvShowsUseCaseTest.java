@@ -6,6 +6,7 @@ import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
 import pl.hypeapp.core.usecase.tvshow.GetTvShowFromApi;
+import pl.hypeapp.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
 
 import java.util.LinkedList;

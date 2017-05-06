@@ -1,4 +1,4 @@
-package pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows;
+package pl.hypeapp.core.usecase.tvshow;
 
 import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
 

@@ -7,6 +7,7 @@ import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.entity.database.TvShowTopListLocal;
 import pl.hypeapp.core.usecase.tvshow.GetTvShowFromApi;
+import pl.hypeapp.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
 
 import java.util.List;
@@ -14,11 +15,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CollectImdbTopTvShowsUseCase {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectImdbTopTvShowsUseCase.class);
+
     private final GetImdbTopTvShows getImdbTopTvShows;
+
     private final GetTvShowFromApi getTvShowFromApi;
+
     private final GetTvShowIdFromApi getTvShowIdFromApi;
+
     private final InsertTvShowToTopList insertTvShowToTopList;
+
     private final InsertTvShowToDatabase insertTvShowToDatabase;
 
     public CollectImdbTopTvShowsUseCase(GetImdbTopTvShows getImdbTopTvShows, GetTvShowFromApi getTvShowFromApi,
@@ -41,7 +48,7 @@ public class CollectImdbTopTvShowsUseCase {
         List<TvShowEntity> tvShows = getTvShows(tvMazeIds);
         LOGGER.info("tv shows size: " + tvShows.size());
 
-        List<TvShowLocal> tvShowsLocalInserted = insertTvShowsToDatabase(tvShows);
+        List<TvShowLocal> tvShowsLocalInserted = insertTvShowsToDataProvider(tvShows);
         LOGGER.info("tv shows local size: " + tvShowsLocalInserted.size());
 
         insertTvShowsToTopList(tvShowsLocalInserted);
@@ -50,7 +57,7 @@ public class CollectImdbTopTvShowsUseCase {
     private List<String> getImdbIds(String url) {
         try {
             return getImdbTopTvShows.crawl(url);
-        } catch (CrawlerFailException e) {
+        } catch (ImdbTopTvShowCrawlerFailException e) {
             LOGGER.info("Crawler Failed" + e.getMessage());
             throw new CollectImdbTopTvShowsException();
         }
@@ -72,7 +79,7 @@ public class CollectImdbTopTvShowsUseCase {
                 .collect(Collectors.toList());
     }
 
-    private List<TvShowLocal> insertTvShowsToDatabase(List<TvShowEntity> tvShowEntities) {
+    private List<TvShowLocal> insertTvShowsToDataProvider(List<TvShowEntity> tvShowEntities) {
         return tvShowEntities.stream()
                 .map(insertTvShowToDatabase::insertTvShow)
                 .filter(Optional::isPresent)
