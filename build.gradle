@@ -60,13 +60,11 @@ subprojects {
             rest                   : [
                     "org.springframework:spring-web:${springVersion}",
                     "com.github.rholder:guava-retrying:2.0.0"
-//                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             ],
 
             database_initialisation: [
-                    "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-//                "org.springframework:spring-jdbc:${spring_version}",
-//                "com.h2database:h2:1.4.191"
+                    "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
+
             ],
 
             database               : [
@@ -75,6 +73,7 @@ subprojects {
 
             jpa                    : [
                     "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
+                    "org.hibernate:hibernate-search-orm:5.6.1.Final"
 
             ],
 

@@ -1,6 +1,5 @@
 dependencies {
     compile project(":application:core")
-    compile libs.database
     compile libs.rest
     compile libs.jpa
     compile libs.utils
