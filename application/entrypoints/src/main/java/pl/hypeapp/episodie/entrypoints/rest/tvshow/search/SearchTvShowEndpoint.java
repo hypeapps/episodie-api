@@ -1,18 +1,19 @@
 package pl.hypeapp.episodie.entrypoints.rest.tvshow.search;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.core.usecase.tvshow.search.SearchTvShowUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
+import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class SearchTvShowEndpoint {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchTvShowEndpoint.class);
 
     private static final String API_PATH = "api/tvshow/search";
 
@@ -24,8 +25,19 @@ public class SearchTvShowEndpoint {
 
     @RequestMapping(value = API_PATH)
     public List<TvShowDto> search(String query) {
-        searchTvShowUseCase.search(query);
-        return null;
+        try {
+            List<TvShowLocal> tvShowSearchResults = searchTvShowUseCase.search(query);
+            return toDtos(tvShowSearchResults);
+        } catch (ResourceNotFoundException e) {
+            throw new NotFoundException();
+        }
+    }
+
+    private List<TvShowDto> toDtos(List<TvShowLocal> tvShows) {
+        TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
+        return tvShows.stream()
+                .map(tvShow -> objectMapper.tvShowLocalToDto.apply(tvShow))
+                .collect(Collectors.toList());
     }
 
 }
