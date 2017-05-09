@@ -11,6 +11,7 @@ import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
 import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
 import pl.hypeapp.core.entity.api.tvmaze.TvShowsUpdatesRemote;
 import pl.hypeapp.episodie.dataproviders.api.tvmaze.id.TvShowIdTvMazeApiDataProvider;
+import pl.hypeapp.episodie.dataproviders.api.tvmaze.search.TvShowSearchTvMazeApiDataProvider;
 import pl.hypeapp.episodie.dataproviders.api.tvmaze.tvshow.TvShowTvMazeApiDataProvider;
 import pl.hypeapp.episodie.dataproviders.api.tvmaze.update.TvShowsUpdatesApiDataProvider;
 
@@ -48,6 +49,11 @@ public class TvMazeApiDataProviderConfiguration {
     @Bean
     public TvShowsUpdatesApiDataProvider tvShowsUpdatesApiDataProvider(RestTemplate restTemplate, Retryer<TvShowsUpdatesRemote> retryer) {
         return new TvShowsUpdatesApiDataProvider(restTemplate, retryer);
+    }
+
+    @Bean
+    public TvShowSearchTvMazeApiDataProvider tvShowSearchTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvShowRemote> retryer) {
+        return new TvShowSearchTvMazeApiDataProvider(restTemplate, retryer);
     }
 
 }

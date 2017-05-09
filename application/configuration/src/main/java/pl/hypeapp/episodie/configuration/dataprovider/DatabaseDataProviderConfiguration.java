@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularRepository;
+import pl.hypeapp.episodie.dataproviders.database.search.SearchTvShowDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.toplist.TvShowTopListDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.toplist.TvShowTopListRepository;
 import pl.hypeapp.episodie.dataproviders.database.tvshow.TvShowDatabaseProvider;
@@ -25,6 +26,11 @@ public class DatabaseDataProviderConfiguration {
     @Bean
     public TvShowMostPopularDatabaseProvider tvShowMostPopularDatabaseProvider(TvShowMostPopularRepository tvShowMosPopularRepository) {
         return new TvShowMostPopularDatabaseProvider(tvShowMosPopularRepository);
+    }
+
+    @Bean
+    public SearchTvShowDatabaseProvider searchTvShowDatabaseProvider() {
+        return new SearchTvShowDatabaseProvider();
     }
 
 }
