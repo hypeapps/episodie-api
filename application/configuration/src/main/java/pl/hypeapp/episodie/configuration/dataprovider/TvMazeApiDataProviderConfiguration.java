@@ -52,8 +52,8 @@ public class TvMazeApiDataProviderConfiguration {
     }
 
     @Bean
-    public TvShowSearchTvMazeApiDataProvider tvShowSearchTvMazeApiDataProvider(RestTemplate restTemplate, Retryer<TvShowRemote> retryer) {
-        return new TvShowSearchTvMazeApiDataProvider(restTemplate, retryer);
+    public TvShowSearchTvMazeApiDataProvider tvShowSearchTvMazeApiDataProvider(RestTemplate restTemplate) {
+        return new TvShowSearchTvMazeApiDataProvider(restTemplate);
     }
 
 }
