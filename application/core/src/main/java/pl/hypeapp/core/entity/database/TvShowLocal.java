@@ -1,9 +1,18 @@
 package pl.hypeapp.core.entity.database;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Setter;
 import lombok.experimental.Tolerate;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Parameter;
 import pl.hypeapp.core.entity.TvShowEntity;
 
 import javax.persistence.*;
@@ -14,8 +23,16 @@ import java.util.List;
 @Setter(AccessLevel.NONE)
 @Builder
 @Entity
-@AllArgsConstructor
+@Indexed
 @Table(name = "tv_shows")
+@AnalyzerDef(name = "tvShowNameAnalyzer",
+        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+        filters = {
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = {
+                        @Parameter(name = "language", value = "English")
+                })
+        })
 public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     @Id
@@ -24,6 +41,8 @@ public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     private String imdbId;
 
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Analyzer(definition = "tvShowNameAnalyzer")
     private String name;
 
     private String status;
