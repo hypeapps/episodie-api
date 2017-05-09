@@ -54,7 +54,7 @@ public class TvShowDatabaseProvider implements GetTvShowFromDatabase, InsertTvSh
     @Override
     public Optional<TvShowLocal> insertTvShow(TvShowEntity tvShowRemote) {
         try {
-            TvShowLocal tvShowLocal = convertToDao(tvShowRemote);
+            TvShowLocal tvShowLocal = convertToLocalEntity(tvShowRemote);
             tvShowRepository.save(tvShowLocal);
             LOGGER.info("Saved tv show for id: " + tvShowLocal.getTvShowApiId());
             return Optional.of(tvShowLocal);
@@ -64,7 +64,7 @@ public class TvShowDatabaseProvider implements GetTvShowFromDatabase, InsertTvSh
         return Optional.empty();
     }
 
-    private TvShowLocal convertToDao(TvShowEntity tvShowEntity) {
+    private TvShowLocal convertToLocalEntity(TvShowEntity tvShowEntity) {
         TvShowDatabaseAdapter tvShowDatabaseAdapter = new TvShowDatabaseAdapter((TvShowRemote) tvShowEntity);
         return tvShowDatabaseAdapter.apply();
     }
