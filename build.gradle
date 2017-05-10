@@ -1,11 +1,7 @@
 subprojects {
 
     repositories {
-//        mavenLocal()
         mavenCentral()
-        maven {
-            url "http://repo.bodar.com"
-        }
     }
 
     ext {
@@ -13,6 +9,7 @@ subprojects {
         springBootVersion = "1.4.4.RELEASE"
         spockFrameworkVersion = '1.1-groovy-2.4-rc-3'
     }
+
     ext.libs = [
             unit_tests             : [
                     "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
@@ -27,24 +24,6 @@ subprojects {
             spock                  : [
                     group: 'org.spockframework', name: 'spock-core', version: "${spockFrameworkVersion}",
                     group: 'org.spockframework', name: 'spock-spring', version: "${spockFrameworkVersion}"
-            ],
-
-
-            acceptance_tests       : [
-//                "com.googlecode.yatspec:yatspec:1.20"
-            ],
-
-            integration_test       : [
-//                "org.springframework:spring-test:${spring_version}",
-//                "org.skyscreamer:jsonassert:1.3.0",
-//                "com.cedarsoftware:json-io:4.4.0"
-            ],
-
-            end_to_end_test        : [
-//                "org.springframework:spring-test:${spring_version}",
-//                "com.mashape.unirest:unirest-java:1.4.8",
-//                "org.skyscreamer:jsonassert:1.3.0",
-//                "com.cedarsoftware:json-io:4.4.0"
             ],
 
             spring_boot            : [
@@ -65,10 +44,6 @@ subprojects {
             database_initialisation: [
                     "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
 
-            ],
-
-            database               : [
-//                "org.springframework:spring-jdbc:${spring_version}"
             ],
 
             jpa                    : [
