@@ -4,6 +4,7 @@ import pl.hypeapp.core.entity.database.TvShowLocal;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface SearchTvShow {
 
     List<TvShowLocal> search(String query);
