@@ -17,7 +17,7 @@ public class ImdbMostPopularTvShowsCrawlerDataProvider implements GetImdbMostPop
 
     private static final int PATH_SECOND_SEGMENT = 2;
 
-    private Logger LOGGER = LoggerFactory.getLogger(ImdbMostPopularTvShowsCrawlerDataProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImdbMostPopularTvShowsCrawlerDataProvider.class);
 
     @Override
     public List<String> crawl(String imdbUrl) {

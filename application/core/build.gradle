@@ -1,4 +1,4 @@
-dependencies{
+dependencies {
     compile libs.jackson
     compile libs.jpa
     compile libs.log

@@ -42,7 +42,7 @@ public class GetTvShowTopListEndpoint {
     private Page<TvShowDto> toDto(Page<TvShowLocal> tvShowTopList, Pageable pageableRequest) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         List<TvShowDto> tvShowDtos = tvShowTopList.getContent().stream()
-                .map(tvShow -> objectMapper.tvShowLocalToDto.apply(tvShow))
+                .map(objectMapper.tvShowLocalToDto)
                 .collect(Collectors.toList());
         return new PageImpl<>(tvShowDtos, pageableRequest, tvShowTopList.getTotalElements());
     }

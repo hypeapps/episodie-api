@@ -14,6 +14,7 @@ jar {
     destinationDir = project(":application").getBuildDir()
     version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
 
 repositories { mavenCentral() }
@@ -25,7 +26,6 @@ dependencies {
     compile project(":application:core")
     compile project(":application:dataproviders")
     compile project(":application:entrypoints")
-    runtime('mysql:mysql-connector-java')
 
-//    testCompile('org.springframework.boot:spring-boot-starter-test')
+    runtime('mysql:mysql-connector-java')
 }

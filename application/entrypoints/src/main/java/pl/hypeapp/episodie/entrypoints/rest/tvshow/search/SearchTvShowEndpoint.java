@@ -36,7 +36,7 @@ public class SearchTvShowEndpoint {
     private List<TvShowDto> toDtos(List<TvShowLocal> tvShows) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         return tvShows.stream()
-                .map(tvShow -> objectMapper.tvShowLocalToDto.apply(tvShow))
+                .map(objectMapper.tvShowLocalToDto)
                 .collect(Collectors.toList());
     }
 
