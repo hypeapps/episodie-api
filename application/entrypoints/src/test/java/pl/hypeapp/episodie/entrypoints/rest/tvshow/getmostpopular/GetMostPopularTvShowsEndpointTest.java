@@ -5,12 +5,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import pl.hypeapp.core.entity.database.EpisodeLocal;
+import pl.hypeapp.core.entity.database.SeasonLocal;
 import pl.hypeapp.core.entity.database.TvShowLocal;
 import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -26,9 +29,18 @@ public class GetMostPopularTvShowsEndpointTest {
     public void shouldGetTvShowTopList() throws Exception {
         Pageable pageable = new PageRequest(0, 3);
         List<TvShowLocal> tvShows = new ArrayList<>();
-        tvShows.add(new TvShowLocal());
-        tvShows.add(new TvShowLocal());
-        tvShows.add(new TvShowLocal());
+        tvShows.add(TvShowLocal.builder()
+                .seasons(Collections.singletonList(new SeasonLocal()))
+                .episodes(Collections.singletonList(new EpisodeLocal()))
+                .build());
+        tvShows.add(TvShowLocal.builder()
+                .seasons(Collections.singletonList(new SeasonLocal()))
+                .episodes(Collections.singletonList(new EpisodeLocal()))
+                .build());
+        tvShows.add(TvShowLocal.builder()
+                .seasons(Collections.singletonList(new SeasonLocal()))
+                .episodes(Collections.singletonList(new EpisodeLocal()))
+                .build());
         Page<TvShowLocal> tvShowLocalPage = new PageImpl<>(tvShows, pageable, pageable.getPageSize());
 
         when(getMostPopularTvShowsUseCase.getMostPopular(pageable)).thenReturn(tvShowLocalPage);
