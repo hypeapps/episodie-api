@@ -2,9 +2,9 @@ package pl.hypeapp.episodie.entrypoints.rest.tvshow.search;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShowUseCase;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;

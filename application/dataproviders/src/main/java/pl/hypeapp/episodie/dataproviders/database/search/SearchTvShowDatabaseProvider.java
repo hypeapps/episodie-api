@@ -6,8 +6,8 @@ import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.transaction.annotation.Transactional;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShow;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShow;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

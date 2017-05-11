@@ -5,11 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import pl.hypeapp.core.entity.database.EpisodeLocal;
-import pl.hypeapp.core.entity.database.SeasonLocal;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
+import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.ArrayList;

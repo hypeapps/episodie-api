@@ -1,8 +1,8 @@
 package pl.hypeapp.episodie.entrypoints.rest.dto;
 
-import pl.hypeapp.core.entity.database.EpisodeLocal;
-import pl.hypeapp.core.entity.database.SeasonLocal;
-import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
+import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;

@@ -2,9 +2,9 @@ package pl.hypeapp.episodie.configuration.job;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 import pl.hypeapp.episodie.entrypoints.job.tvshow.mostpopular.CollectImdbMostPopularTvShowsJob;
 import pl.hypeapp.episodie.entrypoints.job.tvshow.mostpopular.CollectImdbMostPopularTvShowsJobResult;

@@ -2,26 +2,26 @@ package pl.hypeapp.episodie.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.hypeapp.core.usecase.tvshow.GetTvShowFromApi;
-import pl.hypeapp.core.usecase.tvshow.GetTvShowFromDatabase;
-import pl.hypeapp.core.usecase.tvshow.GetTvShowIdFromApi;
-import pl.hypeapp.core.usecase.tvshow.InsertTvShowToDatabase;
-import pl.hypeapp.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.GetImdbMostPopularTvShows;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShow;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShowInApi;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShowUseCase;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
-import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
-import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
-import pl.hypeapp.core.usecase.tvshow.update.GetTvShowsUpdates;
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromApi;
+import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromDatabase;
+import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
+import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
+import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.GetImdbMostPopularTvShows;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShow;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowInApi;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.GetTvShowsUpdates;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 
 @Configuration
 public class UseCaseConfiguration {

@@ -5,8 +5,8 @@ import com.github.rholder.retry.Retryer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
-import pl.hypeapp.core.entity.api.tvmaze.TvShowsUpdatesRemote;
-import pl.hypeapp.core.usecase.tvshow.update.GetTvShowsUpdates;
+import pl.hypeapp.episodie.core.entity.api.tvmaze.TvShowsUpdatesRemote;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.GetTvShowsUpdates;
 
 import java.util.Map;
 import java.util.Optional;

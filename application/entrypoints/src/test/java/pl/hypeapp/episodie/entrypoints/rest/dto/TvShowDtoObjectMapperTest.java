@@ -1,9 +1,9 @@
 package pl.hypeapp.episodie.entrypoints.rest.dto;
 
 import org.junit.Test;
-import pl.hypeapp.core.entity.database.EpisodeLocal;
-import pl.hypeapp.core.entity.database.SeasonLocal;
-import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
+import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,8 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowTopListLocal;
 
 import java.util.List;
 

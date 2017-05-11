@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.entity.database.TvShowTopListLocal;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
-import pl.hypeapp.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
 
 import java.util.List;
 

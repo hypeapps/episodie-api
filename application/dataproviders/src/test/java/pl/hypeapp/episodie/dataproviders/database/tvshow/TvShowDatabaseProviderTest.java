@@ -2,10 +2,10 @@ package pl.hypeapp.episodie.dataproviders.database.tvshow;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import pl.hypeapp.core.entity.TvShowEntity;
-import pl.hypeapp.core.entity.api.tvmaze.TvShowRemote;
-import pl.hypeapp.core.entity.database.TvShowDatabaseAdapter;
-import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.TvShowEntity;
+import pl.hypeapp.episodie.core.entity.api.tvmaze.TvShowRemote;
+import pl.hypeapp.episodie.core.entity.database.TvShowDatabaseAdapter;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
 import java.util.LinkedList;
 import java.util.List;

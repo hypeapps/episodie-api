@@ -3,8 +3,8 @@ package pl.hypeapp.episodie.dataproviders.database.toplist;
 import org.junit.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowTopListLocal;
 
 import java.util.ArrayList;
 import java.util.List;
