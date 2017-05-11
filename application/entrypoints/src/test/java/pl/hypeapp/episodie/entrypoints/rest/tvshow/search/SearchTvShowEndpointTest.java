@@ -1,11 +1,11 @@
 package pl.hypeapp.episodie.entrypoints.rest.tvshow.search;
 
 import org.junit.Test;
-import pl.hypeapp.core.entity.database.EpisodeLocal;
-import pl.hypeapp.core.entity.database.SeasonLocal;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.core.usecase.tvshow.search.SearchTvShowUseCase;
+import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
+import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
+import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 

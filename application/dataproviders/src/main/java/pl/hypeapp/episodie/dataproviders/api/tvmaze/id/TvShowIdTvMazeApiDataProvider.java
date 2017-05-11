@@ -5,8 +5,8 @@ import com.github.rholder.retry.Retryer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
-import pl.hypeapp.core.entity.api.tvmaze.TvMazeId;
-import pl.hypeapp.core.usecase.tvshow.GetTvShowIdFromApi;
+import pl.hypeapp.episodie.core.entity.api.tvmaze.TvMazeId;
+import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 
 import java.util.Optional;
 import java.util.concurrent.Callable;

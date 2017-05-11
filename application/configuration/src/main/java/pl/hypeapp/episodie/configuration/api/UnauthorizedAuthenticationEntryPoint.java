@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UnauthorizedAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+
     private static final String REALM = "API_REALM";
 
     @Override
@@ -32,4 +33,5 @@ public class UnauthorizedAuthenticationEntryPoint extends BasicAuthenticationEnt
         setRealmName(REALM);
         super.afterPropertiesSet();
     }
+
 }

@@ -1,8 +1,8 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.update;
 
 import org.junit.Test;
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsException;
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsException;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;

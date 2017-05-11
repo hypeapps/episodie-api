@@ -1,7 +1,7 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.update;
 
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsException;
-import pl.hypeapp.core.usecase.tvshow.update.UpdateTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsException;
+import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 
 import java.util.concurrent.TimeUnit;

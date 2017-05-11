@@ -31,9 +31,7 @@ subprojects {
                     "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",
                     "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}",
                     "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",
-                    "org.springframework.boot:spring-boot-devtools:${springBootVersion}",
-                    "de.codecentric:spring-boot-admin-server:1.4.6",
-                    "de.codecentric:spring-boot-admin-server-ui:1.4.6"
+                    "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
             ],
 
             rest                   : [

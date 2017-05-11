@@ -3,7 +3,7 @@ package pl.hypeapp.episodie.dataproviders.database.tvshow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import pl.hypeapp.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
 import java.util.List;
 

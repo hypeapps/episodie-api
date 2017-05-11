@@ -1,7 +1,7 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.top;
 
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsException;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsException;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 
 import java.util.concurrent.TimeUnit;

@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import pl.hypeapp.core.entity.database.TvShowLocal;
-import pl.hypeapp.core.entity.database.TvShowMostPopularLocal;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
-import pl.hypeapp.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
+import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowMostPopularLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
 
 import java.util.List;
 

@@ -5,8 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
-import pl.hypeapp.core.usecase.tvshow.toplist.collectimdbtoptvshows.ImdbTopTvShowCrawlerFailException;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.ImdbTopTvShowCrawlerFailException;
 
 import java.io.IOException;
 import java.util.LinkedList;
