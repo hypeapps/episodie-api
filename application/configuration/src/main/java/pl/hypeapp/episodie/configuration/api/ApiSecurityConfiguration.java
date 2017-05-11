@@ -12,8 +12,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @Configuration
 @EnableWebSecurity
 public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     private static final String REALM = "API_REALM";
+
     private static final String USER_ROLE = "USER";
+
     private final ApiCredentialsConfiguration apiCredentials;
 
     @Autowired
@@ -36,9 +39,13 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("api/**").hasRole(USER_ROLE)
-                .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .antMatchers("/api/**")
+                .hasRole(USER_ROLE)
+                .and().httpBasic()
+                .realmName(REALM)
+                .authenticationEntryPoint(getBasicAuthEntryPoint())
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 }
