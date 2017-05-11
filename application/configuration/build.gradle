@@ -8,11 +8,12 @@ buildscript {
 }
 
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
-jar {
-    baseName = 'episodie-api-application'
+war {
+    baseName = 'episodie-api'
     destinationDir = project(":application").getBuildDir()
-    version = '0.0.1-SNAPSHOT'
+    version = '1.0'
 }
 
 sourceCompatibility = 1.8
