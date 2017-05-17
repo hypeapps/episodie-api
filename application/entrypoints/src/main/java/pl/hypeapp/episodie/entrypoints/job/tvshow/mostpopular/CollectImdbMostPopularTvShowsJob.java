@@ -46,9 +46,9 @@ public class CollectImdbMostPopularTvShowsJob implements ScheduledJob {
     public void run() {
         try {
             collectImdbMostPopularTvShowsUseCase.collect(IMDB_MOST_POPULAR_TV_SHOWS_URL);
-            collectImdbMostPopularTvShowsJobResult.recordJobSuccessfulResult();
+            collectImdbMostPopularTvShowsJobResult.recordJobSuccessfulResult(JOB_NAME);
         } catch (CollectImdbMostPopularTvShowsException e) {
-            collectImdbMostPopularTvShowsJobResult.recordJobUnsuccessfulResult(e.getMessage());
+            collectImdbMostPopularTvShowsJobResult.recordJobUnsuccessfulResult(JOB_NAME, e.getMessage());
         }
     }
 

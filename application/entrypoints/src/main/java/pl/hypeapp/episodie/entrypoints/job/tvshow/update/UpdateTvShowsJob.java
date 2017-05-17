@@ -43,9 +43,9 @@ public class UpdateTvShowsJob implements ScheduledJob {
     public void run() {
         try {
             updateTvShowsUseCase.update();
-            updateTvShowsJobResult.recordJobSuccessfulResult();
+            updateTvShowsJobResult.recordJobSuccessfulResult(JOB_NAME);
         } catch (UpdateTvShowsException e) {
-            updateTvShowsJobResult.recordJobUnsuccessfulResult(e.getMessage());
+            updateTvShowsJobResult.recordJobUnsuccessfulResult(JOB_NAME, e.getMessage());
         }
     }
 
