@@ -40,14 +40,17 @@ subprojects {
             ],
 
             database_initialisation: [
-                    "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
-
+                    "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
             ],
 
             jpa                    : [
                     "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
                     "org.hibernate:hibernate-search-orm:5.6.1.Final"
 
+            ],
+
+            sms                    : [
+                    "com.twilio.sdk:twilio-java-sdk:6.3.0"
             ],
 
             log                    : [

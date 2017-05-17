@@ -4,7 +4,7 @@ dependencies {
     compile libs.jpa
     compile libs.utils
     compile libs.log
-
+    compile libs.sms
     testCompile libs.unit_tests
     testCompile libs.spock
 }

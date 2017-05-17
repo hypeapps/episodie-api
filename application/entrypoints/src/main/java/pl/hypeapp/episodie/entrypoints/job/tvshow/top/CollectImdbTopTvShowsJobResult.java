@@ -1,22 +1,25 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.top;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pl.hypeapp.episodie.core.usecase.job.RecordJobResultUseCase;
 
 import java.util.Date;
 
 public class CollectImdbTopTvShowsJobResult {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CollectImdbTopTvShowsJobResult.class);
-
     private final Date date = new Date();
 
-    public void recordJobSuccessfulResult() {
-        LOGGER.info(date.toString() + " JOB SUCCESSFUL");
+    private final RecordJobResultUseCase recordJobResultUseCase;
+
+    public CollectImdbTopTvShowsJobResult(RecordJobResultUseCase recordJobResultUseCase) {
+        this.recordJobResultUseCase = recordJobResultUseCase;
     }
 
-    public void recordJobUnsuccessfulResult(String message) {
-        LOGGER.info(date.toString() + " JOB FAILED BECAUSE: " + message);
+    public void recordJobSuccessfulResult(String jobName) {
+        recordJobResultUseCase.recordSuccessfulJob(jobName, date);
+    }
+
+    public void recordJobUnsuccessfulResult(String jobName, String message) {
+        recordJobResultUseCase.recordUnsuccessfulJob(jobName, message, date);
     }
 
 }

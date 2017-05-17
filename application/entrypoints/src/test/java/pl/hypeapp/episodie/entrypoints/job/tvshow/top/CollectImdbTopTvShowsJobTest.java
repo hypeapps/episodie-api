@@ -12,6 +12,8 @@ public class CollectImdbTopTvShowsJobTest {
 
     private static final String IMDB_TOP_TV_SHOWS_URL = "http://www.imdb.com/chart/toptv";
 
+    private static final String JOB_NAME = "CollectImdbTopTvShowsJob";
+
     private CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase = mock(CollectImdbTopTvShowsUseCase.class);
 
     private CollectImdbTopTvShowsJobResult collectImdbTopTvShowsJobResult = mock(CollectImdbTopTvShowsJobResult.class);
@@ -24,7 +26,7 @@ public class CollectImdbTopTvShowsJobTest {
         collectImdbTopTvShowsJob.run();
 
         verify(collectImdbTopTvShowsUseCase, times(1)).collect(IMDB_TOP_TV_SHOWS_URL);
-        verify(collectImdbTopTvShowsJobResult, times(1)).recordJobSuccessfulResult();
+        verify(collectImdbTopTvShowsJobResult, times(1)).recordJobSuccessfulResult(JOB_NAME);
     }
 
     @Test
@@ -35,7 +37,7 @@ public class CollectImdbTopTvShowsJobTest {
         collectImdbTopTvShowsJob.run();
 
         assertThatExceptionOfType(CollectImdbTopTvShowsException.class).isThrownBy(() -> collectImdbTopTvShowsUseCase.collect(IMDB_TOP_TV_SHOWS_URL));
-        verify(collectImdbTopTvShowsJobResult, times(1)).recordJobUnsuccessfulResult(collectImdbTopTvShowsException.getMessage());
+        verify(collectImdbTopTvShowsJobResult, times(1)).recordJobUnsuccessfulResult(JOB_NAME, collectImdbTopTvShowsException.getMessage());
     }
 
     @Test

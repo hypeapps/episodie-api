@@ -10,6 +10,8 @@ import static org.mockito.Mockito.*;
 
 public class UpdateTvShowsJobTest {
 
+    private static final String JOB_NAME = "UpdateTvShowsJob";
+
     private UpdateTvShowsUseCase updateTvShowsUseCase = mock(UpdateTvShowsUseCase.class);
 
     private UpdateTvShowsJobResult updateTvShowsJobResult = mock(UpdateTvShowsJobResult.class);
@@ -22,7 +24,7 @@ public class UpdateTvShowsJobTest {
         updateTvShowsJob.run();
 
         verify(updateTvShowsUseCase, times(1)).update();
-        verify(updateTvShowsJobResult, times(1)).recordJobSuccessfulResult();
+        verify(updateTvShowsJobResult, times(1)).recordJobSuccessfulResult(JOB_NAME);
     }
 
     @Test
@@ -33,7 +35,7 @@ public class UpdateTvShowsJobTest {
         updateTvShowsJob.run();
 
         assertThatExceptionOfType(UpdateTvShowsException.class).isThrownBy(() -> updateTvShowsUseCase.update());
-        verify(updateTvShowsJobResult, times(1)).recordJobUnsuccessfulResult(updateTvShowsException.getMessage());
+        verify(updateTvShowsJobResult, times(1)).recordJobUnsuccessfulResult(JOB_NAME, updateTvShowsException.getMessage());
     }
 
     @Test

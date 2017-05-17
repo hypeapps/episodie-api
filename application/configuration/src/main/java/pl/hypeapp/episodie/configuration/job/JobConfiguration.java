@@ -2,6 +2,7 @@ package pl.hypeapp.episodie.configuration.job;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.hypeapp.episodie.core.usecase.job.RecordJobResultUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
@@ -17,8 +18,8 @@ import pl.hypeapp.episodie.entrypoints.job.tvshow.update.UpdateTvShowsJobResult;
 public class JobConfiguration {
 
     @Bean
-    public CollectImdbTopTvShowsJobResult collectImdbTopTvShowsJobResult() {
-        return new CollectImdbTopTvShowsJobResult();
+    public CollectImdbTopTvShowsJobResult collectImdbTopTvShowsJobResult(RecordJobResultUseCase recordJobResultUseCase) {
+        return new CollectImdbTopTvShowsJobResult(recordJobResultUseCase);
     }
 
     @Bean
@@ -28,8 +29,8 @@ public class JobConfiguration {
     }
 
     @Bean
-    public UpdateTvShowsJobResult updateTvShowsJobResult() {
-        return new UpdateTvShowsJobResult();
+    public UpdateTvShowsJobResult updateTvShowsJobResult(RecordJobResultUseCase recordJobResultUseCase) {
+        return new UpdateTvShowsJobResult(recordJobResultUseCase);
     }
 
     @Bean
@@ -38,8 +39,8 @@ public class JobConfiguration {
     }
 
     @Bean
-    public CollectImdbMostPopularTvShowsJobResult collectImdbMostPopularTvShowsJobResult() {
-        return new CollectImdbMostPopularTvShowsJobResult();
+    public CollectImdbMostPopularTvShowsJobResult collectImdbMostPopularTvShowsJobResult(RecordJobResultUseCase recordJobResultUseCase) {
+        return new CollectImdbMostPopularTvShowsJobResult(recordJobResultUseCase);
     }
 
     @Bean

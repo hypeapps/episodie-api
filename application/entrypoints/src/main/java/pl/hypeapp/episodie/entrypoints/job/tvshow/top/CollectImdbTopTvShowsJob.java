@@ -46,9 +46,9 @@ public class CollectImdbTopTvShowsJob implements ScheduledJob {
     public void run() {
         try {
             collectImdbTopTvShowsUseCase.collect(IMDB_TOP_TV_SHOWS_URL);
-            collectImdbTopTvShowsJobResult.recordJobSuccessfulResult();
+            collectImdbTopTvShowsJobResult.recordJobSuccessfulResult(JOB_NAME);
         } catch (CollectImdbTopTvShowsException e) {
-            collectImdbTopTvShowsJobResult.recordJobUnsuccessfulResult(e.getMessage());
+            collectImdbTopTvShowsJobResult.recordJobUnsuccessfulResult(JOB_NAME, e.getMessage());
         }
     }
 
