@@ -2,6 +2,8 @@ package pl.hypeapp.episodie.configuration.dataprovider;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.hypeapp.episodie.dataproviders.database.job.JobResultDatabaseProvider;
+import pl.hypeapp.episodie.dataproviders.database.job.JobResultRepository;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularRepository;
 import pl.hypeapp.episodie.dataproviders.database.search.SearchTvShowDatabaseProvider;
@@ -31,6 +33,11 @@ public class DatabaseDataProviderConfiguration {
     @Bean
     public SearchTvShowDatabaseProvider searchTvShowDatabaseProvider() {
         return new SearchTvShowDatabaseProvider();
+    }
+
+    @Bean
+    public JobResultDatabaseProvider jobResultDatabaseProvider(JobResultRepository jobResultRepository) {
+        return new JobResultDatabaseProvider(jobResultRepository);
     }
 
 }
