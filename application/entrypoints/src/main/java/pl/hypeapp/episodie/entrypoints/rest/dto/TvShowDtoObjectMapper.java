@@ -9,10 +9,23 @@ import java.util.stream.Collectors;
 
 public class TvShowDtoObjectMapper {
 
-    public Function<TvShowLocal, TvShowDto> tvShowLocalToDto = new Function<TvShowLocal, TvShowDto>() {
+    public Function<TvShowLocal, TvShowDto> tvShowLocalToDto = tvShowLocal -> TvShowDto.builder()
+            .tvShowApiId(tvShowLocal.getTvShowApiId())
+            .imdbId(tvShowLocal.getImdbId())
+            .name(tvShowLocal.getName())
+            .status(tvShowLocal.getStatus())
+            .runtime(tvShowLocal.getRuntime())
+            .fullRuntime(tvShowLocal.getFullRuntime())
+            .premiered(tvShowLocal.getPremiered())
+            .summary(tvShowLocal.getSummary())
+            .imageOriginal(tvShowLocal.getImageOriginal())
+            .imageMedium(tvShowLocal.getImageMedium())
+            .build();
+
+    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtended = new Function<TvShowLocal, TvShowExtendedDto>() {
         @Override
-        public TvShowDto apply(TvShowLocal tvShowLocal) {
-            return TvShowDto.builder()
+        public TvShowExtendedDto apply(TvShowLocal tvShowLocal) {
+            return TvShowExtendedDto.builder()
                     .tvShowApiId(tvShowLocal.getTvShowApiId())
                     .imdbId(tvShowLocal.getImdbId())
                     .name(tvShowLocal.getName())
