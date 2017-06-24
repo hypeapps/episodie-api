@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Builder
 @Setter(AccessLevel.NONE)
-public class TvShowDto {
+public class TvShowExtendedDto {
 
     private String tvShowApiId;
 
@@ -29,4 +31,9 @@ public class TvShowDto {
     private String imageMedium;
 
     private String imageOriginal;
+
+    private List<SeasonDto> seasons;
+
+    private List<EpisodeDto> episodes;
+
 }
