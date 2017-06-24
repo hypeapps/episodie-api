@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.TvShowNotFoundException;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -24,7 +24,7 @@ public class GetTvShowEndpoint {
     }
 
     @RequestMapping(value = API_PATH, method = GET)
-    public TvShowDto getTvShow(@PathVariable String tvMazeId) {
+    public TvShowExtendedDto getTvShow(@PathVariable String tvMazeId) {
         try {
             TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
             return toDto(tvShow);
@@ -33,9 +33,9 @@ public class GetTvShowEndpoint {
         }
     }
 
-    private TvShowDto toDto(TvShowLocal tvShow) {
+    private TvShowExtendedDto toDto(TvShowLocal tvShow) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
-        return objectMapper.tvShowLocalToDto.apply(tvShow);
+        return objectMapper.tvShowLocalToDtoExtended.apply(tvShow);
     }
 
 }

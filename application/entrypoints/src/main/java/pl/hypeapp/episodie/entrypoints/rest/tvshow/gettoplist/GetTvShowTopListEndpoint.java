@@ -10,6 +10,7 @@ import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;
@@ -21,6 +22,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class GetTvShowTopListEndpoint {
 
     private static final String API_PATH = "api/tvshow/toplist";
+
+    private static final String API_PATH_EXTENDED = "api/tvshow/toplist/extended";
 
     private final GetTvShowTopListUseCase getTvShowTopListUseCase;
 
@@ -39,12 +42,31 @@ public class GetTvShowTopListEndpoint {
         }
     }
 
-    private Page<TvShowDto> toDto(Page<TvShowLocal> tvShowTopList, Pageable pageableRequest) {
+    @RequestMapping(value = API_PATH_EXTENDED, method = GET)
+    public Page<TvShowExtendedDto> getTopListExtended(Pageable pageableRequest) {
+        Page<TvShowLocal> tvShowTopList;
+        try {
+            tvShowTopList = getTvShowTopListUseCase.getTopList(pageableRequest);
+            return toDtoExtended(tvShowTopList, pageableRequest);
+        } catch (ResourceNotFoundException e) {
+            throw new NotFoundException();
+        }
+    }
+
+    private Page<TvShowDto> toDto(Page<TvShowLocal> mostPopularTvShows, Pageable pageableRequest) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
-        List<TvShowDto> tvShowDtos = tvShowTopList.getContent().stream()
+        List<TvShowDto> tvShowDtos = mostPopularTvShows.getContent().stream()
                 .map(objectMapper.tvShowLocalToDto)
                 .collect(Collectors.toList());
-        return new PageImpl<>(tvShowDtos, pageableRequest, tvShowTopList.getTotalElements());
+        return new PageImpl<>(tvShowDtos, pageableRequest, mostPopularTvShows.getTotalElements());
+    }
+
+    private Page<TvShowExtendedDto> toDtoExtended(Page<TvShowLocal> tvShowTopList, Pageable pageableRequest) {
+        TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
+        List<TvShowExtendedDto> tvShowExtendedDtos = tvShowTopList.getContent().stream()
+                .map(objectMapper.tvShowLocalToDtoExtended)
+                .collect(Collectors.toList());
+        return new PageImpl<>(tvShowExtendedDtos, pageableRequest, tvShowTopList.getTotalElements());
     }
 
 }

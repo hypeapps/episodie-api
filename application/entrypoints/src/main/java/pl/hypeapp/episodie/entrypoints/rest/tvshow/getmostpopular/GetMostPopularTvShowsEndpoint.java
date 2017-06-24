@@ -10,6 +10,7 @@ import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;
@@ -21,6 +22,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class GetMostPopularTvShowsEndpoint {
 
     private static final String API_PATH = "api/tvshow/mostpopular";
+
+    private static final String API_PATH_EXTENDED = "api/tvshow/mostpopular/extended";
 
     private final GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase;
 
@@ -39,12 +42,31 @@ public class GetMostPopularTvShowsEndpoint {
         }
     }
 
+    @RequestMapping(value = API_PATH_EXTENDED, method = GET)
+    public Page<TvShowExtendedDto> getMostPopularExtended(Pageable pageableRequest) {
+        Page<TvShowLocal> mostPopularTvShows;
+        try {
+            mostPopularTvShows = getMostPopularTvShowsUseCase.getMostPopular(pageableRequest);
+            return toExtendedDto(mostPopularTvShows, pageableRequest);
+        } catch (ResourceNotFoundException e) {
+            throw new NotFoundException();
+        }
+    }
+
     private Page<TvShowDto> toDto(Page<TvShowLocal> mostPopularTvShows, Pageable pageableRequest) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         List<TvShowDto> tvShowDtos = mostPopularTvShows.getContent().stream()
                 .map(objectMapper.tvShowLocalToDto)
                 .collect(Collectors.toList());
         return new PageImpl<>(tvShowDtos, pageableRequest, mostPopularTvShows.getTotalElements());
+    }
+
+    private Page<TvShowExtendedDto> toExtendedDto(Page<TvShowLocal> mostPopularTvShows, Pageable pageableRequest) {
+        TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
+        List<TvShowExtendedDto> tvShowExtendedDtos = mostPopularTvShows.getContent().stream()
+                .map(objectMapper.tvShowLocalToDtoExtended)
+                .collect(Collectors.toList());
+        return new PageImpl<>(tvShowExtendedDtos, pageableRequest, mostPopularTvShows.getTotalElements());
     }
 
 }
