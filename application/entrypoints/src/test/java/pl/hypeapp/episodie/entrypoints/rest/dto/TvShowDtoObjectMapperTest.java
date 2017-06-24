@@ -29,9 +29,9 @@ public class TvShowDtoObjectMapperTest {
                 .seasons(seasonLocals)
                 .build();
 
-        TvShowDto tvShowDto = tvShowDtoObjectMapper.tvShowLocalToDto.apply(tvShowLocal);
+        TvShowExtendedDto tvShowExtendedDto = tvShowDtoObjectMapper.tvShowLocalToDtoExtended.apply(tvShowLocal);
 
-        assertSame(tvShowDto.getTvShowApiId(), tvShowLocal.getTvShowApiId());
+        assertSame(tvShowExtendedDto.getTvShowApiId(), tvShowLocal.getTvShowApiId());
     }
 
 }

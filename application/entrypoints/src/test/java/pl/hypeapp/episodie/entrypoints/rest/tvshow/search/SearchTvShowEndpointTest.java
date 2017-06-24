@@ -6,7 +6,7 @@ import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -42,9 +42,9 @@ public class SearchTvShowEndpointTest {
 
         when(searchTvShowUseCase.search(query)).thenReturn(result);
 
-        List<TvShowDto> tvShowDtos = searchTvShowEndpoint.search(query);
+        List<TvShowExtendedDto> tvShowExtendedDtos = searchTvShowEndpoint.searchExtended(query);
 
-        assertSame(tvShowDtos.get(0).getTvShowApiId(), result.get(0).getTvShowApiId());
+        assertSame(tvShowExtendedDtos.get(0).getTvShowApiId(), result.get(0).getTvShowApiId());
         verify(searchTvShowUseCase, times(1)).search(query);
     }
 

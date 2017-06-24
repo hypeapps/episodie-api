@@ -6,7 +6,7 @@ import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.TvShowNotFoundException;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -39,9 +39,9 @@ public class GetTvShowEndpointTest {
 
         when(getTvShowUseCase.getTvShow(tvMazeId)).thenReturn(tvShowLocal);
 
-        TvShowDto tvShowDto = getTvShowEndpoint.getTvShow(tvMazeId);
+        TvShowExtendedDto tvShowExtendedDto = getTvShowEndpoint.getTvShow(tvMazeId);
 
-        assertSame(tvShowDto.getTvShowApiId(), tvShowLocal.getTvShowApiId());
+        assertSame(tvShowExtendedDto.getTvShowApiId(), tvShowLocal.getTvShowApiId());
     }
 
     @Test(expected = TvShowNotFoundException.class)

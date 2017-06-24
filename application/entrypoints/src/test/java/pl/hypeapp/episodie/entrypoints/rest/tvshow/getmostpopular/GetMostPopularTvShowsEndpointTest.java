@@ -45,7 +45,7 @@ public class GetMostPopularTvShowsEndpointTest {
 
         when(getMostPopularTvShowsUseCase.getMostPopular(pageable)).thenReturn(tvShowLocalPage);
 
-        getMostPopularTvShowsEndpoint.getMostPopular(pageable);
+        getMostPopularTvShowsEndpoint.getMostPopularExtended(pageable);
 
         verify(getMostPopularTvShowsUseCase, times(1)).getMostPopular(pageable);
     }
@@ -60,7 +60,7 @@ public class GetMostPopularTvShowsEndpointTest {
         getMostPopularTvShowsUseCase.getMostPopular(pageable);
 
         assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getMostPopularTvShowsUseCase.getMostPopular(pageable));
-        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getMostPopularTvShowsEndpoint.getMostPopular(pageable));
+        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getMostPopularTvShowsEndpoint.getMostPopularExtended(pageable));
     }
 
 }
