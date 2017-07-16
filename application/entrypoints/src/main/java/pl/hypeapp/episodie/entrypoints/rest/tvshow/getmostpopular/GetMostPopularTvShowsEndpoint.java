@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
@@ -25,17 +25,17 @@ public class GetMostPopularTvShowsEndpoint {
 
     private static final String API_PATH_EXTENDED = "api/tvshow/mostpopular/extended";
 
-    private final GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase;
+    private final GetMostPopularUseCase getMostPopularUseCase;
 
-    public GetMostPopularTvShowsEndpoint(GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase) {
-        this.getMostPopularTvShowsUseCase = getMostPopularTvShowsUseCase;
+    public GetMostPopularTvShowsEndpoint(GetMostPopularUseCase getMostPopularUseCase) {
+        this.getMostPopularUseCase = getMostPopularUseCase;
     }
 
     @RequestMapping(value = API_PATH, method = GET)
     public Page<TvShowDto> getMostPopular(Pageable pageableRequest) {
         Page<TvShowLocal> mostPopularTvShows;
         try {
-            mostPopularTvShows = getMostPopularTvShowsUseCase.getMostPopular(pageableRequest);
+            mostPopularTvShows = getMostPopularUseCase.getMostPopular(pageableRequest);
             return toDto(mostPopularTvShows, pageableRequest);
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();
@@ -46,7 +46,7 @@ public class GetMostPopularTvShowsEndpoint {
     public Page<TvShowExtendedDto> getMostPopularExtended(Pageable pageableRequest) {
         Page<TvShowLocal> mostPopularTvShows;
         try {
-            mostPopularTvShows = getMostPopularTvShowsUseCase.getMostPopular(pageableRequest);
+            mostPopularTvShows = getMostPopularUseCase.getMostPopular(pageableRequest);
             return toExtendedDto(mostPopularTvShows, pageableRequest);
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();

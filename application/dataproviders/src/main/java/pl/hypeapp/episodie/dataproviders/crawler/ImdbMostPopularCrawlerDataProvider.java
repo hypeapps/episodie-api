@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ImdbMostPopularTvShowsCrawlerDataProvider implements GetImdbMostPopularTvShows {
+public class ImdbMostPopularCrawlerDataProvider implements GetImdbMostPopularTvShows {
 
     private static final int PATH_SECOND_SEGMENT = 2;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImdbMostPopularTvShowsCrawlerDataProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImdbMostPopularCrawlerDataProvider.class);
 
     @Override
     public List<String> crawl(String imdbUrl) {

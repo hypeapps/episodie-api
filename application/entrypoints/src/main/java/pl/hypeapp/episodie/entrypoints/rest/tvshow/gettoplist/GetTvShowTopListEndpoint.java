@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
-import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTopListUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
@@ -25,17 +25,17 @@ public class GetTvShowTopListEndpoint {
 
     private static final String API_PATH_EXTENDED = "api/tvshow/toplist/extended";
 
-    private final GetTvShowTopListUseCase getTvShowTopListUseCase;
+    private final GetTopListUseCase getTopListUseCase;
 
-    public GetTvShowTopListEndpoint(GetTvShowTopListUseCase getTvShowTopListUseCase) {
-        this.getTvShowTopListUseCase = getTvShowTopListUseCase;
+    public GetTvShowTopListEndpoint(GetTopListUseCase getTopListUseCase) {
+        this.getTopListUseCase = getTopListUseCase;
     }
 
     @RequestMapping(value = API_PATH, method = GET)
     public Page<TvShowDto> getTopList(Pageable pageableRequest) {
         Page<TvShowLocal> tvShowTopList;
         try {
-            tvShowTopList = getTvShowTopListUseCase.getTopList(pageableRequest);
+            tvShowTopList = getTopListUseCase.getTopList(pageableRequest);
             return toDto(tvShowTopList, pageableRequest);
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();
@@ -46,7 +46,7 @@ public class GetTvShowTopListEndpoint {
     public Page<TvShowExtendedDto> getTopListExtended(Pageable pageableRequest) {
         Page<TvShowLocal> tvShowTopList;
         try {
-            tvShowTopList = getTvShowTopListUseCase.getTopList(pageableRequest);
+            tvShowTopList = getTopListUseCase.getTopList(pageableRequest);
             return toDtoExtended(tvShowTopList, pageableRequest);
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();

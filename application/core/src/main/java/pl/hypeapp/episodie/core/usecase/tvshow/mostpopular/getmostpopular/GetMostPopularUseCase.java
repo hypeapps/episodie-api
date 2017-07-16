@@ -11,11 +11,11 @@ import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetMostPopularTvShowsUseCase {
+public class GetMostPopularUseCase {
 
     private final GetMostPopularTvShows getMostPopularTvShows;
 
-    public GetMostPopularTvShowsUseCase(GetMostPopularTvShows getMostPopularTvShows) {
+    public GetMostPopularUseCase(GetMostPopularTvShows getMostPopularTvShows) {
         this.getMostPopularTvShows = getMostPopularTvShows;
     }
 

@@ -11,11 +11,11 @@ import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetTvShowTopListUseCase {
+public class GetTopListUseCase {
 
     private final GetTvShowTopList getTvShowTopList;
 
-    public GetTvShowTopListUseCase(GetTvShowTopList getTvShowTopList) {
+    public GetTopListUseCase(GetTvShowTopList getTvShowTopList) {
         this.getTvShowTopList = getTvShowTopList;
     }
 

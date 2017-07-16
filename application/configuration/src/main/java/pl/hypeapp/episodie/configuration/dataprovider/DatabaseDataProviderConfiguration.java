@@ -4,10 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.hypeapp.episodie.dataproviders.database.job.JobResultDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.job.JobResultRepository;
-import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularDatabaseProvider;
+import pl.hypeapp.episodie.dataproviders.database.mostpopular.MostPopularDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularRepository;
 import pl.hypeapp.episodie.dataproviders.database.search.SearchTvShowDatabaseProvider;
-import pl.hypeapp.episodie.dataproviders.database.toplist.TvShowTopListDatabaseProvider;
+import pl.hypeapp.episodie.dataproviders.database.toplist.TopListDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.toplist.TvShowTopListRepository;
 import pl.hypeapp.episodie.dataproviders.database.tvshow.TvShowDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.tvshow.TvShowRepository;
@@ -21,13 +21,13 @@ public class DatabaseDataProviderConfiguration {
     }
 
     @Bean
-    public TvShowTopListDatabaseProvider tvShowTopListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
-        return new TvShowTopListDatabaseProvider(tvShowTopListRepository);
+    public TopListDatabaseProvider topListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
+        return new TopListDatabaseProvider(tvShowTopListRepository);
     }
 
     @Bean
-    public TvShowMostPopularDatabaseProvider tvShowMostPopularDatabaseProvider(TvShowMostPopularRepository tvShowMosPopularRepository) {
-        return new TvShowMostPopularDatabaseProvider(tvShowMosPopularRepository);
+    public MostPopularDatabaseProvider mostPopularDatabaseProvider(TvShowMostPopularRepository tvShowMosPopularRepository) {
+        return new MostPopularDatabaseProvider(tvShowMosPopularRepository);
     }
 
     @Bean

@@ -11,13 +11,13 @@ import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMos
 
 import java.util.List;
 
-public class TvShowMostPopularDatabaseProvider implements InsertTvShowToMostPopular, GetMostPopularTvShows {
+public class MostPopularDatabaseProvider implements InsertTvShowToMostPopular, GetMostPopularTvShows {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TvShowMostPopularDatabaseProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MostPopularDatabaseProvider.class);
 
     private final TvShowMostPopularRepository tvShowMostPopularRepository;
 
-    public TvShowMostPopularDatabaseProvider(TvShowMostPopularRepository tvShowMostPopularRepository) {
+    public MostPopularDatabaseProvider(TvShowMostPopularRepository tvShowMostPopularRepository) {
         this.tvShowMostPopularRepository = tvShowMostPopularRepository;
     }
 

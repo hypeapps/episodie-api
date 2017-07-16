@@ -16,11 +16,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.*;
 
-public class GetTvShowTopListUseCaseTest {
+public class GetTopListUseCaseTest {
 
     private GetTvShowTopList getTvShowTopList = mock(GetTvShowTopList.class);
 
-    private GetTvShowTopListUseCase getTvShowTopListUseCase = new GetTvShowTopListUseCase(getTvShowTopList);
+    private GetTopListUseCase getTopListUseCase = new GetTopListUseCase(getTvShowTopList);
 
     @Test
     @Ignore
@@ -47,9 +47,9 @@ public class GetTvShowTopListUseCaseTest {
 
         when(getTvShowTopList.getTopListTvShows(topListIds)).thenReturn(tvShows);
 
-        when(getTvShowTopListUseCase.getTopList(pageable)).thenReturn(tvShowLocalPage);
+        when(getTopListUseCase.getTopList(pageable)).thenReturn(tvShowLocalPage);
 
-        getTvShowTopListUseCase.getTopList(pageable);
+        getTopListUseCase.getTopList(pageable);
 
         verify(getTvShowTopList, times(1)).getTopList(pageable);
         verify(getTvShowTopList, times(1)).getTopListTvShows(topListIds);
@@ -68,9 +68,9 @@ public class GetTvShowTopListUseCaseTest {
         ResourceNotFoundException exception = new ResourceNotFoundException();
 
         when(getTvShowTopList.getTopList(pageable)).thenReturn(tvShowTopListLocalPage);
-        when(getTvShowTopListUseCase.getTopList(pageable)).thenThrow(exception);
+        when(getTopListUseCase.getTopList(pageable)).thenThrow(exception);
 
-        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getTvShowTopListUseCase.getTopList(pageable));
+        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getTopListUseCase.getTopList(pageable));
     }
 
 }
