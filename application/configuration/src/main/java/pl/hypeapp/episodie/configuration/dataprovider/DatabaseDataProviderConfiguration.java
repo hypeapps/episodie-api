@@ -6,6 +6,8 @@ import pl.hypeapp.episodie.dataproviders.database.job.JobResultDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.job.JobResultRepository;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.MostPopularDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.mostpopular.TvShowMostPopularRepository;
+import pl.hypeapp.episodie.dataproviders.database.premieres.PremieresDatabaseProvider;
+import pl.hypeapp.episodie.dataproviders.database.premieres.TvShowPremieresRepository;
 import pl.hypeapp.episodie.dataproviders.database.search.SearchTvShowDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.toplist.TopListDatabaseProvider;
 import pl.hypeapp.episodie.dataproviders.database.toplist.TvShowTopListRepository;
@@ -33,6 +35,11 @@ public class DatabaseDataProviderConfiguration {
     @Bean
     public SearchTvShowDatabaseProvider searchTvShowDatabaseProvider() {
         return new SearchTvShowDatabaseProvider();
+    }
+
+    @Bean
+    public PremieresDatabaseProvider premieresDatabaseProvider(TvShowPremieresRepository tvShowPremieresRepository) {
+        return new PremieresDatabaseProvider(tvShowPremieresRepository);
     }
 
     @Bean

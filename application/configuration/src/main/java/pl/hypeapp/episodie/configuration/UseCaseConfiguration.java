@@ -17,6 +17,9 @@ import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMos
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbPremieresUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.GetImdbTvShowsPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.InsertPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieresUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShow;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowInApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
@@ -51,8 +54,10 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public CollectImdbPremieresUseCase collectImdbPremieresUseCase(GetImdbTvShowsPremieres getImdbTvShowsPremieres, GetTvShowIdFromApi getTvShowIdFromApi) {
-        return new CollectImdbPremieresUseCase(getImdbTvShowsPremieres, getTvShowIdFromApi);
+    public CollectImdbPremieresUseCase collectImdbPremieresUseCase(GetImdbTvShowsPremieres getImdbTvShowsPremieres, GetTvShowIdFromApi getTvShowIdFromApi,
+                                                                   GetTvShowFromApi getTvShowFromApi, InsertTvShowToDatabase insertTvShowToDatabase,
+                                                                   InsertPremieres insertPremieres) {
+        return new CollectImdbPremieresUseCase(getImdbTvShowsPremieres, getTvShowIdFromApi, getTvShowFromApi, insertTvShowToDatabase, insertPremieres);
     }
 
     @Bean
@@ -69,6 +74,11 @@ public class UseCaseConfiguration {
     @Bean
     public GetMostPopularUseCase getMostPopularUseCase(GetMostPopularTvShows getMostPopularTvShows) {
         return new GetMostPopularUseCase(getMostPopularTvShows);
+    }
+
+    @Bean
+    public GetPremieresUseCase getPremieresUseCase(GetPremieres getPremieres) {
+        return new GetPremieresUseCase(getPremieres);
     }
 
     @Bean

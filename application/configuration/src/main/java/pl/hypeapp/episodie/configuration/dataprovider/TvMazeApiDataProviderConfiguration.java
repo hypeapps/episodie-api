@@ -31,8 +31,8 @@ public class TvMazeApiDataProviderConfiguration {
         return RetryerBuilder.newBuilder()
                 .retryIfExceptionOfType(HTTPException.class)
                 .retryIfRuntimeException()
-                .withWaitStrategy(WaitStrategies.fixedWait(6, TimeUnit.SECONDS))
-                .withStopStrategy(StopStrategies.stopAfterAttempt(3))
+                .withWaitStrategy(WaitStrategies.fixedWait(1, TimeUnit.SECONDS))
+                .withStopStrategy(StopStrategies.stopAfterAttempt(1))
                 .build();
     }
 
