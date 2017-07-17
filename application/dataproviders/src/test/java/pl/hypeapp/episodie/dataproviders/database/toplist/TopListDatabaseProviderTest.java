@@ -11,11 +11,11 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class TvShowTopListDatabaseProviderTest {
+public class TopListDatabaseProviderTest {
 
     private TvShowTopListRepository tvShowTopListRepository = mock(TvShowTopListRepository.class);
 
-    private TvShowTopListDatabaseProvider tvShowTopListDatabaseProvider = new TvShowTopListDatabaseProvider(tvShowTopListRepository);
+    private TopListDatabaseProvider topListDatabaseProvider = new TopListDatabaseProvider(tvShowTopListRepository);
 
     @Test
     public void shouldInsertTvShowToTopList() throws Exception {
@@ -23,7 +23,7 @@ public class TvShowTopListDatabaseProviderTest {
 
         when(tvShowTopListRepository.save(tvShowTopListLocal)).thenReturn(tvShowTopListLocal);
 
-        tvShowTopListDatabaseProvider.insert(tvShowTopListLocal);
+        topListDatabaseProvider.insert(tvShowTopListLocal);
 
         verify(tvShowTopListRepository, times(1)).save(tvShowTopListLocal);
     }
@@ -32,7 +32,7 @@ public class TvShowTopListDatabaseProviderTest {
     public void shouldReturnsTopList() throws Exception {
         Pageable pageable = new PageRequest(0, 3);
 
-        tvShowTopListDatabaseProvider.getTopList(pageable);
+        topListDatabaseProvider.getTopList(pageable);
 
         verify(tvShowTopListRepository, times(1)).findAll(pageable);
     }
@@ -49,7 +49,7 @@ public class TvShowTopListDatabaseProviderTest {
 
         when(tvShowTopListRepository.getTopListTvShows(topListIds)).thenReturn(tvShows);
 
-        tvShowTopListDatabaseProvider.getTopListTvShows(topListIds);
+        topListDatabaseProvider.getTopListTvShows(topListIds);
 
         verify(tvShowTopListRepository, times(1)).getTopListTvShows(topListIds);
     }

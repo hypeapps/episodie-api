@@ -13,13 +13,13 @@ import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopLi
 import java.util.List;
 
 @Transactional
-public class TvShowTopListDatabaseProvider implements InsertTvShowToTopList, GetTvShowTopList {
+public class TopListDatabaseProvider implements InsertTvShowToTopList, GetTvShowTopList {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TvShowTopListDatabaseProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TopListDatabaseProvider.class);
 
     private final TvShowTopListRepository tvShowTopListRepository;
 
-    public TvShowTopListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
+    public TopListDatabaseProvider(TvShowTopListRepository tvShowTopListRepository) {
         this.tvShowTopListRepository = tvShowTopListRepository;
     }
 

@@ -1,10 +1,10 @@
-package pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows;
+package pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows;
 
 import org.junit.Test;
 import pl.hypeapp.episodie.core.entity.api.tvmaze.TvMazeId;
 import pl.hypeapp.episodie.core.entity.api.tvmaze.TvShowRemote;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
-import pl.hypeapp.episodie.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowMostPopularLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
@@ -15,11 +15,11 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-public class CollectImdbTopTvShowsUseCaseTest {
+public class CollectImdbMostPopularUseCaseTest {
 
     private static final String URL = "http://www.example.com";
 
-    private GetImdbTopTvShows getImdbTopTvShows = mock(GetImdbTopTvShows.class);
+    private GetImdbMostPopularTvShows getImdbMostPopularTvShows = mock(GetImdbMostPopularTvShows.class);
 
     private GetTvShowFromApi getTvShowFromApi = mock(GetTvShowFromApi.class);
 
@@ -27,11 +27,11 @@ public class CollectImdbTopTvShowsUseCaseTest {
 
     private InsertTvShowToDatabase insertTvShowToDatabase = mock(InsertTvShowToDatabase.class);
 
-    private InsertTvShowToTopList insertTvShowToTopList = mock(InsertTvShowToTopList.class);
+    private InsertTvShowToMostPopular insertTvShowToMostPopular = mock(InsertTvShowToMostPopular.class);
 
-    private CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase =
-            new CollectImdbTopTvShowsUseCase(getImdbTopTvShows, getTvShowFromApi, getTvShowIdFromApi,
-                    insertTvShowToTopList, insertTvShowToDatabase);
+    private CollectImdbMostPopularUseCase collectImdbMostPopularUseCase =
+            new CollectImdbMostPopularUseCase(getImdbMostPopularTvShows, getTvShowFromApi, getTvShowIdFromApi,
+                    insertTvShowToMostPopular, insertTvShowToDatabase);
 
     @Test
     public void shouldGetTopTvShowsAndInsertToDataProvider() throws Exception {
@@ -42,18 +42,18 @@ public class CollectImdbTopTvShowsUseCaseTest {
         Optional<TvShowRemote> tvShowEntity = Optional.of(new TvShowRemote());
         Optional<TvShowLocal> tvShowLocal = Optional.of(new TvShowLocal());
 
-        when(getImdbTopTvShows.crawl(URL)).thenReturn(imdbIds);
+        when(getImdbMostPopularTvShows.crawl(URL)).thenReturn(imdbIds);
         when(getTvShowIdFromApi.getTvShowIdByImdbId("1")).thenReturn(tvMazeId);
         when(getTvShowFromApi.getTvShowByMazeId(tvMazeId.get())).thenReturn(tvShowEntity);
         when(insertTvShowToDatabase.insertTvShow(tvShowEntity.get())).thenReturn(tvShowLocal);
 
-        collectImdbTopTvShowsUseCase.collect(URL);
+        collectImdbMostPopularUseCase.collect(URL);
 
-        verify(getImdbTopTvShows, times(1)).crawl(URL);
+        verify(getImdbMostPopularTvShows, times(1)).crawl(URL);
         verify(getTvShowIdFromApi, times(imdbIds.size())).getTvShowIdByImdbId(imdbIds.get(0));
         verify(getTvShowFromApi, times(imdbIds.size())).getTvShowByMazeId(tvMazeId.get());
         verify(insertTvShowToDatabase, times(imdbIds.size())).insertTvShow(tvShowEntity.get());
-        verify(insertTvShowToTopList, times(1)).insert(new TvShowTopListLocal(1, null));
+        verify(insertTvShowToMostPopular, times(1)).insert(new TvShowMostPopularLocal(1, null));
     }
 
 }

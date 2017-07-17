@@ -1,16 +1,16 @@
-package pl.hypeapp.episodie.entrypoints.job.tvshow.top;
+package pl.hypeapp.episodie.entrypoints.job.tvshow.mostpopular;
 
 import pl.hypeapp.episodie.core.usecase.job.RecordJobResultUseCase;
 
 import java.util.Date;
 
-public class CollectImdbTopTvShowsJobResult {
+public class CollectImdbMostPopularJobResult {
 
     private final Date date = new Date();
 
     private final RecordJobResultUseCase recordJobResultUseCase;
 
-    public CollectImdbTopTvShowsJobResult(RecordJobResultUseCase recordJobResultUseCase) {
+    public CollectImdbMostPopularJobResult(RecordJobResultUseCase recordJobResultUseCase) {
         this.recordJobResultUseCase = recordJobResultUseCase;
     }
 

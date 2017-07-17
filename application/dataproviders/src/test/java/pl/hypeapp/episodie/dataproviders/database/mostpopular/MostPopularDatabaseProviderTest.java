@@ -11,11 +11,11 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class TvShowMostPopularDatabaseProviderTest {
+public class MostPopularDatabaseProviderTest {
 
     private TvShowMostPopularRepository tvShowMostPopularRepository = mock(TvShowMostPopularRepository.class);
 
-    private TvShowMostPopularDatabaseProvider tvShowMostPopularDatabaseProvider = new TvShowMostPopularDatabaseProvider(tvShowMostPopularRepository);
+    private MostPopularDatabaseProvider mostPopularDatabaseProvider = new MostPopularDatabaseProvider(tvShowMostPopularRepository);
 
     @Test
     public void shouldInsertTvShowToTopList() throws Exception {
@@ -23,7 +23,7 @@ public class TvShowMostPopularDatabaseProviderTest {
 
         when(tvShowMostPopularRepository.save(tvShowMostPopularLocal)).thenReturn(tvShowMostPopularLocal);
 
-        tvShowMostPopularDatabaseProvider.insert(tvShowMostPopularLocal);
+        mostPopularDatabaseProvider.insert(tvShowMostPopularLocal);
 
         verify(tvShowMostPopularRepository, times(1)).save(tvShowMostPopularLocal);
     }
@@ -32,7 +32,7 @@ public class TvShowMostPopularDatabaseProviderTest {
     public void shouldReturnsTopList() throws Exception {
         Pageable pageable = new PageRequest(0, 3);
 
-        tvShowMostPopularDatabaseProvider.getMostPopular(pageable);
+        mostPopularDatabaseProvider.getMostPopular(pageable);
 
         verify(tvShowMostPopularRepository, times(1)).findAll(pageable);
     }
@@ -49,7 +49,7 @@ public class TvShowMostPopularDatabaseProviderTest {
 
         when(tvShowMostPopularRepository.getTopListTvShows(topListIds)).thenReturn(tvShows);
 
-        tvShowMostPopularDatabaseProvider.getMostPopularTvShows(topListIds);
+        mostPopularDatabaseProvider.getMostPopularTvShows(topListIds);
 
         verify(tvShowMostPopularRepository, times(1)).getTopListTvShows(topListIds);
     }

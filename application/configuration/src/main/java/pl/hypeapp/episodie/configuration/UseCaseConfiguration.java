@@ -10,19 +10,24 @@ import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromDatabase;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.GetImdbMostPopularTvShows;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
-import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbPremieresUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.GetImdbTvShowsPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.InsertPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieresUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShow;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowInApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopTvShowsUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopListUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.GetImdbTopTvShows;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.InsertTvShowToTopList;
+import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTopListUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopList;
-import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTvShowTopListUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.update.GetTvShowsUpdates;
 import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 
@@ -35,17 +40,24 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public CollectImdbTopTvShowsUseCase collectImdbTopTvShowsUseCase(GetImdbTopTvShows getImdbTopTvShows, GetTvShowFromApi getTvShowFromApi,
-                                                                     GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToTopList insertTvShowToTopList,
-                                                                     InsertTvShowToDatabase insertTvShowToDatabase) {
-        return new CollectImdbTopTvShowsUseCase(getImdbTopTvShows, getTvShowFromApi, getTvShowIdFromApi, insertTvShowToTopList, insertTvShowToDatabase);
+    public CollectImdbTopListUseCase collectImdbTopTvShowsUseCase(GetImdbTopTvShows getImdbTopTvShows, GetTvShowFromApi getTvShowFromApi,
+                                                                  GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToTopList insertTvShowToTopList,
+                                                                  InsertTvShowToDatabase insertTvShowToDatabase) {
+        return new CollectImdbTopListUseCase(getImdbTopTvShows, getTvShowFromApi, getTvShowIdFromApi, insertTvShowToTopList, insertTvShowToDatabase);
     }
 
     @Bean
-    public CollectImdbMostPopularTvShowsUseCase collectImdbMostPopularTvShowsUseCase(GetImdbMostPopularTvShows getImdbMostPopularTvShows, GetTvShowFromApi getTvShowFromApi,
-                                                                                     GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToMostPopular insertTvShowToMostPopular,
-                                                                                     InsertTvShowToDatabase insertTvShowToDatabase) {
-        return new CollectImdbMostPopularTvShowsUseCase(getImdbMostPopularTvShows, getTvShowFromApi, getTvShowIdFromApi, insertTvShowToMostPopular, insertTvShowToDatabase);
+    public CollectImdbMostPopularUseCase collectImdbMostPopularTvShowsUseCase(GetImdbMostPopularTvShows getImdbMostPopularTvShows, GetTvShowFromApi getTvShowFromApi,
+                                                                              GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToMostPopular insertTvShowToMostPopular,
+                                                                              InsertTvShowToDatabase insertTvShowToDatabase) {
+        return new CollectImdbMostPopularUseCase(getImdbMostPopularTvShows, getTvShowFromApi, getTvShowIdFromApi, insertTvShowToMostPopular, insertTvShowToDatabase);
+    }
+
+    @Bean
+    public CollectImdbPremieresUseCase collectImdbPremieresUseCase(GetImdbTvShowsPremieres getImdbTvShowsPremieres, GetTvShowIdFromApi getTvShowIdFromApi,
+                                                                   GetTvShowFromApi getTvShowFromApi, InsertTvShowToDatabase insertTvShowToDatabase,
+                                                                   InsertPremieres insertPremieres) {
+        return new CollectImdbPremieresUseCase(getImdbTvShowsPremieres, getTvShowIdFromApi, getTvShowFromApi, insertTvShowToDatabase, insertPremieres);
     }
 
     @Bean
@@ -55,13 +67,18 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public GetTvShowTopListUseCase getTvShowTopListUseCase(GetTvShowTopList getTvShowTopList) {
-        return new GetTvShowTopListUseCase(getTvShowTopList);
+    public GetTopListUseCase getTopListUseCase(GetTvShowTopList getTvShowTopList) {
+        return new GetTopListUseCase(getTvShowTopList);
     }
 
     @Bean
-    public GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase(GetMostPopularTvShows getMostPopularTvShows) {
-        return new GetMostPopularTvShowsUseCase(getMostPopularTvShows);
+    public GetMostPopularUseCase getMostPopularUseCase(GetMostPopularTvShows getMostPopularTvShows) {
+        return new GetMostPopularUseCase(getMostPopularTvShows);
+    }
+
+    @Bean
+    public GetPremieresUseCase getPremieresUseCase(GetPremieres getPremieres) {
+        return new GetPremieresUseCase(getPremieres);
     }
 
     @Bean

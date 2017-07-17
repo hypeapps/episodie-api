@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GetMostPopularTvShowsUseCaseTest {
+public class GetMostPopularUseCaseTest {
 
     private GetMostPopularTvShows getMostPopularTvShows = mock(GetMostPopularTvShows.class);
 
-    private GetMostPopularTvShowsUseCase getMostPopularTvShowsUseCase = new GetMostPopularTvShowsUseCase(getMostPopularTvShows);
+    private GetMostPopularUseCase getMostPopularUseCase = new GetMostPopularUseCase(getMostPopularTvShows);
 
     @Test
     public void shouldThrowsExceptionWhenPageIsNotFound() throws Exception {
@@ -33,9 +33,9 @@ public class GetMostPopularTvShowsUseCaseTest {
         ResourceNotFoundException exception = new ResourceNotFoundException();
 
         when(getMostPopularTvShows.getMostPopular(pageable)).thenReturn(tvShowMostPopularPage);
-        when(getMostPopularTvShowsUseCase.getMostPopular(pageable)).thenThrow(exception);
+        when(getMostPopularUseCase.getMostPopular(pageable)).thenThrow(exception);
 
-        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getMostPopularTvShowsUseCase.getMostPopular(pageable));
+        assertThatExceptionOfType(ResourceNotFoundException.class).isThrownBy(() -> getMostPopularUseCase.getMostPopular(pageable));
     }
 
 }

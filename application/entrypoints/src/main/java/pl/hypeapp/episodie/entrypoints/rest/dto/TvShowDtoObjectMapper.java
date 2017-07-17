@@ -1,5 +1,6 @@
 package pl.hypeapp.episodie.entrypoints.rest.dto;
 
+import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
 import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
@@ -46,7 +47,20 @@ public class TvShowDtoObjectMapper {
         }
     };
 
-    public Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
+    public Function<TvShowPremiereBundle, TvShowPremiereDto> tvShowPremiereBundleToDto = tvShowPremiereBundle ->
+            TvShowPremiereDto.builder()
+                    .tvShowApiId(tvShowPremiereBundle.getTvShowLocal().getTvShowApiId())
+                    .imdbId(tvShowPremiereBundle.getTvShowLocal().getImdbId())
+                    .name(tvShowPremiereBundle.getTvShowLocal().getName())
+                    .premiere(tvShowPremiereBundle.getPremiereLocal().getPremiereDate())
+                    .summary(tvShowPremiereBundle.getTvShowLocal().getSummary())
+                    .runtime(tvShowPremiereBundle.getTvShowLocal().getRuntime())
+                    .fullRuntime(tvShowPremiereBundle.getTvShowLocal().getFullRuntime())
+                    .imageMedium(tvShowPremiereBundle.getTvShowLocal().getImageMedium())
+                    .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
+                    .build();
+
+    private Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
             .episodeApiId(episodeLocal.getEpisodeApiId())
             .url(episodeLocal.getUrl())
             .name(episodeLocal.getName())
@@ -59,7 +73,7 @@ public class TvShowDtoObjectMapper {
             .summary(episodeLocal.getSummary())
             .build();
 
-    public Function<SeasonLocal, SeasonDto> seasonLocalToDto = seasonLocal -> SeasonDto.builder()
+    private Function<SeasonLocal, SeasonDto> seasonLocalToDto = seasonLocal -> SeasonDto.builder()
             .seasonApiId(seasonLocal.getSeasonApiId())
             .url(seasonLocal.getUrl())
             .seasonNumber(seasonLocal.getSeasonNumber())

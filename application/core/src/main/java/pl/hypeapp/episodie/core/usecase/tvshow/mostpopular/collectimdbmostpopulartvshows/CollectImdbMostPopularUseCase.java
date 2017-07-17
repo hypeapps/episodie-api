@@ -1,11 +1,11 @@
-package pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows;
+package pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.hypeapp.episodie.core.entity.TvShowEntity;
 import pl.hypeapp.episodie.core.entity.api.tvmaze.TvMazeId;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
-import pl.hypeapp.episodie.core.entity.database.TvShowTopListLocal;
+import pl.hypeapp.episodie.core.entity.database.TvShowMostPopularLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
@@ -14,27 +14,27 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CollectImdbTopTvShowsUseCase {
+public class CollectImdbMostPopularUseCase {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CollectImdbTopTvShowsUseCase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CollectImdbMostPopularUseCase.class);
 
-    private final GetImdbTopTvShows getImdbTopTvShows;
+    private final GetImdbMostPopularTvShows getImdbMostPopularTvShows;
 
     private final GetTvShowFromApi getTvShowFromApi;
 
     private final GetTvShowIdFromApi getTvShowIdFromApi;
 
-    private final InsertTvShowToTopList insertTvShowToTopList;
+    private final InsertTvShowToMostPopular insertTvShowToMostPopular;
 
     private final InsertTvShowToDatabase insertTvShowToDatabase;
 
-    public CollectImdbTopTvShowsUseCase(GetImdbTopTvShows getImdbTopTvShows, GetTvShowFromApi getTvShowFromApi,
-                                        GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToTopList insertTvShowToTopList,
-                                        InsertTvShowToDatabase insertTvShowToDatabase) {
-        this.getImdbTopTvShows = getImdbTopTvShows;
+    public CollectImdbMostPopularUseCase(GetImdbMostPopularTvShows getImdbMostPopularTvShows, GetTvShowFromApi getTvShowFromApi,
+                                         GetTvShowIdFromApi getTvShowIdFromApi, InsertTvShowToMostPopular insertTvShowToMostPopular,
+                                         InsertTvShowToDatabase insertTvShowToDatabase) {
+        this.getImdbMostPopularTvShows = getImdbMostPopularTvShows;
         this.getTvShowFromApi = getTvShowFromApi;
         this.getTvShowIdFromApi = getTvShowIdFromApi;
-        this.insertTvShowToTopList = insertTvShowToTopList;
+        this.insertTvShowToMostPopular = insertTvShowToMostPopular;
         this.insertTvShowToDatabase = insertTvShowToDatabase;
     }
 
@@ -51,15 +51,15 @@ public class CollectImdbTopTvShowsUseCase {
         List<TvShowLocal> tvShowsLocalInserted = insertTvShowsToDataProvider(tvShows);
         LOGGER.info("tv shows local size: " + tvShowsLocalInserted.size());
 
-        insertTvShowsToTopList(tvShowsLocalInserted);
+        insertTvShowsToMostPopular(tvShowsLocalInserted);
     }
 
     private List<String> getImdbIds(String url) {
         try {
-            return getImdbTopTvShows.crawl(url);
-        } catch (ImdbTopTvShowCrawlerFailException e) {
-            LOGGER.info("Crawler Failed" + e.getMessage());
-            throw new CollectImdbTopTvShowsException();
+            return getImdbMostPopularTvShows.crawl(url);
+        } catch (ImdbMostPopularTvShowCrawlerFailException e) {
+            LOGGER.info("Crawler Failed " + e.getMessage());
+            throw new CollectImdbMostPopularTvShowsException();
         }
     }
 
@@ -87,9 +87,9 @@ public class CollectImdbTopTvShowsUseCase {
                 .collect(Collectors.toList());
     }
 
-    private void insertTvShowsToTopList(List<TvShowLocal> tvShowsLocalInserted) {
+    private void insertTvShowsToMostPopular(List<TvShowLocal> tvShowsLocalInserted) {
         for (int i = 0; i < tvShowsLocalInserted.size(); i++) {
-            insertTvShowToTopList.insert(new TvShowTopListLocal(i + 1, tvShowsLocalInserted.get(i).getTvShowApiId()));
+            insertTvShowToMostPopular.insert(new TvShowMostPopularLocal(i + 1, tvShowsLocalInserted.get(i).getTvShowApiId()));
         }
     }
 
