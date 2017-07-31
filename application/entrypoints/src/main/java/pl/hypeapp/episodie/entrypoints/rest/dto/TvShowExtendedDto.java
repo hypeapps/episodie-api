@@ -20,6 +20,12 @@ public class TvShowExtendedDto {
 
     private String status;
 
+    private String officialSite;
+
+    private String network;
+
+    private String genre;
+
     private Integer runtime;
 
     private Integer fullRuntime;

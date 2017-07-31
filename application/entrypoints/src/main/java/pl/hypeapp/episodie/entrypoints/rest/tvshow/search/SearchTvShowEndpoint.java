@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.*;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;
@@ -19,6 +17,8 @@ public class SearchTvShowEndpoint {
     private static final String API_PATH = "api/tvshow/search";
 
     private static final String API_PATH_EXTENDED = "api/tvshow/search/extended";
+
+    private static final String API_PATH_SEARCH_NAME = "api/tvshow/search/name";
 
     private final SearchTvShowUseCase searchTvShowUseCase;
 
@@ -44,6 +44,23 @@ public class SearchTvShowEndpoint {
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();
         }
+    }
+
+    @RequestMapping(value = API_PATH_SEARCH_NAME)
+    public List<SearchNameResultDto> searchName(String query) {
+        try {
+            List<TvShowLocal> tvShowSearchResults = searchTvShowUseCase.search(query);
+            return toSearchNameResultDto(tvShowSearchResults);
+        } catch (ResourceNotFoundException e) {
+            throw new NotFoundException();
+        }
+    }
+
+    private List<SearchNameResultDto> toSearchNameResultDto(List<TvShowLocal> tvShows) {
+        SearchNameResultDtoMapper mapper = new SearchNameResultDtoMapper();
+        return tvShows.stream()
+                .map(mapper.tvShowLocalToSearchNameDto)
+                .collect(Collectors.toList());
     }
 
     private List<TvShowDto> toDto(List<TvShowLocal> tvShows) {

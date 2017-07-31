@@ -12,11 +12,17 @@ public interface TvShowEntity<SeasonType, EpisodeType> {
 
     String getStatus();
 
+    String getOfficialSite();
+
     Integer getRuntime();
 
     Integer getFullRuntime();
 
     String getPremiered();
+
+    String getNetworkName();
+
+    String getGenre();
 
     String getSummary();
 
