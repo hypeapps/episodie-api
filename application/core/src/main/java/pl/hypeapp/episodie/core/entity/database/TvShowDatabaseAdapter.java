@@ -16,24 +16,6 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
         this.tvShowRemote = tvShowRemote;
     }
 
-    public TvShowLocal apply() {
-        return TvShowLocal.builder()
-                .tvShowApiId(getTvShowApiId())
-                .imdbId(getImdbId())
-                .name(getName())
-                .status(getStatus())
-                .runtime(getRuntime())
-                .fullRuntime(getFullRuntime())
-                .premiered(getPremiered())
-                .summary(getSummary())
-                .imageMedium(getImageMedium())
-                .imageOriginal(getImageOriginal())
-                .updated(getUpdated())
-                .seasons(getSeasons())
-                .episodes(getEpisodes())
-                .build();
-    }
-
     @Override
     public String getTvShowApiId() {
         return this.tvShowRemote.getTvShowApiId();
@@ -55,6 +37,11 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
     }
 
     @Override
+    public String getOfficialSite() {
+        return this.tvShowRemote.getOfficialSite();
+    }
+
+    @Override
     public Integer getRuntime() {
         return this.tvShowRemote.getRuntime();
     }
@@ -67,6 +54,16 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
     @Override
     public String getPremiered() {
         return this.tvShowRemote.getPremiered();
+    }
+
+    @Override
+    public String getNetworkName() {
+        return this.tvShowRemote.getNetworkName();
+    }
+
+    @Override
+    public String getGenre() {
+        return this.tvShowRemote.getGenre();
     }
 
     @Override
@@ -89,6 +86,27 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
         return this.tvShowRemote.getUpdated();
     }
 
+    public TvShowLocal apply() {
+        return TvShowLocal.builder()
+                .tvShowApiId(getTvShowApiId())
+                .imdbId(getImdbId())
+                .name(getName())
+                .status(getStatus())
+                .officialSite(getOfficialSite())
+                .runtime(getRuntime())
+                .fullRuntime(getFullRuntime())
+                .premiered(getPremiered())
+                .networkName(getNetworkName())
+                .genre(getGenre())
+                .summary(getSummary())
+                .imageMedium(getImageMedium())
+                .imageOriginal(getImageOriginal())
+                .updated(getUpdated())
+                .seasons(getSeasons())
+                .episodes(getEpisodes())
+                .build();
+    }
+
     @Override
     public List<SeasonLocal> getSeasons() {
         return tvShowRemote.getSeasons()
@@ -104,6 +122,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .map(this::convertToEpisodeLocal)
                 .collect(Collectors.toList());
     }
+
 
     private SeasonLocal convertToSeasonLocal(SeasonRemote seasonRemote) {
         return SeasonLocal.builder()

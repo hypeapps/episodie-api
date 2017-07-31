@@ -28,12 +28,12 @@ public class CollectImdbPremieresJob implements ScheduledJob {
 
     @Override
     public long getInitialDelay() {
-        return 1;
+        return 0;
     }
 
     @Override
     public long getPeriod() {
-        return 7;
+        return 5;
     }
 
     @Override
