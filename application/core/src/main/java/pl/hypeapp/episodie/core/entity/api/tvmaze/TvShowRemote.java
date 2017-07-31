@@ -23,9 +23,15 @@ public class TvShowRemote implements TvShowEntity<SeasonRemote, EpisodeRemote> {
 
     private String status;
 
+    private String officialSite;
+
     private Integer runtime;
 
     private String premiered;
+
+    private Network network;
+
+    private String[] genres;
 
     private Externals externals;
 
@@ -43,16 +49,6 @@ public class TvShowRemote implements TvShowEntity<SeasonRemote, EpisodeRemote> {
     }
 
     @Override
-    public String getImageMedium() {
-        return image.getMedium();
-    }
-
-    @Override
-    public String getImageOriginal() {
-        return image.getOriginal();
-    }
-
-    @Override
     public List<SeasonRemote> getSeasons() {
         return embedded.getSeasons();
     }
@@ -60,6 +56,42 @@ public class TvShowRemote implements TvShowEntity<SeasonRemote, EpisodeRemote> {
     @Override
     public List<EpisodeRemote> getEpisodes() {
         return embedded.getEpisodes();
+    }
+
+    @Override
+    public String getNetworkName() {
+        if (network != null) {
+            return network.getName();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getGenre() {
+        if (genres != null) {
+            return String.join("/", genres);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getImageMedium() {
+        if (image != null) {
+            return image.getMedium();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getImageOriginal() {
+        if (image != null) {
+            return image.getOriginal();
+        } else {
+            return null;
+        }
     }
 
     @Override

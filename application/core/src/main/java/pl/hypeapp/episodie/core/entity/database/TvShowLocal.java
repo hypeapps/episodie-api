@@ -47,11 +47,17 @@ public class TvShowLocal implements TvShowEntity<SeasonLocal, EpisodeLocal> {
 
     private String status;
 
+    private String officialSite;
+
     private Integer runtime;
 
     private Integer fullRuntime;
 
     private String premiered;
+
+    private String networkName;
+
+    private String genre;
 
     @Lob
     @Column(length = 100000)
