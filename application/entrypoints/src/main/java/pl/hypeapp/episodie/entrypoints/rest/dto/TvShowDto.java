@@ -18,6 +18,12 @@ public class TvShowDto {
 
     private String status;
 
+    private String officialSite;
+
+    private String network;
+
+    private String genre;
+
     private Integer runtime;
 
     private Integer fullRuntime;
@@ -29,4 +35,5 @@ public class TvShowDto {
     private String imageMedium;
 
     private String imageOriginal;
+
 }
