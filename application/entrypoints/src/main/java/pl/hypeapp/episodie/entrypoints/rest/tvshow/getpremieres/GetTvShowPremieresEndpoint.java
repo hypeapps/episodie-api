@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieresUseCase;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowPremiereDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.mapper.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;

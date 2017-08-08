@@ -9,8 +9,8 @@ import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.gettoplist.GetTopListUseCase;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.mapper.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import java.util.List;

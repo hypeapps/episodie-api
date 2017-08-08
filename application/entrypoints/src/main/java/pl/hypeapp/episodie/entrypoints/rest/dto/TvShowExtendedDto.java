@@ -40,6 +40,4 @@ public class TvShowExtendedDto {
 
     private List<SeasonDto> seasons;
 
-    private List<EpisodeDto> episodes;
-
 }

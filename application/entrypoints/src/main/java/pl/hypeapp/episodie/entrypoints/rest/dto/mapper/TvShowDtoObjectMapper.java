@@ -1,10 +1,11 @@
-package pl.hypeapp.episodie.entrypoints.rest.dto;
+package pl.hypeapp.episodie.entrypoints.rest.dto.mapper;
 
 import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
-import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.entrypoints.rest.dto.*;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,32 +27,46 @@ public class TvShowDtoObjectMapper {
             .imageMedium(tvShowLocal.getImageMedium())
             .build();
 
-    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtended = new Function<TvShowLocal, TvShowExtendedDto>() {
-        @Override
-        public TvShowExtendedDto apply(TvShowLocal tvShowLocal) {
-            return TvShowExtendedDto.builder()
-                    .tvShowApiId(tvShowLocal.getTvShowApiId())
-                    .imdbId(tvShowLocal.getImdbId())
-                    .name(tvShowLocal.getName())
-                    .status(tvShowLocal.getStatus())
-                    .officialSite(tvShowLocal.getOfficialSite())
-                    .genre(tvShowLocal.getGenre())
-                    .network(tvShowLocal.getNetworkName())
-                    .runtime(tvShowLocal.getRuntime())
-                    .fullRuntime(tvShowLocal.getFullRuntime())
-                    .premiered(tvShowLocal.getPremiered())
-                    .summary(tvShowLocal.getSummary())
-                    .imageOriginal(tvShowLocal.getImageOriginal())
-                    .imageMedium(tvShowLocal.getImageMedium())
-                    .episodes(tvShowLocal.getEpisodes().stream()
-                            .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
-                            .collect(Collectors.toList()))
-                    .seasons(tvShowLocal.getSeasons().stream()
-                            .map(seasonLocal -> seasonLocalToDto.apply(seasonLocal))
-                            .collect(Collectors.toList()))
-                    .build();
-        }
-    };
+    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtended = tvShowLocal -> TvShowExtendedDto.builder()
+            .tvShowApiId(tvShowLocal.getTvShowApiId())
+            .imdbId(tvShowLocal.getImdbId())
+            .name(tvShowLocal.getName())
+            .status(tvShowLocal.getStatus())
+            .officialSite(tvShowLocal.getOfficialSite())
+            .genre(tvShowLocal.getGenre())
+            .network(tvShowLocal.getNetworkName())
+            .runtime(tvShowLocal.getRuntime())
+            .fullRuntime(tvShowLocal.getFullRuntime())
+            .premiered(tvShowLocal.getPremiered())
+            .summary(tvShowLocal.getSummary())
+            .imageOriginal(tvShowLocal.getImageOriginal())
+            .imageMedium(tvShowLocal.getImageMedium())
+            .seasons(tvShowLocalToSeasonsDto(tvShowLocal))
+            .build();
+
+    private List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
+        return tvShowLocal.getSeasons().stream()
+                .filter(seasonLocal -> seasonLocal.getPremiereDate() != null)
+                .map(seasonLocal -> SeasonDto.builder()
+                        .seasonApiId(seasonLocal.getSeasonApiId())
+                        .episodeOrder(seasonLocal.getEpisodeOrder())
+                        .seasonNumber(seasonLocal.getSeasonNumber())
+                        .endDate(seasonLocal.getEndDate())
+                        .premiereDate(seasonLocal.getPremiereDate())
+                        .runtime(seasonLocal.getRuntime())
+                        .url(seasonLocal.getUrl())
+                        .summary(seasonLocal.getUrl())
+                        .episodes(tvShowLocalToEpisodesDto(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
+        return tvShowLocal.getEpisodes().stream()
+                .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
+                .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
+                .collect(Collectors.toList());
+    }
 
     public Function<TvShowPremiereBundle, TvShowPremiereDto> tvShowPremiereBundleToDto = tvShowPremiereBundle ->
             TvShowPremiereDto.builder()
@@ -80,17 +95,6 @@ public class TvShowDtoObjectMapper {
             .imageMedium(episodeLocal.getImageMedium())
             .imageOriginal(episodeLocal.getImageOriginal())
             .summary(episodeLocal.getSummary())
-            .build();
-
-    private Function<SeasonLocal, SeasonDto> seasonLocalToDto = seasonLocal -> SeasonDto.builder()
-            .seasonApiId(seasonLocal.getSeasonApiId())
-            .url(seasonLocal.getUrl())
-            .seasonNumber(seasonLocal.getSeasonNumber())
-            .episodeOrder(seasonLocal.getEpisodeOrder())
-            .runtime(seasonLocal.getRuntime())
-            .premiereDate(seasonLocal.getPremiereDate())
-            .endDate(seasonLocal.getEndDate())
-            .summary(seasonLocal.getSummary())
             .build();
 
 }
