@@ -11,6 +11,8 @@ public class SearchNameResultDtoMapper {
             .tvShowApiId(tvShowLocal.getTvShowApiId())
             .name(tvShowLocal.getName())
             .fullRuntime(tvShowLocal.getFullRuntime())
+            .imageMedium(tvShowLocal.getImageMedium())
+            .imageOriginal(tvShowLocal.getImageOriginal())
             .build();
 
 }
