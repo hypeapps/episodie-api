@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.TvShowNotFoundException;
-import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDtoObjectMapper;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.mapper.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -17,6 +18,8 @@ public class GetTvShowEndpoint {
 
     private static final String API_PATH = "api/tvshow/get/{tvMazeId}";
 
+    private static final String API_PATH_EXTENDED = "api/tvshow/extended/get/{tvMazeId}";
+
     private GetTvShowUseCase getTvShowUseCase;
 
     public GetTvShowEndpoint(GetTvShowUseCase getTvShowUseCase) {
@@ -24,7 +27,7 @@ public class GetTvShowEndpoint {
     }
 
     @RequestMapping(value = API_PATH, method = GET)
-    public TvShowExtendedDto getTvShow(@PathVariable String tvMazeId) {
+    public TvShowDto getTvShow(@PathVariable String tvMazeId) {
         try {
             TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
             return toDto(tvShow);
@@ -33,7 +36,22 @@ public class GetTvShowEndpoint {
         }
     }
 
-    private TvShowExtendedDto toDto(TvShowLocal tvShow) {
+    @RequestMapping(value = API_PATH_EXTENDED, method = GET)
+    public TvShowExtendedDto getTvShowExtended(@PathVariable String tvMazeId) {
+        try {
+            TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
+            return toDtoExtended(tvShow);
+        } catch (TvShowNotFoundException exception) {
+            throw new NotFoundException();
+        }
+    }
+
+    private TvShowDto toDto(TvShowLocal tvShow) {
+        TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
+        return objectMapper.tvShowLocalToDto.apply(tvShow);
+    }
+
+    private TvShowExtendedDto toDtoExtended(TvShowLocal tvShow) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         return objectMapper.tvShowLocalToDtoExtended.apply(tvShow);
     }
