@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Builder
 @Setter(AccessLevel.NONE)
@@ -25,5 +27,7 @@ public class SeasonDto {
     private String endDate;
 
     private String summary;
+
+    private List<EpisodeDto> episodes;
 
 }

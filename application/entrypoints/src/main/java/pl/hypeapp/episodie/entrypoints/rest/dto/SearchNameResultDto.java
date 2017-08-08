@@ -16,4 +16,8 @@ public class SearchNameResultDto {
 
     private Integer fullRuntime;
 
+    private String imageMedium;
+
+    private String imageOriginal;
+
 }

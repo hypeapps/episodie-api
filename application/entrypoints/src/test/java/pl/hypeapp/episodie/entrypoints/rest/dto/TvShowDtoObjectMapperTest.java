@@ -4,6 +4,7 @@ import org.junit.Test;
 import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
 import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
+import pl.hypeapp.episodie.entrypoints.rest.dto.mapper.TvShowDtoObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;

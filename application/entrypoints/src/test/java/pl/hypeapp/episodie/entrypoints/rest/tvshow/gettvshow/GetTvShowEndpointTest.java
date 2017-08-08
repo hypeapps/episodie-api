@@ -39,7 +39,7 @@ public class GetTvShowEndpointTest {
 
         when(getTvShowUseCase.getTvShow(tvMazeId)).thenReturn(tvShowLocal);
 
-        TvShowExtendedDto tvShowExtendedDto = getTvShowEndpoint.getTvShow(tvMazeId);
+        TvShowExtendedDto tvShowExtendedDto = getTvShowEndpoint.getTvShowExtended(tvMazeId);
 
         assertSame(tvShowExtendedDto.getTvShowApiId(), tvShowLocal.getTvShowApiId());
     }
@@ -53,7 +53,7 @@ public class GetTvShowEndpointTest {
 
         getTvShowUseCase.getTvShow(tvMazeId);
 
-        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getTvShowEndpoint.getTvShow(tvMazeId));
+        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> getTvShowEndpoint.getTvShowExtended(tvMazeId));
     }
 
 }
