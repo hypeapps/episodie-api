@@ -10,7 +10,6 @@ import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
-import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularTvShowsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,17 +44,16 @@ public class CollectImdbPremieresUseCase {
 
     public void collect() {
         List<ImdbPremiere> imdbPremieres = getImdbIds();
-        imdbPremieres.forEach(s ->
-                LOGGER.info("Imdb ids " + s));
+        LOGGER.info("IMDB TV PREMIERES SIZE: " + imdbPremieres.size());
 
         List<TvMazeId> tvMazeIds = getTvMazeIds(imdbPremieres);
         LOGGER.info("TV PREMIERES SIZE: " + tvMazeIds.size());
 
         List<TvShowEntity> tvShows = getTvShows(tvMazeIds);
-        LOGGER.info("TV ENTITES SIZE: " + tvShows.size());
+        LOGGER.info("TV SHOW ENTITES SIZE: " + tvShows.size());
 
         List<TvShowLocal> tvShowsLocalInserted = insertTvShowsToDataProvider(tvShows);
-        LOGGER.info("tv shows local size: " + tvShowsLocalInserted.size());
+        LOGGER.info("TV SHOW LOCAL INSERTED: " + tvShowsLocalInserted.size());
 
         insertPremieres(tvShowsLocalInserted, imdbPremieres);
     }
@@ -65,7 +63,7 @@ public class CollectImdbPremieresUseCase {
             return getImdbTvShowsPremieres.crawl();
         } catch (ImdbPremieresTvShowCrawlerFailException e) {
             LOGGER.info("Crawler Failed " + e.getMessage());
-            throw new CollectImdbMostPopularTvShowsException();
+            throw new CollectImdbTvShowsPremieresException();
         }
     }
 
