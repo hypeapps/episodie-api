@@ -28,6 +28,26 @@ public class SeasonRemote implements SeasonEntity {
 
     private String endDate;
 
+    private Image image;
+
     private String summary;
+
+    @Override
+    public String getImageMedium() {
+        if (image != null) {
+            return image.getMedium();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getImageOriginal() {
+        if (image != null) {
+            return image.getOriginal();
+        } else {
+            return null;
+        }
+    }
 
 }

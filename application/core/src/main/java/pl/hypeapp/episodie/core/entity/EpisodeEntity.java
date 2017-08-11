@@ -12,7 +12,7 @@ public interface EpisodeEntity {
 
     Integer getEpisodeNumber();
 
-    String getAirStamp();
+    String getPremiereDate();
 
     Integer getRuntime();
 

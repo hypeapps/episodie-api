@@ -23,6 +23,14 @@ public class SeasonLocal implements SeasonEntity {
     @Column(name = "season_api_id")
     private String seasonApiId;
 
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdEntity;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedEntity;
+
     private String url;
 
     private Integer seasonNumber;
@@ -35,13 +43,9 @@ public class SeasonLocal implements SeasonEntity {
 
     private String endDate;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private Timestamp createdEntity;
+    private String imageMedium;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Timestamp updatedEntity;
+    private String imageOriginal;
 
     @Lob
     @Column(length = 100000)

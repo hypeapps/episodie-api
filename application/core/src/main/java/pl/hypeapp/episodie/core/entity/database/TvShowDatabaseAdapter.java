@@ -134,6 +134,8 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .premiereDate(seasonRemote.getPremiereDate())
                 .endDate(seasonRemote.getEndDate())
                 .summary(seasonRemote.getSummary())
+                .imageMedium(seasonRemote.getImageMedium())
+                .imageOriginal(seasonRemote.getImageOriginal())
                 .build();
     }
 
@@ -151,7 +153,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .name(episodeRemote.getName())
                 .seasonNumber(episodeRemote.getSeasonNumber())
                 .episodeNumber(episodeRemote.getEpisodeNumber())
-                .airStamp(episodeRemote.getAirStamp())
+                .premiereDate(episodeRemote.getPremiereDate())
                 .runtime(episodeRemote.getRuntime())
                 .imageMedium(episodeRemote.getImageMedium())
                 .imageOriginal(episodeRemote.getImageOriginal())
