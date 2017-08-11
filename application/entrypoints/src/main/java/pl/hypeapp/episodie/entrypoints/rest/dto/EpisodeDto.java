@@ -20,7 +20,7 @@ public class EpisodeDto {
 
     private Integer episodeNumber;
 
-    private String airStamp;
+    private String premiereDate;
 
     private Integer runtime;
 

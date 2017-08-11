@@ -2,6 +2,7 @@ package pl.hypeapp.episodie.entrypoints.rest.dto.mapper;
 
 import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
+import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.entrypoints.rest.dto.*;
 
@@ -65,32 +66,53 @@ public class TvShowDtoObjectMapper {
                     .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
                     .build();
 
-    private List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
+    public List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
         return tvShowLocal.getSeasons().stream()
-                .filter(seasonLocal -> seasonLocal.getPremiereDate() != null)
+                .filter(this::isSeasonAfterPremiereDate)
                 .map(seasonLocal -> SeasonDto.builder()
                         .seasonApiId(seasonLocal.getSeasonApiId())
                         .episodeOrder(seasonLocal.getEpisodeOrder())
                         .seasonNumber(seasonLocal.getSeasonNumber())
                         .endDate(seasonLocal.getEndDate())
                         .premiereDate(seasonLocal.getPremiereDate())
-                        .runtime(seasonLocal.getRuntime())
                         .url(seasonLocal.getUrl())
                         .summary(seasonLocal.getUrl())
                         .episodes(tvShowLocalToEpisodesDto(tvShowLocal, seasonLocal.getSeasonNumber()))
-                        .imageMedium(getImageMediumForSeason(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .runtime(calculateActualRuntime(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .imageMedium(seasonLocal.getImageMedium())
                         .build())
                 .sorted(sortSeasonsAsc())
                 .collect(Collectors.toList());
     }
 
-    private List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
+    public List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
         return tvShowLocal.getEpisodes().stream()
                 .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
-                .filter(this::isAfterPremiereDate)
+                .filter(this::isEpisodeAfterPremiereDate)
                 .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
                 .sorted(sortEpisodesAsc())
                 .collect(Collectors.toList());
+    }
+
+    public Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
+            .episodeApiId(episodeLocal.getEpisodeApiId())
+            .url(episodeLocal.getUrl())
+            .name(episodeLocal.getName())
+            .seasonNumber(episodeLocal.getSeasonNumber())
+            .episodeNumber(episodeLocal.getEpisodeNumber())
+            .premiereDate(episodeLocal.getPremiereDate())
+            .runtime(episodeLocal.getRuntime())
+            .imageMedium(episodeLocal.getImageMedium())
+            .imageOriginal(episodeLocal.getImageOriginal())
+            .summary(episodeLocal.getSummary())
+            .build();
+
+    private Integer calculateActualRuntime(TvShowLocal tvShowLocal, Integer seasonNumber) {
+        return tvShowLocal.getEpisodes().stream()
+                .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
+                .filter(this::isEpisodeAfterPremiereDate)
+                .mapToInt(EpisodeLocal::getRuntime)
+                .sum();
     }
 
     private Comparator<SeasonDto> sortSeasonsAsc() {
@@ -107,34 +129,14 @@ public class TvShowDtoObjectMapper {
         };
     }
 
-    // Image medium will be always second screen of episode
-    private String getImageMediumForSeason(TvShowLocal tvShowLocal, Integer seasonNumber) {
-        return tvShowLocal.getEpisodes().stream()
-                .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
-                .filter(episodeLocal -> episodeLocal.getImageMedium() != null)
-                .collect(Collectors.toList())
-                .stream()
-                .filter(episodeLocal -> episodeLocal.getEpisodeNumber() == 2)
-                .findFirst()
-                .map(EpisodeLocal::getImageMedium)
-                .get();
+    private boolean isEpisodeAfterPremiereDate(EpisodeLocal episodeLocal) {
+        return episodeLocal.getPremiereDate() != null &&
+                LocalDate.parse(episodeLocal.getPremiereDate(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).isBefore(LocalDate.now(ZoneId.of("Europe/Warsaw")));
     }
 
-    private boolean isAfterPremiereDate(EpisodeLocal episodeLocal) {
-        return LocalDate.parse(episodeLocal.getAirStamp(), DateTimeFormatter.ISO_OFFSET_DATE_TIME).isBefore(LocalDate.now(ZoneId.of("Europe/Warsaw")));
+    private boolean isSeasonAfterPremiereDate(SeasonLocal seasonLocal) {
+        return seasonLocal.getPremiereDate() != null &&
+                LocalDate.parse(seasonLocal.getPremiereDate(), DateTimeFormatter.ISO_LOCAL_DATE).isBefore(LocalDate.now(ZoneId.of("Europe/Warsaw")));
     }
-
-    private Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
-            .episodeApiId(episodeLocal.getEpisodeApiId())
-            .url(episodeLocal.getUrl())
-            .name(episodeLocal.getName())
-            .seasonNumber(episodeLocal.getSeasonNumber())
-            .episodeNumber(episodeLocal.getEpisodeNumber())
-            .airStamp(episodeLocal.getAirStamp())
-            .runtime(episodeLocal.getRuntime())
-            .imageMedium(episodeLocal.getImageMedium())
-            .imageOriginal(episodeLocal.getImageOriginal())
-            .summary(episodeLocal.getSummary())
-            .build();
 
 }
