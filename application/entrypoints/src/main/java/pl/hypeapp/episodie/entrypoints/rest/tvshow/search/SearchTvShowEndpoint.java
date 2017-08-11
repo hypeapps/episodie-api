@@ -20,9 +20,9 @@ public class SearchTvShowEndpoint {
 
     private static final String API_PATH = "api/tvshow/search";
 
-    private static final String API_PATH_EXTENDED = "api/tvshow/search/extended";
+    private static final String API_PATH_EXTENDED = "api/tvshow/extended/search/";
 
-    private static final String API_PATH_SEARCH_NAME = "api/tvshow/search/name";
+    private static final String API_PATH_SEARCH_NAME = "api/tvshow/basic/search";
 
     private final SearchTvShowUseCase searchTvShowUseCase;
 
