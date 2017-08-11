@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -35,6 +36,8 @@ public class ImdbPremieresCrawlerDataProvider implements GetImdbTvShowsPremieres
             return initCrawler(document);
         } catch (IOException e) {
             LOGGER.info("Unable to get document: " + e.getMessage());
+            throw new ImdbPremieresTvShowCrawlerFailException();
+        } catch (ImdbPremieresTvShowCrawlerFailException e) {
             throw new ImdbPremieresTvShowCrawlerFailException();
         }
     }
@@ -71,8 +74,12 @@ public class ImdbPremieresCrawlerDataProvider implements GetImdbTvShowsPremieres
     }
 
     private LocalDate formatStringToDate(String date) {
-        return LocalDate.parse(date + " " + Year.now().toString(),
-                DateTimeFormatter.ofPattern("MMMM d yyyy", Locale.ENGLISH));
+        try {
+            return LocalDate.parse(date + " " + Year.now().toString(),
+                    DateTimeFormatter.ofPattern("MMM. d yyyy", Locale.ENGLISH));
+        } catch (DateTimeParseException e) {
+            throw new ImdbPremieresTvShowCrawlerFailException();
+        }
     }
 
 }

@@ -14,6 +14,10 @@ public interface SeasonEntity {
 
     String getEndDate();
 
+    String getImageMedium();
+
+    String getImageOriginal();
+
     String getSummary();
 
 }

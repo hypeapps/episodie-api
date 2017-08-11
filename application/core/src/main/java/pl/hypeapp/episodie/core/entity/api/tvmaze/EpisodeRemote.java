@@ -24,7 +24,7 @@ public class EpisodeRemote implements EpisodeEntity {
     @JsonProperty("number")
     private Integer episodeNumber;
     @JsonProperty("airstamp")
-    private String airStamp;
+    private String premiereDate;
 
     private Integer runtime;
 

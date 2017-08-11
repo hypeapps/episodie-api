@@ -23,7 +23,7 @@ public class GetMostPopularTvShowsEndpoint {
 
     private static final String API_PATH = "api/tvshow/mostpopular";
 
-    private static final String API_PATH_EXTENDED = "api/tvshow/mostpopular/extended";
+    private static final String API_PATH_EXTENDED = "api/tvshow/extended/mostpopular";
 
     private final GetMostPopularUseCase getMostPopularUseCase;
 

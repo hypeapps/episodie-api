@@ -23,7 +23,7 @@ public class GetTvShowTopListEndpoint {
 
     private static final String API_PATH = "api/tvshow/toplist";
 
-    private static final String API_PATH_EXTENDED = "api/tvshow/toplist/extended";
+    private static final String API_PATH_EXTENDED = "api/tvshow/extended/toplist";
 
     private final GetTopListUseCase getTopListUseCase;
 

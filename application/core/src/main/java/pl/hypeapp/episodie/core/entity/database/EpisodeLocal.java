@@ -31,7 +31,7 @@ public class EpisodeLocal implements EpisodeEntity {
 
     private Integer episodeNumber;
 
-    private String airStamp;
+    private String premiereDate;
 
     private Integer runtime;
 
