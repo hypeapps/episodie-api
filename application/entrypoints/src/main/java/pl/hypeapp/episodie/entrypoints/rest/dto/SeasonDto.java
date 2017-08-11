@@ -28,6 +28,8 @@ public class SeasonDto {
 
     private String summary;
 
+    private String imageMedium;
+
     private List<EpisodeDto> episodes;
 
 }
