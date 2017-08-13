@@ -10,7 +10,7 @@ public class SearchNameResultDtoMapper {
     public Function<TvShowLocal, SearchNameResultDto> tvShowLocalToSearchNameDto = tvShowLocal -> SearchNameResultDto.builder()
             .tvShowApiId(tvShowLocal.getTvShowApiId())
             .name(tvShowLocal.getName())
-            .fullRuntime(tvShowLocal.getFullRuntime())
+            .fullRuntime(new TvShowDtoObjectMapper().calculateActualFullRuntime(tvShowLocal))
             .imageMedium(tvShowLocal.getImageMedium())
             .imageOriginal(tvShowLocal.getImageOriginal())
             .build();
