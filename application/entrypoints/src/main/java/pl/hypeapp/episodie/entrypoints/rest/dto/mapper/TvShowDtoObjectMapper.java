@@ -71,6 +71,7 @@ public class TvShowDtoObjectMapper {
                 .filter(this::isSeasonAfterPremiereDate)
                 .map(seasonLocal -> SeasonDto.builder()
                         .seasonApiId(seasonLocal.getSeasonApiId())
+                        .tvShowApiId(tvShowLocal.getTvShowApiId())
                         .episodeOrder(seasonLocal.getEpisodeOrder())
                         .seasonNumber(seasonLocal.getSeasonNumber())
                         .endDate(seasonLocal.getEndDate())
@@ -90,8 +91,21 @@ public class TvShowDtoObjectMapper {
                 .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
                 .filter(this::isEpisodeAfterPremiereDate)
                 .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
+                .map(episodeDto -> setIds(episodeDto, tvShowLocal))
                 .sorted(sortEpisodesAsc())
                 .collect(Collectors.toList());
+    }
+
+    private EpisodeDto setIds(EpisodeDto episodeDto, TvShowLocal tvShowLocal) {
+        return tvShowLocal.getSeasons().stream()
+                .filter(seasonLocal -> seasonLocal.getSeasonNumber().equals(episodeDto.getSeasonNumber()))
+                .map(seasonLocal -> {
+                    episodeDto.setSeasonApiId(seasonLocal.getSeasonApiId());
+                    episodeDto.setTvShowApiId(tvShowLocal.getTvShowApiId());
+                    return episodeDto;
+                })
+                .findFirst()
+                .orElse(null);
     }
 
     private Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
