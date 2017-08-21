@@ -1,16 +1,17 @@
 package pl.hypeapp.episodie.entrypoints.rest.dto;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Setter;
 
 @Data
 @Builder
-@Setter(AccessLevel.NONE)
 public class EpisodeDto {
 
     private String episodeApiId;
+
+    private String tvShowApiId;
+
+    private String seasonApiId;
 
     private String url;
 
