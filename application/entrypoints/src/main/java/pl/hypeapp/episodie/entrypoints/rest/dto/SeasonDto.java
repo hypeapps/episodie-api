@@ -14,6 +14,8 @@ public class SeasonDto {
 
     private String seasonApiId;
 
+    private String tvShowApiId;
+
     private String url;
 
     private Integer seasonNumber;

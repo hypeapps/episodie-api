@@ -67,17 +67,19 @@ public class ImdbPremieresCrawlerDataProvider implements GetImdbTvShowsPremieres
     }
 
     private ImdbPremiere createPremiere(String imdbId, String premiereDate) {
+        String date = premiereDate.replaceAll("\\.", "").substring(0, 3) + premiereDate.split(" ")[1];
         return ImdbPremiere.builder()
                 .imdbId(imdbId)
-                .premiereDate(formatStringToDate(premiereDate))
+                .premiereDate(formatStringToDate(date))
                 .build();
     }
 
     private LocalDate formatStringToDate(String date) {
         try {
             return LocalDate.parse(date + " " + Year.now().toString(),
-                    DateTimeFormatter.ofPattern("MMM. d yyyy", Locale.ENGLISH));
+                    DateTimeFormatter.ofPattern("MMMd yyyy", Locale.ENGLISH));
         } catch (DateTimeParseException e) {
+            LOGGER.info(e.getMessage());
             throw new ImdbPremieresTvShowCrawlerFailException();
         }
     }

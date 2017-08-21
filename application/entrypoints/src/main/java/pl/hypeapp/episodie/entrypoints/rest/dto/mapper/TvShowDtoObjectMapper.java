@@ -25,7 +25,7 @@ public class TvShowDtoObjectMapper {
             .network(tvShowLocal.getNetworkName())
             .status(tvShowLocal.getStatus())
             .runtime(tvShowLocal.getRuntime())
-            .fullRuntime(tvShowLocal.getFullRuntime())
+            .fullRuntime(calculateActualFullRuntime(tvShowLocal))
             .premiered(tvShowLocal.getPremiered())
             .summary(tvShowLocal.getSummary())
             .imageOriginal(tvShowLocal.getImageOriginal())
@@ -41,7 +41,7 @@ public class TvShowDtoObjectMapper {
             .genre(tvShowLocal.getGenre())
             .network(tvShowLocal.getNetworkName())
             .runtime(tvShowLocal.getRuntime())
-            .fullRuntime(tvShowLocal.getFullRuntime())
+            .fullRuntime(calculateActualFullRuntime(tvShowLocal))
             .premiered(tvShowLocal.getPremiered())
             .summary(tvShowLocal.getSummary())
             .imageOriginal(tvShowLocal.getImageOriginal())
@@ -66,11 +66,12 @@ public class TvShowDtoObjectMapper {
                     .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
                     .build();
 
-    public List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
+    private List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
         return tvShowLocal.getSeasons().stream()
                 .filter(this::isSeasonAfterPremiereDate)
                 .map(seasonLocal -> SeasonDto.builder()
                         .seasonApiId(seasonLocal.getSeasonApiId())
+                        .tvShowApiId(tvShowLocal.getTvShowApiId())
                         .episodeOrder(seasonLocal.getEpisodeOrder())
                         .seasonNumber(seasonLocal.getSeasonNumber())
                         .endDate(seasonLocal.getEndDate())
@@ -85,16 +86,29 @@ public class TvShowDtoObjectMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
+    private List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
         return tvShowLocal.getEpisodes().stream()
                 .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
                 .filter(this::isEpisodeAfterPremiereDate)
                 .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
+                .map(episodeDto -> setIds(episodeDto, tvShowLocal))
                 .sorted(sortEpisodesAsc())
                 .collect(Collectors.toList());
     }
 
-    public Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
+    private EpisodeDto setIds(EpisodeDto episodeDto, TvShowLocal tvShowLocal) {
+        return tvShowLocal.getSeasons().stream()
+                .filter(seasonLocal -> seasonLocal.getSeasonNumber().equals(episodeDto.getSeasonNumber()))
+                .map(seasonLocal -> {
+                    episodeDto.setSeasonApiId(seasonLocal.getSeasonApiId());
+                    episodeDto.setTvShowApiId(tvShowLocal.getTvShowApiId());
+                    return episodeDto;
+                })
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Function<EpisodeLocal, EpisodeDto> episodeLocalToDto = episodeLocal -> EpisodeDto.builder()
             .episodeApiId(episodeLocal.getEpisodeApiId())
             .url(episodeLocal.getUrl())
             .name(episodeLocal.getName())
@@ -107,9 +121,16 @@ public class TvShowDtoObjectMapper {
             .summary(episodeLocal.getSummary())
             .build();
 
-    private Integer calculateActualRuntime(TvShowLocal tvShowLocal, Integer seasonNumber) {
+    Integer calculateActualRuntime(TvShowLocal tvShowLocal, Integer seasonNumber) {
         return tvShowLocal.getEpisodes().stream()
                 .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
+                .filter(this::isEpisodeAfterPremiereDate)
+                .mapToInt(EpisodeLocal::getRuntime)
+                .sum();
+    }
+
+    Integer calculateActualFullRuntime(TvShowLocal tvShowLocal) {
+        return tvShowLocal.getEpisodes().stream()
                 .filter(this::isEpisodeAfterPremiereDate)
                 .mapToInt(EpisodeLocal::getRuntime)
                 .sum();
