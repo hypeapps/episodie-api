@@ -26,6 +26,8 @@ public class TvShowPremiereDto {
 
     private Integer fullRuntime;
 
+    private Integer episodeOrder;
+
     private String premiere;
 
     private String summary;
