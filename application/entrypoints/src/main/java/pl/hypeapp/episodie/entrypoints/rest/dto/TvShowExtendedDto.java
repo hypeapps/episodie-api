@@ -26,6 +26,8 @@ public class TvShowExtendedDto {
 
     private String genre;
 
+    private Integer episodeOrder;
+
     private Integer runtime;
 
     private Integer fullRuntime;
