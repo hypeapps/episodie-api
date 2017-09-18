@@ -14,6 +14,8 @@ public class SearchNameResultDto {
 
     private String name;
 
+    private Integer episodeOrder;
+
     private Integer fullRuntime;
 
     private String imageMedium;

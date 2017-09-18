@@ -25,7 +25,7 @@ public class TvShowDtoObjectMapper {
             .network(tvShowLocal.getNetworkName())
             .status(tvShowLocal.getStatus())
             .runtime(tvShowLocal.getRuntime())
-            .episodeOrder(tvShowLocal.getEpisodes().size())
+            .episodeOrder(getEpisodeOrderAfterPremiereDate(tvShowLocal))
             .fullRuntime(calculateActualFullRuntime(tvShowLocal))
             .premiered(tvShowLocal.getPremiered())
             .summary(tvShowLocal.getSummary())
@@ -42,7 +42,7 @@ public class TvShowDtoObjectMapper {
             .genre(tvShowLocal.getGenre())
             .network(tvShowLocal.getNetworkName())
             .runtime(tvShowLocal.getRuntime())
-            .episodeOrder(tvShowLocal.getEpisodes().size())
+            .episodeOrder(getEpisodeOrderAfterPremiereDate(tvShowLocal))
             .fullRuntime(calculateActualFullRuntime(tvShowLocal))
             .premiered(tvShowLocal.getPremiered())
             .summary(tvShowLocal.getSummary())
@@ -63,7 +63,7 @@ public class TvShowDtoObjectMapper {
                     .network(tvShowPremiereBundle.getTvShowLocal().getNetworkName())
                     .summary(tvShowPremiereBundle.getTvShowLocal().getSummary())
                     .runtime(tvShowPremiereBundle.getTvShowLocal().getRuntime())
-                    .episodeOrder(tvShowPremiereBundle.getTvShowLocal().getEpisodes().size())
+                    .episodeOrder(getEpisodeOrderAfterPremiereDate(tvShowPremiereBundle.getTvShowLocal()))
                     .fullRuntime(tvShowPremiereBundle.getTvShowLocal().getFullRuntime())
                     .imageMedium(tvShowPremiereBundle.getTvShowLocal().getImageMedium())
                     .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
@@ -137,6 +137,13 @@ public class TvShowDtoObjectMapper {
                 .filter(this::isEpisodeAfterPremiereDate)
                 .mapToInt(EpisodeLocal::getRuntime)
                 .sum();
+    }
+
+    Integer getEpisodeOrderAfterPremiereDate(TvShowLocal tvShowLocal) {
+        return tvShowLocal.getEpisodes().stream()
+                .filter(this::isEpisodeAfterPremiereDate)
+                .collect(Collectors.toList())
+                .size();
     }
 
     private Comparator<SeasonDto> sortSeasonsAsc() {
