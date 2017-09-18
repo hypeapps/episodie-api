@@ -1,5 +1,7 @@
 package pl.hypeapp.episodie.core.entity.database;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import pl.hypeapp.episodie.core.entity.TvShowEntity;
 import pl.hypeapp.episodie.core.entity.api.tvmaze.EpisodeRemote;
 import pl.hypeapp.episodie.core.entity.api.tvmaze.SeasonRemote;
@@ -68,7 +70,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
 
     @Override
     public String getSummary() {
-        return this.tvShowRemote.getSummary();
+        return escapeHtmlTags(this.tvShowRemote.getSummary());
     }
 
     @Override
@@ -133,7 +135,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .episodeOrder(seasonRemote.getEpisodeOrder())
                 .premiereDate(seasonRemote.getPremiereDate())
                 .endDate(seasonRemote.getEndDate())
-                .summary(seasonRemote.getSummary())
+                .summary(escapeHtmlTags(seasonRemote.getSummary()))
                 .imageMedium(seasonRemote.getImageMedium())
                 .imageOriginal(seasonRemote.getImageOriginal())
                 .build();
@@ -157,8 +159,16 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
                 .runtime(episodeRemote.getRuntime())
                 .imageMedium(episodeRemote.getImageMedium())
                 .imageOriginal(episodeRemote.getImageOriginal())
-                .summary(episodeRemote.getSummary())
+                .summary(escapeHtmlTags(episodeRemote.getSummary()))
                 .build();
+    }
+
+    private String escapeHtmlTags(String input) {
+        if (input != null) {
+            return Jsoup.clean(this.tvShowRemote.getSummary(), Whitelist.none());
+        } else {
+            return null;
+        }
     }
 
 }

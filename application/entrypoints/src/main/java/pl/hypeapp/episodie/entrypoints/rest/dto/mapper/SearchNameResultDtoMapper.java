@@ -7,10 +7,13 @@ import java.util.function.Function;
 
 public class SearchNameResultDtoMapper {
 
+    private TvShowDtoObjectMapper tvShowDtoObjectMapper = new TvShowDtoObjectMapper();
+
     public Function<TvShowLocal, SearchNameResultDto> tvShowLocalToSearchNameDto = tvShowLocal -> SearchNameResultDto.builder()
             .tvShowApiId(tvShowLocal.getTvShowApiId())
             .name(tvShowLocal.getName())
-            .fullRuntime(new TvShowDtoObjectMapper().calculateActualFullRuntime(tvShowLocal))
+            .episodeOrder(tvShowDtoObjectMapper.getEpisodeOrderAfterPremiereDate(tvShowLocal))
+            .fullRuntime(tvShowDtoObjectMapper.calculateActualFullRuntime(tvShowLocal))
             .imageMedium(tvShowLocal.getImageMedium())
             .imageOriginal(tvShowLocal.getImageOriginal())
             .build();
