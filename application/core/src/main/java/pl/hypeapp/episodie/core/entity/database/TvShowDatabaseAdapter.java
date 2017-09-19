@@ -165,7 +165,7 @@ public class TvShowDatabaseAdapter implements TvShowEntity<SeasonLocal, EpisodeL
 
     private String escapeHtmlTags(String input) {
         if (input != null) {
-            return Jsoup.clean(this.tvShowRemote.getSummary(), Whitelist.none());
+            return Jsoup.clean(input, Whitelist.none());
         } else {
             return null;
         }
