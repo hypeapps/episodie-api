@@ -77,7 +77,7 @@ public class SearchTvShowEndpoint {
     private List<TvShowExtendedDto> toDtoExtended(List<TvShowLocal> tvShows) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         return tvShows.stream()
-                .map(objectMapper.tvShowLocalToDtoExtended)
+                .map(objectMapper.tvShowLocalToDtoExtendedAfterPremiereDate)
                 .collect(Collectors.toList());
     }
 
