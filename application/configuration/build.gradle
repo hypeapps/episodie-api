@@ -13,7 +13,7 @@ apply plugin: 'war'
 war {
     baseName = 'episodie-api'
     destinationDir = project(":application").getBuildDir()
-    version = '1.0.11a'
+    version = '1.0.12'
 }
 
 sourceCompatibility = 1.8

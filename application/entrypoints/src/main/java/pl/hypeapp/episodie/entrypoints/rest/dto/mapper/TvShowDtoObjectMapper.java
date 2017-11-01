@@ -33,7 +33,7 @@ public class TvShowDtoObjectMapper {
             .imageMedium(tvShowLocal.getImageMedium())
             .build();
 
-    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtended = tvShowLocal -> TvShowExtendedDto.builder()
+    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtendedAfterPremiereDate = tvShowLocal -> TvShowExtendedDto.builder()
             .tvShowApiId(tvShowLocal.getTvShowApiId())
             .imdbId(tvShowLocal.getImdbId())
             .name(tvShowLocal.getName())
@@ -48,7 +48,25 @@ public class TvShowDtoObjectMapper {
             .summary(tvShowLocal.getSummary())
             .imageOriginal(tvShowLocal.getImageOriginal())
             .imageMedium(tvShowLocal.getImageMedium())
-            .seasons(tvShowLocalToSeasonsDto(tvShowLocal))
+            .seasons(tvShowLocalToSeasonsDtoAfterPremiereDate(tvShowLocal))
+            .build();
+
+    public Function<TvShowLocal, TvShowExtendedDto> tvShowLocalToDtoExtended = tvShowLocal -> TvShowExtendedDto.builder()
+            .tvShowApiId(tvShowLocal.getTvShowApiId())
+            .imdbId(tvShowLocal.getImdbId())
+            .name(tvShowLocal.getName())
+            .status(tvShowLocal.getStatus())
+            .officialSite(tvShowLocal.getOfficialSite())
+            .genre(tvShowLocal.getGenre())
+            .network(tvShowLocal.getNetworkName())
+            .runtime(tvShowLocal.getRuntime())
+            .episodeOrder(tvShowLocal.getEpisodes().size())
+            .fullRuntime(tvShowLocal.getFullRuntime())
+            .premiered(tvShowLocal.getPremiered())
+            .summary(tvShowLocal.getSummary())
+            .imageOriginal(tvShowLocal.getImageOriginal())
+            .imageMedium(tvShowLocal.getImageMedium())
+            .seasons(tvShowLocalToSeasonDto(tvShowLocal))
             .build();
 
 
@@ -69,7 +87,7 @@ public class TvShowDtoObjectMapper {
                     .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
                     .build();
 
-    private List<SeasonDto> tvShowLocalToSeasonsDto(TvShowLocal tvShowLocal) {
+    private List<SeasonDto> tvShowLocalToSeasonsDtoAfterPremiereDate(TvShowLocal tvShowLocal) {
         return tvShowLocal.getSeasons().stream()
                 .filter(this::isSeasonAfterPremiereDate)
                 .map(seasonLocal -> SeasonDto.builder()
@@ -81,8 +99,37 @@ public class TvShowDtoObjectMapper {
                         .premiereDate(seasonLocal.getPremiereDate())
                         .url(seasonLocal.getUrl())
                         .summary(seasonLocal.getUrl())
-                        .episodes(tvShowLocalToEpisodesDto(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .episodes(tvShowLocalToEpisodesDtoAfterPremiereDate(tvShowLocal, seasonLocal.getSeasonNumber()))
                         .runtime(calculateActualRuntime(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .imageMedium(seasonLocal.getImageMedium())
+                        .build())
+                .sorted(sortSeasonsAsc())
+                .collect(Collectors.toList());
+    }
+
+    private List<EpisodeDto> tvShowLocalToEpisodesDtoAfterPremiereDate(TvShowLocal tvShowLocal, Integer seasonNumber) {
+        return tvShowLocal.getEpisodes().stream()
+                .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
+                .filter(this::isEpisodeAfterPremiereDate)
+                .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
+                .map(episodeDto -> setIds(episodeDto, tvShowLocal))
+                .sorted(sortEpisodesAsc())
+                .collect(Collectors.toList());
+    }
+
+    private List<SeasonDto> tvShowLocalToSeasonDto(TvShowLocal tvShowLocal) {
+        return tvShowLocal.getSeasons().stream()
+                .map(seasonLocal -> SeasonDto.builder()
+                        .seasonApiId(seasonLocal.getSeasonApiId())
+                        .tvShowApiId(tvShowLocal.getTvShowApiId())
+                        .episodeOrder(seasonLocal.getEpisodeOrder())
+                        .seasonNumber(seasonLocal.getSeasonNumber())
+                        .endDate(seasonLocal.getEndDate())
+                        .premiereDate(seasonLocal.getPremiereDate())
+                        .url(seasonLocal.getUrl())
+                        .summary(seasonLocal.getUrl())
+                        .episodes(tvShowLocalToEpisodesDto(tvShowLocal, seasonLocal.getSeasonNumber()))
+                        .runtime(seasonLocal.getRuntime())
                         .imageMedium(seasonLocal.getImageMedium())
                         .build())
                 .sorted(sortSeasonsAsc())
@@ -92,7 +139,6 @@ public class TvShowDtoObjectMapper {
     private List<EpisodeDto> tvShowLocalToEpisodesDto(TvShowLocal tvShowLocal, Integer seasonNumber) {
         return tvShowLocal.getEpisodes().stream()
                 .filter(episodeLocal -> episodeLocal.getSeasonNumber().equals(seasonNumber))
-                .filter(this::isEpisodeAfterPremiereDate)
                 .map(episodeLocal -> episodeLocalToDto.apply(episodeLocal))
                 .map(episodeDto -> setIds(episodeDto, tvShowLocal))
                 .sorted(sortEpisodesAsc())

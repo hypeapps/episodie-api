@@ -2,6 +2,7 @@ package pl.hypeapp.episodie.entrypoints.rest.tvshow.gettvshow;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.gettvshow.GetTvShowUseCase;
@@ -37,10 +38,10 @@ public class GetTvShowEndpoint {
     }
 
     @RequestMapping(value = API_PATH_EXTENDED, method = GET)
-    public TvShowExtendedDto getTvShowExtended(@PathVariable String tvMazeId) {
+    public TvShowExtendedDto getTvShowExtended(@PathVariable String tvMazeId, @RequestParam("afterPremiereDate") Boolean afterPremiereDate) {
         try {
             TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
-            return toDtoExtended(tvShow);
+            return toDtoExtended(tvShow, afterPremiereDate);
         } catch (TvShowNotFoundException exception) {
             throw new NotFoundException();
         }
@@ -51,9 +52,13 @@ public class GetTvShowEndpoint {
         return objectMapper.tvShowLocalToDto.apply(tvShow);
     }
 
-    private TvShowExtendedDto toDtoExtended(TvShowLocal tvShow) {
+    private TvShowExtendedDto toDtoExtended(TvShowLocal tvShow, boolean afterPremiereDate) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
-        return objectMapper.tvShowLocalToDtoExtended.apply(tvShow);
+        if (afterPremiereDate) {
+            return objectMapper.tvShowLocalToDtoExtendedAfterPremiereDate.apply(tvShow);
+        } else {
+            return objectMapper.tvShowLocalToDtoExtended.apply(tvShow);
+        }
     }
 
 }

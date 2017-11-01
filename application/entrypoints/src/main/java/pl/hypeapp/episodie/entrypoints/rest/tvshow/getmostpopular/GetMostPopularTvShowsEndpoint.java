@@ -64,7 +64,7 @@ public class GetMostPopularTvShowsEndpoint {
     private Page<TvShowExtendedDto> toExtendedDto(Page<TvShowLocal> mostPopularTvShows, Pageable pageableRequest) {
         TvShowDtoObjectMapper objectMapper = new TvShowDtoObjectMapper();
         List<TvShowExtendedDto> tvShowExtendedDtos = mostPopularTvShows.getContent().stream()
-                .map(objectMapper.tvShowLocalToDtoExtended)
+                .map(objectMapper.tvShowLocalToDtoExtendedAfterPremiereDate)
                 .collect(Collectors.toList());
         return new PageImpl<>(tvShowExtendedDtos, pageableRequest, mostPopularTvShows.getTotalElements());
     }
