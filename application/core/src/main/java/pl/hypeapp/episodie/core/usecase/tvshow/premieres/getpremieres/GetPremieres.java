@@ -5,11 +5,12 @@ import org.springframework.data.domain.Pageable;
 import pl.hypeapp.episodie.core.entity.database.PremiereLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
+import java.util.Date;
 import java.util.List;
 
 public interface GetPremieres {
 
-    Page<PremiereLocal> getPremieres(Pageable pageable);
+    Page<PremiereLocal> getPremieres(Pageable pageable, Date fromDate);
 
     List<TvShowLocal> getPremieresTvShows(List<String> premieresIds);
 

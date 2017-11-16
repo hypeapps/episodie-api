@@ -11,7 +11,9 @@ import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.GetTvShowIdFromApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.InsertTvShowToDatabase;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -96,8 +98,8 @@ public class CollectImdbPremieresUseCase {
         tvShowsLocalInserted.forEach(tvShowLocal -> {
             for (ImdbPremiere imdbPremiere : imdbPremieres) {
                 if (imdbPremiere.getImdbId().equals(tvShowLocal.getImdbId())) {
-                    premiersToInsert.add(new PremiereLocal(tvShowLocal.getTvShowApiId(),
-                            imdbPremiere.getPremiereDate().toString()));
+                    premiersToInsert.add(new PremiereLocal(tvShowLocal.getTvShowApiId(), Date.from(imdbPremiere.getPremiereDate()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant())));
                 }
             }
         });

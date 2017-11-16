@@ -10,7 +10,9 @@ import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class GetPremieresUseCase {
@@ -21,8 +23,14 @@ public class GetPremieresUseCase {
         this.getPremieres = getPremieres;
     }
 
-    public Page<TvShowPremiereBundle> getPremieres(Pageable pageableRequest) {
-        Page<PremiereLocal> premieres = getPremieres.getPremieres(pageableRequest);
+    Logger logger = Logger.getAnonymousLogger();
+
+    public Page<TvShowPremiereBundle> getPremieres(Pageable pageableRequest, Date fromDate) {
+        logger.info(fromDate.toString());
+        Page<PremiereLocal> premieres = getPremieres.getPremieres(pageableRequest, fromDate);
+        premieres.forEach(premiereLocal -> {
+            logger.info(premiereLocal.getPremiereDate() + " id " + premiereLocal.getTvShowApiId());
+        });
         if (pageableRequest.getPageNumber() >= premieres.getTotalPages()) {
             throw new ResourceNotFoundException();
         }

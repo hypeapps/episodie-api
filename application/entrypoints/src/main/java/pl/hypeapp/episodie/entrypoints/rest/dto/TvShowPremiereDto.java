@@ -28,6 +28,8 @@ public class TvShowPremiereDto {
 
     private Integer episodeOrder;
 
+    private String status;
+
     private String premiere;
 
     private String summary;

@@ -3,7 +3,9 @@ package pl.hypeapp.episodie.entrypoints.rest.tvshow.getpremieres;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.usecase.tvshow.ResourceNotFoundException;
@@ -12,6 +14,7 @@ import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowPremiereDto;
 import pl.hypeapp.episodie.entrypoints.rest.dto.mapper.TvShowDtoObjectMapper;
 import pl.hypeapp.episodie.entrypoints.rest.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 public class GetTvShowPremieresEndpoint {
 
-    private static final String API_PATH = "api/tvshow/premieres";
+    private static final String API_PATH = "api/tvshow/premieredates";
 
     private final GetPremieresUseCase getPremieresUseCase;
 
@@ -29,10 +32,12 @@ public class GetTvShowPremieresEndpoint {
     }
 
     @RequestMapping(value = API_PATH, method = GET)
-    public Page<TvShowPremiereDto> getPremieres(Pageable pageableRequest) {
+    public Page<TvShowPremiereDto> getPremieres(Pageable pageableRequest,
+                                                @RequestParam(value = "fromDate")
+                                                @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate) {
         Page<TvShowPremiereBundle> tvShowsPremieres;
         try {
-            tvShowsPremieres = getPremieresUseCase.getPremieres(pageableRequest);
+            tvShowsPremieres = getPremieresUseCase.getPremieres(pageableRequest, fromDate);
             return toDto(tvShowsPremieres, pageableRequest);
         } catch (ResourceNotFoundException e) {
             throw new NotFoundException();
