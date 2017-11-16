@@ -69,17 +69,17 @@ public class TvShowDtoObjectMapper {
             .seasons(tvShowLocalToSeasonDto(tvShowLocal))
             .build();
 
-
     public Function<TvShowPremiereBundle, TvShowPremiereDto> tvShowPremiereBundleToDto = tvShowPremiereBundle ->
             TvShowPremiereDto.builder()
                     .tvShowApiId(tvShowPremiereBundle.getTvShowLocal().getTvShowApiId())
                     .imdbId(tvShowPremiereBundle.getTvShowLocal().getImdbId())
                     .name(tvShowPremiereBundle.getTvShowLocal().getName())
-                    .premiere(tvShowPremiereBundle.getPremiereLocal().getPremiereDate())
+                    .premiere(tvShowPremiereBundle.getPremiereLocal().getPremiereDate().toString())
                     .officialSite(tvShowPremiereBundle.getTvShowLocal().getOfficialSite())
                     .genre(tvShowPremiereBundle.getTvShowLocal().getGenre())
                     .network(tvShowPremiereBundle.getTvShowLocal().getNetworkName())
                     .summary(tvShowPremiereBundle.getTvShowLocal().getSummary())
+                    .status(tvShowPremiereBundle.getTvShowLocal().getStatus())
                     .runtime(tvShowPremiereBundle.getTvShowLocal().getRuntime())
                     .episodeOrder(getEpisodeOrderAfterPremiereDate(tvShowPremiereBundle.getTvShowLocal()))
                     .fullRuntime(tvShowPremiereBundle.getTvShowLocal().getFullRuntime())

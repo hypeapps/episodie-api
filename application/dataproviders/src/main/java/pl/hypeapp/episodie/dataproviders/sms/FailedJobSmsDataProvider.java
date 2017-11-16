@@ -17,7 +17,7 @@ public class FailedJobSmsDataProvider implements SendSmsAboutFailedJob {
     //YOUR NUMBER
     private static final String TO = "+48721066885";
     //YOU NEED YOUR OWN TWILIO NUMBER
-    private static final String FROM = "+48799449394";
+    private static final String FROM = "+48732168435";
 
     private final TwilioRestClient twilioRestClient;
 
