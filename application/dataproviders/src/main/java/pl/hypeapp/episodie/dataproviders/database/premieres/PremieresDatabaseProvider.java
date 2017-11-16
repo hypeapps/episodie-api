@@ -9,6 +9,7 @@ import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.InsertPremieres;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieres;
 
+import java.util.Date;
 import java.util.List;
 
 public class PremieresDatabaseProvider implements InsertPremieres, GetPremieres {
@@ -32,8 +33,8 @@ public class PremieresDatabaseProvider implements InsertPremieres, GetPremieres 
     }
 
     @Override
-    public Page<PremiereLocal> getPremieres(Pageable pageable) {
-        return tvShowPremieresRepository.findAllByOrderByPremiereDateAsc(pageable);
+    public Page<PremiereLocal> getPremieres(Pageable pageable, Date fromDate) {
+        return tvShowPremieresRepository.findFromPremiereDateOrderByPremiereDateAsc(fromDate, pageable);
     }
 
     @Override

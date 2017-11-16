@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import pl.hypeapp.episodie.core.entity.database.PremiereLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TvShowPremieresRepository extends CrudRepository<PremiereLocal, Integer> {
@@ -15,6 +16,7 @@ public interface TvShowPremieresRepository extends CrudRepository<PremiereLocal,
     @Query("SELECT tvShow FROM TvShowLocal tvShow WHERE tvShow.tvShowApiId IN :topListIds")
     List<TvShowLocal> getPremieresTvShows(@Param("topListIds") List<String> topListIds);
 
-    Page<PremiereLocal> findAllByOrderByPremiereDateAsc(Pageable pageableRequest);
+    @Query("SELECT premiere FROM PremiereLocal premiere WHERE premiere.premiereDate >= :dateFrom ORDER BY premiere.premiereDate ASC")
+    Page<PremiereLocal> findFromPremiereDateOrderByPremiereDateAsc(@Param("dateFrom") Date dateFrom, Pageable pageableRequest);
 
 }

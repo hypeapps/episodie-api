@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Setter(AccessLevel.NONE)
@@ -24,7 +25,7 @@ public class PremiereLocal {
     @Id
     private String tvShowApiId;
 
-    private String premiereDate;
+    private Date premiereDate;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -40,7 +41,7 @@ public class PremiereLocal {
     }
 
     @Tolerate
-    public PremiereLocal(String tvShowApiId, String premiereDate) {
+    public PremiereLocal(String tvShowApiId, Date premiereDate) {
         this.tvShowApiId = tvShowApiId;
         this.premiereDate = premiereDate;
     }
