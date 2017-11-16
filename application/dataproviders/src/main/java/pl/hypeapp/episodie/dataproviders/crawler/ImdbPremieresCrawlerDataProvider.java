@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -28,12 +29,8 @@ public class ImdbPremieresCrawlerDataProvider implements GetImdbTvShowsPremieres
 
     @Override
     public List<ImdbPremiere> crawl() {
-        Document document;
         try {
-            document = getDocument(URL_TV_SHOWS_MAIN);
-            String premieresUrl = getPremieresUrl(document);
-            document = getDocument(premieresUrl);
-            return initCrawler(document);
+            return initCrawler();
         } catch (IOException e) {
             LOGGER.info("Unable to get document: " + e.getMessage());
             throw new ImdbPremieresTvShowCrawlerFailException();
@@ -46,15 +43,32 @@ public class ImdbPremieresCrawlerDataProvider implements GetImdbTvShowsPremieres
         return Jsoup.connect(url).get();
     }
 
-    private String getPremieresUrl(Document document) {
+    private String getPremieresUrl(Document document, int page) {
         Elements premieresButton = document.select(".nav > li:nth-child(2) > a:nth-child(1)");
-        return "http://www.imdb.com/" + premieresButton.attr("href");
+        return "http://www.imdb.com/" + premieresButton.attr("href") + "&sort=list_order,asc&st_dt=&mode=detail&page=" + page;
     }
 
-    private List<ImdbPremiere> initCrawler(Document document) {
-        Elements lister = document.select(".lister-list");
-        Elements listerItems = lister.select("div.lister-item");
-        return selectImdbIds(listerItems);
+    private List<ImdbPremiere> initCrawler() throws IOException {
+        Document document = getDocument(URL_TV_SHOWS_MAIN);
+        List<ImdbPremiere> imdbPremieres = new ArrayList<>();
+        try {
+            for (int i = 1; i <= 3; i++) {
+                String premieresUrl = getPremieresUrl(document, i);
+                Document page = getDocument(premieresUrl);
+                Elements lister = page.select(".lister-list");
+                Elements listerItems = lister.select("div.lister-item");
+                if (listerItems.size() > 1) {
+                    imdbPremieres.addAll(selectImdbIds(listerItems));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ImdbPremieresTvShowCrawlerFailException();
+        }
+        imdbPremieres.forEach(imdbPremiere -> {
+            LOGGER.info(imdbPremiere.getImdbId() + " " + imdbPremiere.getPremiereDate());
+        });
+        return imdbPremieres;
     }
 
     private List<ImdbPremiere> selectImdbIds(Elements listerItems) {
