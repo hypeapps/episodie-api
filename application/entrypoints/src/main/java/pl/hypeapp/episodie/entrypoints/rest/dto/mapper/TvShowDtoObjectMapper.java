@@ -1,10 +1,12 @@
 package pl.hypeapp.episodie.entrypoints.rest.dto.mapper;
 
-import pl.hypeapp.episodie.core.entity.TvShowPremiereBundle;
 import pl.hypeapp.episodie.core.entity.database.EpisodeLocal;
 import pl.hypeapp.episodie.core.entity.database.SeasonLocal;
 import pl.hypeapp.episodie.core.entity.database.TvShowLocal;
-import pl.hypeapp.episodie.entrypoints.rest.dto.*;
+import pl.hypeapp.episodie.entrypoints.rest.dto.EpisodeDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.SeasonDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowDto;
+import pl.hypeapp.episodie.entrypoints.rest.dto.TvShowExtendedDto;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -68,24 +70,6 @@ public class TvShowDtoObjectMapper {
             .imageMedium(tvShowLocal.getImageMedium())
             .seasons(tvShowLocalToSeasonDto(tvShowLocal))
             .build();
-
-    public Function<TvShowPremiereBundle, TvShowPremiereDto> tvShowPremiereBundleToDto = tvShowPremiereBundle ->
-            TvShowPremiereDto.builder()
-                    .tvShowApiId(tvShowPremiereBundle.getTvShowLocal().getTvShowApiId())
-                    .imdbId(tvShowPremiereBundle.getTvShowLocal().getImdbId())
-                    .name(tvShowPremiereBundle.getTvShowLocal().getName())
-                    .premiere(tvShowPremiereBundle.getPremiereLocal().getPremiereDate().toString())
-                    .officialSite(tvShowPremiereBundle.getTvShowLocal().getOfficialSite())
-                    .genre(tvShowPremiereBundle.getTvShowLocal().getGenre())
-                    .network(tvShowPremiereBundle.getTvShowLocal().getNetworkName())
-                    .summary(tvShowPremiereBundle.getTvShowLocal().getSummary())
-                    .status(tvShowPremiereBundle.getTvShowLocal().getStatus())
-                    .runtime(tvShowPremiereBundle.getTvShowLocal().getRuntime())
-                    .episodeOrder(getEpisodeOrderAfterPremiereDate(tvShowPremiereBundle.getTvShowLocal()))
-                    .fullRuntime(tvShowPremiereBundle.getTvShowLocal().getFullRuntime())
-                    .imageMedium(tvShowPremiereBundle.getTvShowLocal().getImageMedium())
-                    .imageOriginal(tvShowPremiereBundle.getTvShowLocal().getImageOriginal())
-                    .build();
 
     private List<SeasonDto> tvShowLocalToSeasonsDtoAfterPremiereDate(TvShowLocal tvShowLocal) {
         return tvShowLocal.getSeasons().stream()
