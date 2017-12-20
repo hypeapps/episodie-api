@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.hypeapp.episodie.core.usecase.job.RecordJobResultUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.CollectImdbMostPopularUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbPremieresUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectPremieresUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.toplist.collectimdbtoptvshows.CollectImdbTopListUseCase;
 import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
@@ -58,9 +58,9 @@ public class JobConfiguration {
     }
 
     @Bean
-    public ScheduledJob collectImdbPremieresJob(CollectImdbPremieresUseCase collectImdbPremieresUseCase,
+    public ScheduledJob collectImdbPremieresJob(CollectPremieresUseCase collectPremieresUseCase,
                                                 CollectImdbPremieresJobResult collectImdbPremieresJobResult) {
-        return new CollectImdbPremieresJob(collectImdbPremieresUseCase, collectImdbPremieresJobResult);
+        return new CollectImdbPremieresJob(collectPremieresUseCase, collectImdbPremieresJobResult);
     }
 
 }
