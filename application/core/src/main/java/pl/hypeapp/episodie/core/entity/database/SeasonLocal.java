@@ -31,6 +31,8 @@ public class SeasonLocal implements SeasonEntity {
     @Column(name = "updated_at")
     private Timestamp updatedEntity;
 
+    @Lob
+    @Column(length = 100000)
     private String url;
 
     private Integer seasonNumber;

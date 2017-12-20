@@ -20,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "tv_show_premieres")
-public class PremiereLocal {
+public class TvShowPremiereLocal {
 
     @Id
     private String tvShowApiId;
@@ -36,12 +36,12 @@ public class PremiereLocal {
     private Timestamp updatedEntity;
 
     @Tolerate
-    public PremiereLocal() {
+    public TvShowPremiereLocal() {
         //Need to be empty because of JPA and @Tolerate for lombok.
     }
 
     @Tolerate
-    public PremiereLocal(String tvShowApiId, Date premiereDate) {
+    public TvShowPremiereLocal(String tvShowApiId, Date premiereDate) {
         this.tvShowApiId = tvShowApiId;
         this.premiereDate = premiereDate;
     }
