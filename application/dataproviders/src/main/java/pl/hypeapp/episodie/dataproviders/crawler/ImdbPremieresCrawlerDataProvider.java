@@ -6,8 +6,8 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.hypeapp.episodie.core.entity.crawler.ImdbPremiere;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.GetImdbTvShowsPremieres;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.ImdbPremieresTvShowCrawlerFailException;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.GetImdbTvShowsPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.ImdbPremieresTvShowCrawlerFailException;
 
 import java.io.IOException;
 import java.time.LocalDate;

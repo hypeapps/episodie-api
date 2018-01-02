@@ -30,7 +30,7 @@ public class GetTvShowEndpoint {
     @RequestMapping(value = API_PATH, method = GET)
     public TvShowDto getTvShow(@PathVariable String tvMazeId) {
         try {
-            TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
+            TvShowLocal tvShow = getTvShowUseCase.getTvShowFromLocal(tvMazeId);
             return toDto(tvShow);
         } catch (TvShowNotFoundException exception) {
             throw new NotFoundException();
@@ -40,7 +40,7 @@ public class GetTvShowEndpoint {
     @RequestMapping(value = API_PATH_EXTENDED, method = GET)
     public TvShowExtendedDto getTvShowExtended(@PathVariable String tvMazeId, @RequestParam("afterPremiereDate") Boolean afterPremiereDate) {
         try {
-            TvShowLocal tvShow = getTvShowUseCase.getTvShow(tvMazeId);
+            TvShowLocal tvShow = getTvShowUseCase.getTvShowFromLocal(tvMazeId);
             return toDtoExtended(tvShow, afterPremiereDate);
         } catch (TvShowNotFoundException exception) {
             throw new NotFoundException();

@@ -15,11 +15,13 @@ import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopula
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.collectimdbmostpopulartvshows.InsertTvShowToMostPopular;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularTvShows;
 import pl.hypeapp.episodie.core.usecase.tvshow.mostpopular.getmostpopular.GetMostPopularUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbPremieresUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.GetImdbTvShowsPremieres;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.InsertPremieres;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectPremieresUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.GetImdbTvShowsPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.InsertPremieres;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetEpisodePremieresLocal;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetEpisodePremieresRemote;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetPremieresUseCase;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.getpremieres.GetTvShowPremieres;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShow;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowInApi;
 import pl.hypeapp.episodie.core.usecase.tvshow.search.SearchTvShowUseCase;
@@ -35,8 +37,9 @@ import pl.hypeapp.episodie.core.usecase.tvshow.update.UpdateTvShowsUseCase;
 public class UseCaseConfiguration {
 
     @Bean
-    public GetTvShowUseCase getTvShowUseCase(GetTvShowFromDatabase getTvShowFromDatabase) {
-        return new GetTvShowUseCase(getTvShowFromDatabase);
+    public GetTvShowUseCase getTvShowUseCase(GetTvShowFromDatabase getTvShowFromDatabase, GetTvShowFromApi getTvShowFromApi,
+                                             InsertTvShowToDatabase insertTvShowToDatabase) {
+        return new GetTvShowUseCase(getTvShowFromDatabase, getTvShowFromApi, insertTvShowToDatabase);
     }
 
     @Bean
@@ -54,10 +57,10 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public CollectImdbPremieresUseCase collectImdbPremieresUseCase(GetImdbTvShowsPremieres getImdbTvShowsPremieres, GetTvShowIdFromApi getTvShowIdFromApi,
-                                                                   GetTvShowFromApi getTvShowFromApi, InsertTvShowToDatabase insertTvShowToDatabase,
-                                                                   InsertPremieres insertPremieres) {
-        return new CollectImdbPremieresUseCase(getImdbTvShowsPremieres, getTvShowIdFromApi, getTvShowFromApi, insertTvShowToDatabase, insertPremieres);
+    public CollectPremieresUseCase collectImdbPremieresUseCase(GetImdbTvShowsPremieres getImdbTvShowsPremieres, GetTvShowIdFromApi getTvShowIdFromApi,
+                                                               GetTvShowFromApi getTvShowFromApi, InsertTvShowToDatabase insertTvShowToDatabase,
+                                                               InsertPremieres insertPremieres, GetPremieresUseCase getPremieresUseCase) {
+        return new CollectPremieresUseCase(getImdbTvShowsPremieres, getTvShowIdFromApi, getTvShowFromApi, getPremieresUseCase, insertTvShowToDatabase, insertPremieres);
     }
 
     @Bean
@@ -77,8 +80,9 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public GetPremieresUseCase getPremieresUseCase(GetPremieres getPremieres) {
-        return new GetPremieresUseCase(getPremieres);
+    public GetPremieresUseCase getPremieresUseCase(GetTvShowPremieres getTvShowPremieres, GetEpisodePremieresRemote getEpisodePremieresRemote,
+                                                   GetEpisodePremieresLocal getEpisodePremieresLocal, GetTvShowUseCase getTvShowUseCase) {
+        return new GetPremieresUseCase(getTvShowPremieres, getEpisodePremieresRemote, getEpisodePremieresLocal, getTvShowUseCase);
     }
 
     @Bean

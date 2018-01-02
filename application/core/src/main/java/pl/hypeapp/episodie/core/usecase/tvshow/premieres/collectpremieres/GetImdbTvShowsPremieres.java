@@ -1,4 +1,4 @@
-package pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres;
+package pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres;
 
 import pl.hypeapp.episodie.core.entity.crawler.ImdbPremiere;
 

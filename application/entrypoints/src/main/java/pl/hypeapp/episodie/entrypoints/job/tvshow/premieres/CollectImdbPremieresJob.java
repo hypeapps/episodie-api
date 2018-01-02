@@ -1,8 +1,8 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.premieres;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbPremieresUseCase;
-import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectimdbtvshowpremieres.CollectImdbTvShowsPremieresException;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectImdbTvShowsPremieresException;
+import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectPremieresUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
 
 import java.util.concurrent.TimeUnit;
@@ -11,13 +11,13 @@ public class CollectImdbPremieresJob implements ScheduledJob {
 
     private static final String JOB_NAME = "CollectImdbPremieresJob";
 
-    private final CollectImdbPremieresUseCase collectImdbPremieresUseCase;
+    private final CollectPremieresUseCase collectPremieresUseCase;
 
     private final CollectImdbPremieresJobResult collectImdbPremieresJobResult;
 
-    public CollectImdbPremieresJob(CollectImdbPremieresUseCase collectImdbPremieresUseCase,
+    public CollectImdbPremieresJob(CollectPremieresUseCase collectPremieresUseCase,
                                    CollectImdbPremieresJobResult collectImdbPremieresJobResult) {
-        this.collectImdbPremieresUseCase = collectImdbPremieresUseCase;
+        this.collectPremieresUseCase = collectPremieresUseCase;
         this.collectImdbPremieresJobResult = collectImdbPremieresJobResult;
     }
 
@@ -45,7 +45,7 @@ public class CollectImdbPremieresJob implements ScheduledJob {
     @Scheduled(cron = "0 0 12 1 * *")
     public void run() {
         try {
-            collectImdbPremieresUseCase.collect();
+            collectPremieresUseCase.collect();
             collectImdbPremieresJobResult.recordJobSuccessfulResult(JOB_NAME);
         } catch (CollectImdbTvShowsPremieresException e) {
             collectImdbPremieresJobResult.recordJobUnsuccessfulResult(JOB_NAME, e.getMessage());

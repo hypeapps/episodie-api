@@ -23,6 +23,8 @@ public class EpisodeLocal implements EpisodeEntity {
     @Column(name = "episode_api_id")
     private String episodeApiId;
 
+    @Lob
+    @Column(length = 100000)
     private String url;
 
     private String name;
