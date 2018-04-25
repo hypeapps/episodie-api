@@ -29,17 +29,17 @@ public class CollectImdbTopListJob implements ScheduledJob {
 
     @Override
     public long getInitialDelay() {
-        return 0;
+        return 1;
     }
 
     @Override
     public long getPeriod() {
-        return 3;
+        return 72;
     }
 
     @Override
     public TimeUnit getTimeUnit() {
-        return TimeUnit.DAYS;
+        return TimeUnit.HOURS;
     }
 
     @Override

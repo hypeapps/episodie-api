@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.core.StopFilterFactory;
 import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.apache.lucene.analysis.standard.StandardFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -29,6 +31,8 @@ import java.util.List;
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = StandardFilterFactory.class),
+                @TokenFilterDef(factory = StopFilterFactory.class),
                 @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = {
                         @Parameter(name = "language", value = "English")
                 })

@@ -1,6 +1,5 @@
 package pl.hypeapp.episodie.entrypoints.job.tvshow.premieres;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectImdbTvShowsPremieresException;
 import pl.hypeapp.episodie.core.usecase.tvshow.premieres.collectpremieres.CollectPremieresUseCase;
 import pl.hypeapp.episodie.entrypoints.job.ScheduledJob;
@@ -33,16 +32,16 @@ public class CollectImdbPremieresJob implements ScheduledJob {
 
     @Override
     public long getPeriod() {
-        return 5;
+        return 48;
     }
 
     @Override
     public TimeUnit getTimeUnit() {
-        return TimeUnit.DAYS;
+        return TimeUnit.HOURS;
     }
 
     @Override
-    @Scheduled(cron = "0 0 12 1 * *")
+//    @Scheduled(cron = "0 0 12 1 * *")
     public void run() {
         try {
             collectPremieresUseCase.collect();
