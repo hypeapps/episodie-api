@@ -26,17 +26,17 @@ public class UpdateTvShowsJob implements ScheduledJob {
 
     @Override
     public long getInitialDelay() {
-        return 0;
+        return 2;
     }
 
     @Override
     public long getPeriod() {
-        return 1;
+        return 30;
     }
 
     @Override
     public TimeUnit getTimeUnit() {
-        return TimeUnit.DAYS;
+        return TimeUnit.HOURS;
     }
 
     @Override

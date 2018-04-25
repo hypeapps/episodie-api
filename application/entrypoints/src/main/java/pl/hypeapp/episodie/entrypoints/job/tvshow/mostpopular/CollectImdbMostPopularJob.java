@@ -29,17 +29,17 @@ public class CollectImdbMostPopularJob implements ScheduledJob {
 
     @Override
     public long getInitialDelay() {
-        return 0;
+        return 1;
     }
 
     @Override
     public long getPeriod() {
-        return 2;
+        return 50;
     }
 
     @Override
     public TimeUnit getTimeUnit() {
-        return TimeUnit.DAYS;
+        return TimeUnit.HOURS;
     }
 
     @Override
